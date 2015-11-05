@@ -1,0 +1,21 @@
+
+<?php $_product = $this->getProduct(); ?>
+<? 
+ $textInputs = $this->getCustomInputs($_product);
+?>
+
+<div id="mto-container" style="clear:both;">
+<div class="product-attributes">
+<?php
+foreach ($textInputs as $_input):
+?>
+<?php echo $_input->getFrontend()->getLabel();?>:
+<input type="text" name="<?php echo $_input->getAttributeCode();?>" class="mto-attribute" value="">
+<br/>
+<?php endforeach;?>
+</div>
+</div>
+
+
+<br/>
+

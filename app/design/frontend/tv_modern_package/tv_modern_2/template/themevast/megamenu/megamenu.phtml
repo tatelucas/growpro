@@ -1,0 +1,42 @@
+<?php
+$className = Mage::getConfig()->getBlockClassName('megamenu/megamenu');
+            $block = new $className();  
+ $_menu = $block->renderCategoriesMenuHtml(0,'level-top') ?>
+
+<nav class="nav-container">
+
+        <?php if($_menu): ?>
+            <div class="nav-mobilemenu-container visible-xs">
+                <div class="navbar">
+                        <div id="navbar-inner" class="navbar-inner navbar-inactive">
+                                <div class="menu-mobile">
+                                    <a class="btn btn-navbar navbar-toggle">
+                                            <span class="icon-bar"></span>
+                                            <span class="icon-bar"></span>
+                                            <span class="icon-bar"></span>
+                                    </a>
+                                    <span class="brand navbar-brand"><?php echo $this->__('Menu') ?></span>
+                                </div>
+                                <ul id="nav-mobilemenu" class="mobilemenu nav-collapse collapse">
+                                        <?php echo $_menu ?>
+                                        <li class="blog level0 level-top"><a href="<?php echo $this->getUrl('blog')?>" class="level0" title="blog"><span><?php echo $this->__('Blog')?></span></a></li>
+                                </ul>
+                        </div>
+                </div>
+            </div>
+        <?php endif ?>
+        <div id="nav_megamenu" class="nav_megamenu visible-lg visible-md"> 
+            <?php $megamenu =  $this->getLayout()->createBlock('megamenu/megamenu'); ?>       
+            <?php echo $megamenu->drawMegamenuHome(); ?>
+            <?php if(Mage::getStoreConfig('megamenu/general/showall')==1):?>
+            <?php echo $megamenu->drawMegamenuAll();?>
+            <?php else:?>
+            <?php echo $megamenu->drawMegamenuMainTop(); ?>
+            <?php endif;?>
+            <?php echo $megamenu->drawMegamenuExtra(); ?>
+            <?php echo $megamenu->drawMegamenuLink(); ?>
+            
+            
+
+        </div>
+</nav>

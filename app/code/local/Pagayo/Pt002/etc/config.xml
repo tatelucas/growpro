@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<config>
+
+	<modules>
+		<Pagayo_Pt002>
+			<version>0.1.1</version>
+		</Pagayo_Pt002>
+	</modules>
+	
+	 <global>
+    	<resources>
+    	    <pt002_setup>
+    	        <setup>
+    	            <module>Pagayo_Pt002</module>
+				  <class>Mage_Eav_Model_Entity_Setup</class>
+				</setup>
+				<connection>
+				  <use>default_setup</use>
+				</connection>
+    	    </pt002_setup>
+    	</resources>
+     </global>    
+     
+     <adminhtml>
+          <acl>
+             <resources>
+                 <admin>
+                     <children>
+                         <system>
+                             <children>
+                                 <config>
+                                     <children>
+                                         <pagayopt002>
+                                             <title>Theme Women Fashion</title>
+                                         </pagayopt002>
+                                     </children>
+                                 </config>
+                             </children>
+                         </system>
+                    </children>
+                </admin>
+            </resources>
+         </acl>
+     </adminhtml>
+    
+</config>

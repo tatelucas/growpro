@@ -1,0 +1,167 @@
+<?xml version="1.0"?>
+<config>
+   <modules>
+      <Metrof_MadeToOrder>
+         <version>0.7.0</version>
+         <depends>
+            <Mage_Customer />
+         </depends>
+      </Metrof_MadeToOrder>
+   </modules>
+
+   <global>
+   <blocks>
+	<madetoorder><class>Metrof_MadeToOrder_Block</class></madetoorder>
+	<catalog>
+		<rewrite>
+			<product_list>Metrof_MadeToOrder_Block_Product_List</product_list>
+			<product_view>Metrof_MadeToOrder_Block_Product_View</product_view>
+		</rewrite> 
+	</catalog>
+<!-- adminhtml needs rework for 1.0 -->
+<!--
+    <adminhtml>
+         <rewrite>
+            <sales_order_edit_items_grid_renderer_configid>Metrof_Adminhtml_Block_Sales_Order_Edit_Items_Grid_Renderer_Configid</sales_order_edit_items_grid_renderer_configid>
+            <sales_order_view_form>Metrof_Adminhtml_Block_Sales_Order_View_Form</sales_order_view_form>
+            <sales_order_view_items>Metrof_Adminhtml_Block_Sales_Order_View_Items</sales_order_view_items>
+         </rewrite>
+    </adminhtml>
+-->
+   </blocks>
+
+	<resources>
+		<madetoorder_setup>
+			<setup>
+				<module>Metrof_MadeToOrder</module>
+			</setup>
+			<connection>
+				<use>core_setup</use>
+			</connection>
+		</madetoorder_setup>
+	</resources>
+
+        <models>
+            <madetoorder><class>Metrof_MadeToOrder_Model</class></madetoorder>
+            <catalog>
+                <rewrite>
+                <product>Metrof_MadeToOrder_Model_Product</product>
+                </rewrite> 
+            </catalog>
+            <sales>
+                <rewrite>
+                   <quote>Metrof_MadeToOrder_Model_Sales_Quote</quote>
+                </rewrite> 
+            </sales>
+            <checkout>
+                <rewrite>
+                    <cart>Metrof_MadeToOrder_Model_Cart</cart>
+                </rewrite> 
+            </checkout>
+<!--
+            <core>
+                <rewrite>
+                    <abstract>Metrof_MadeToOrder_Model_Abstract</abstract>
+                </rewrite> 
+            </core>
+-->
+        </models>
+
+    <helpers>
+        <madetoorder>
+            <class>Metrof_MadeToOrder_Helper</class>
+        </madetoorder>
+    </helpers>
+    </global>
+
+    <frontend>
+     <layout>
+          <updates>
+              <customeradv>
+                  <file>madetoorder.xml</file>
+              </customeradv>
+          </updates>
+     </layout>
+
+        <events>
+
+          <sales_convert_quote_item_to_order_item>
+            <observers>
+              <my_cart_checker>
+                <type>object</type>
+                <class>Metrof_MadeToOrder_Helper_Event</class>
+                <method>attachSpecialOrderAttribs</method>
+              </my_cart_checker>
+            </observers>
+          </sales_convert_quote_item_to_order_item>
+	  <checkout_cart_before_add>
+            <observers>
+              <madetoorder>
+                <type>object</type>
+                <class>Metrof_MadeToOrder_Helper_Event</class>
+                <method>attachSpecialQuoteAttribs</method>
+              </madetoorder>
+            </observers>
+	  </checkout_cart_before_add>
+          <sales_quote_save_before>
+            <observers>
+              <my_cart_checker>
+                <type>object</type>
+                <class>Metrof_MadeToOrder_Helper_Event</class>
+                <method>cartBeforeSave</method>
+              </my_cart_checker>
+            </observers>
+          </sales_quote_save_before>
+          <sales_quote_save_after>
+            <observers>
+              <my_cart_checker>
+                <type>object</type>
+                <class>Metrof_MadeToOrder_Helper_Event</class>
+                <method>cartAfterSave</method>
+              </my_cart_checker>
+            </observers>
+          </sales_quote_save_after>
+        </events>
+
+        <routers>
+            <madetoorder>
+                <use>standard</use>
+                <args>
+					<module>Metrof_MadeToOrder</module>
+                    <frontName>mto</frontName>
+                </args>
+            </madetoorder>
+        </routers>
+    </frontend>
+
+	<default>
+		<mto>
+			<measurement_class><metric>no</metric></measurement_class>
+			<mto_field_1>
+				<field_name>mto_width</field_name>
+				<field_type>range</field_type>
+				<use_as_dimension>width</use_as_dimension>
+			</mto_field_1>
+			<mto_field_2>
+				<field_name>mto_height</field_name>
+				<field_type>range</field_type>
+				<use_as_dimension>height</use_as_dimension>
+			</mto_field_2>
+			<mto_field_3>
+				<field_name>mto_depth</field_name>
+				<field_type>range</field_type>
+				<use_as_dimension>depth</use_as_dimension>
+			</mto_field_3>
+			<mto_field_4>
+				<field_name></field_name>
+				<field_type>disabled</field_type>
+				<use_as_dimension>none</use_as_dimension>
+			</mto_field_4>
+			<mto_field_5>
+				<field_name></field_name>
+				<field_type>disabled</field_type>
+				<use_as_dimension>none</use_as_dimension>
+			</mto_field_5>
+		</mto>
+	</default>
+</config>

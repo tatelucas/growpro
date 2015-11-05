@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <cms_index_index>
+        <reference name="head">
+            <action method="addCss"><stylesheet>themevast/plugin/css/jquery.bxslider.css</stylesheet></action>
+            <action method="addJs"><script>themevast/jquery.min.js</script></action>         
+            <action method="addJs"><script>themevast/noconflict.js</script></action>             
+            <action method="addJs"><script>themevast/plugin/jquery.bxslider.js</script></action>             
+     	</reference>
+	</cms_index_index>
+    <cattabs_index_ajax>  
+        <reference name="root">
+            <action method="setTemplate"><template>themevast/cattabs/ajax.phtml</template></action>
+            <block type="cattabs/cattabs" name="product_grid" template="themevast/cattabs/product/grid.phtml" />
+        </reference>
+    </cattabs_index_ajax>
+</layout> 
+

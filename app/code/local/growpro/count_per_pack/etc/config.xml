@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+<!-- <config>
+    <modules> 
+        <growpro_count_per_pack> 
+            <version>0.1.0</version> 
+        </growpro_count_per_pack> 
+    </modules> 
+    <global>
+        <sales>
+            <quote>
+                <item>
+                    <product_attributes>
+                        <count_per_pack/>
+                    </product_attributes>
+                </item>
+            </quote>
+        </sales>
+    </global>
+</config> -->
+
+<config>
+    <modules> 
+        <growpro_count_per_pack> 
+            <version>0.1.0</version> 
+        </growpro_count_per_pack> 
+		<growpro_launchpromo>
+		 	<version>0.1.0</version> 
+			<!-- <depends>
+				<Mage_Customer />
+				<Mage_Checkout />
+			</depends> -->
+		</growpro_launchpromo>
+    </modules> 
+    <global>
+		<models>
+			<salesrule>
+				<rewrite>
+					<rule>growpro_launchpromo_Model_Rule</rule>
+					<validator>growpro_launchpromo_Model_Validator</validator>
+				</rewrite>
+			</salesrule>
+		</models>
+        <sales>
+            <quote>
+                <item>
+                    <product_attributes>
+                        <count_per_pack/>
+                    </product_attributes>
+                </item>
+            </quote>
+        </sales>
+    </global>
+</config>

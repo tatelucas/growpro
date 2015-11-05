@@ -1,0 +1,90 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+
+<!--
+Product view
+-->
+
+    <catalog_product_view>
+        <reference name="root">
+            <action method="setTemplate"><template>page/2columns-right.phtml</template></action>
+        </reference>
+        <reference name="head">
+            <action method="addJs"><script>varien/product.js</script></action>
+        </reference>
+        <reference name="content">
+
+            <action method="unsetChild"><name>product.info</name></action>
+
+            <block type="catalog/product_view" name="product.info" template="madetoorder/view.phtml">
+                <block type="catalog/product_view_media" name="product.info.media" as="media" template="catalog/product/view/media.phtml"/>
+                <block type="core/text_list" name="alert.urls" as="alert_urls" />
+                <block type="catalog/product_list_upsell" name="product.info.upsell" as="upsell_products" template="catalog/product/list/upsell.phtml"/>
+                <block type="catalog/product_view_additional" name="product.info.additional" as="product_additional_data" />
+                <block type="catalog/product_view_media" name="product.info.media" as="media" template="catalog/product/view/media.phtml"/>
+                <block type="catalog/product_view" name="product.info.customsize" as="product_customsize" template="madetoorder/customsize.phtml"/>
+                <block type="catalog/product_view" name="product.info.custominput" as="product_custominput" template="madetoorder/custominput.phtml"/>
+
+            </block>
+        </reference>
+        <reference name="right">
+            <block type="catalog/product_list_related" name="catalog.product.related" before="-" template="catalog/product/list/related.phtml"/>
+        </reference>
+    </catalog_product_view>
+
+
+    <checkout_cart_index>
+		<!--
+		Uncomment this block if you want 
+		to use order by case count feature.
+
+        <reference name="content">
+            <block type="madetoorder/checkout_cart" name="checkout.cart">
+                <action method="setCartTemplate"><value>madetoorder/checkout_cart.phtml</value></action>
+                <action method="setEmptyTemplate"><value>checkout/cart/noItems.phtml</value></action>
+                <action method="chooseTemplate"/>
+
+                <block type="core/text_list" name="checkout.cart.top_methods" as="top_methods">
+                    <block type="checkout/onepage_link" name="checkout.cart.methods.onepage" template="checkout/onepage/link.phtml"/>
+                </block>
+
+                <block type="core/text_list" name="checkout.cart.methods" as="methods">
+                    <block type="checkout/onepage_link" name="checkout.cart.methods.onepage" template="checkout/onepage/link.phtml"/>
+                    <block type="checkout/multishipping_link" name="checkout.cart.methods.multishipping" template="checkout/multishipping/link.phtml"/>
+                </block>
+
+                <block type="checkout/cart_coupon" name="checkout.cart.coupon" as="coupon" template="checkout/cart/coupon.phtml"/>
+                <block type="checkout/cart_shipping" name="checkout.cart.shipping" as="shipping" template="checkout/cart/shipping.phtml"/>
+                <block type="checkout/cart_crosssell" name="checkout.cart.crosssell" as="crosssell" template="checkout/cart/crosssell.phtml"/>
+            </block>
+        </reference>
+		-->
+
+
+		<!--
+		Uncomment this block if you want 
+		to show the custom size on the cart page.
+
+        <reference name="checkout.cart">
+             <action method="setCartTemplate"><value>madetoorder/checkout_cart.phtml</value></action>
+             <action method="chooseTemplate"/>
+        </reference>
+		-->
+
+
+    </checkout_cart_index>
+
+
+
+		<!--
+		Uncomment this block if you want 
+		to use order by case count feature.
+
+    <PRODUCT_TYPE_simple>
+        <reference name="product.info">
+            <action method="unsetChild"><name>product_type_data</name></action>
+            <block type="madetoorder/product_viewcasecount" name="product.info.simple" as="product_type_data" template="madetoorder/product_view_type_simple.phtml"/>
+        </reference>
+    </PRODUCT_TYPE_simple>
+		-->
+</layout>

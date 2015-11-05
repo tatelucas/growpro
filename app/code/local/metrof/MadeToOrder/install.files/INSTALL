@@ -1,0 +1,117 @@
+Installation of MTO
+================================================================================
+1. Create the app folder:
+     app/code/local/Metrof
+
+2. Copy "MadeToOrder", included in this package, to:
+     app/code/local/Metrof
+
+3. Create the teamplate folder "madetoorder" at :
+     app/design/frontend/yourpackage/yourtheme/template/madetoorder/
+
+4. Copy all the files in design/template/ into:
+     app/design/frontend/yourpackage/yourtheme/template/madetoorder/
+
+5. Copy design/layout/madetoorder.xml to:
+     app/design/frontend/yourpackage/yourtheme/layout/
+
+6. Copy install.files/Metrof_MadeToOrder.xml to:
+     app/etc/modules/
+
+6a. (Optional) Merge the contents of install.files/Metrof_MadeToOrder.xml into 
+     app/etc/modules/ instead of copying.
+
+7. Edit your pricing sheet XML line in Model/Product.php around line 226 in method getPriceXml() if you want dynamic pricing.
+
+
+
+Explanation of Specific Template Changes (just for reference (might be out of date))
+================================================================================
+
+changes to 'design/frontend/default/default/template/catalog/product/view.phtml' (around line 106)
+================================================================================
+
+<? if($this->hasCustomSizes($_product)) :?>
+        <?=$this->getChildHtml('product_customsize')?>
+<? endif; ?>
+
+
+
+-------------------------------- the original code ----------------------------
+                <?if($_product->isSaleable()):?>
+                <fieldset class="add-to-cart-box">
+                    <legend><?=$this->__('Add Items to Cart')?></legend>
+                    <span class="qty-box"><label for="qty"><?=$this->__('Qty')?>:</label>
+                    <input name="qty" type="text" class="input-text qty" id="qty" maxlength="12" value="<?=$this->getMinimalQty($_product)?>"/></span>
+                    <button class="form-button" onclick="productAddToCartForm.submit()"><span><?=$this->__('Add to Cart')?></span></button>
+                    <?if( $this->helper('wishlist')->isAllow() || $_compareUrl=$this->helper('catalog/product_compare')->getAddUrl($_product)):?>
+                        <strong><?=$this->__('OR')?></strong>
+                    <?endif;?>
+                </fieldset>
+                <?endif;?>
+
+
+
+-------------------------------- the new code --------------------------------
+
+                <?if($_product->isSaleable()):?>
+                <fieldset class="add-to-cart-box">
+                    <legend><?=$this->__('Add Items to Cart')?></legend>
+
+
+<? if($this->hasCustomSizes($_product)) :?>
+        <?=$this->getChildHtml('product_customsize')?>
+<? endif; ?>
+
+
+                    <span class="qty-box"><label for="qty"><?=$this->__('Qty')?>:</label>
+                    <input name="qty" type="text" class="input-text qty" id="qty" maxlength="12" value="<?=$this->getMinimalQty($_product)?>"/></span>
+                    <button class="form-button" onclick="productAddToCartForm.submit()"><span><?=$this->__('Add to Cart')?></span></button>
+                    <?if( $this->helper('wishlist')->isAllow() || $_compareUrl=$this->helper('catalog/product_compare')->getAddUrl($_product)):?>
+                        <strong><?=$this->__('OR')?></strong>
+                    <?endif;?>
+                </fieldset>
+                <?endif;?>
+
+
+
+Changes to layout/catalog.xml ( around line 135 )
+================================================================================
+
+<!-- @@CUSTOMIZED MTO -->
+<block type="catalog/product_view" name="product.info.customsize" as="product_customsize" template="madetoorder/customsize.phtml"/>
+
+
+-------------------------------- the original code ----------------------------
+
+        <reference name="content">
+            <block type="catalog/product_view" name="product.info" template="catalog/product/view.phtml">
+                <block type="catalog/product_view_super_config" name="product.info.config" as="super_config" template="catalog/product/view/super/config.phtml"/>
+                <block type="catalog/product_view_super_group" name="product.info.group" as="super_group" template="catalog/product/view/super/group.phtml"/>
+                <block type="catalog/product_list_upsell" name="product.info.upsell" as="upsell_products" template="catalog/product/list/upsell.phtml"/>
+                <block type="catalog/product_view_additional" name="product.info.additional" as="product_additional_data" />
+            </block>
+        </reference>
+        <reference name="right">
+            <block type="catalog/product_list_related" name="catalog.product.related" before="-" template="catalog/product/list/related.phtml"/>
+        </reference>
+
+
+
+-------------------------------- the new code --------------------------------
+
+        <reference name="content">
+            <block type="catalog/product_view" name="product.info" template="catalog/product/view.phtml">
+                <block type="catalog/product_view_super_config" name="product.info.config" as="super_config" template="catalog/product/view/super/config.phtml"/>
+                <block type="catalog/product_view_super_group" name="product.info.group" as="super_group" template="catalog/product/view/super/group.phtml"/>
+                <block type="catalog/product_list_upsell" name="product.info.upsell" as="upsell_products" template="catalog/product/list/upsell.phtml"/>
+                <block type="catalog/product_view_additional" name="product.info.additional" as="product_additional_data" />
+<!-- @@CUSTOMIZED MTO -->
+<block type="catalog/product_view" name="product.info.customsize" as="product_customsize" template="madetoorder/customsize.phtml"/>
+            </block>
+        </reference>
+        <reference name="right">
+            <block type="catalog/product_list_related" name="catalog.product.related" before="-" template="catalog/product/list/related.phtml"/>
+        </reference>
+
+

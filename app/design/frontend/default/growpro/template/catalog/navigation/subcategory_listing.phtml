@@ -1,0 +1,33 @@
+<?php $_categories=$this->getCurrentChildCategories(); ?>
+
+<div class="listing-type-list catalog-listing">
+    <?php foreach ($_categories as $_category): ?>
+    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+            <?php if($_category->getIsActive()): ?>
+            <tr>
+                <td width="30%">
+                    <div class="listing-item">
+                        <div class="cat-box-text">
+                        <h6><a href="<?php echo $_category->getURL() ?>" title="<?php echo $this->htmlEscape($_category->getName()) ?>"><?php echo $this->htmlEscape($_category->getName()) ?></a></h6>
+                        </div>
+                        <div class="product-image">
+                            <a href="<?php echo $_category->getURL() ?>" title="<?php echo $this->htmlEscape($_category->getName()) ?>">
+                                <img src="<?php echo $_category->getImageUrl() ?>" width="100" alt="<?php echo $this->htmlEscape($_category->getName()) ?>" />
+                            </a>
+                                <?php /* echo "Find this item->" */ ?>
+                        </div>
+                    </div>
+                
+                </td>
+                <td width="40%">
+                    <div class="listing-item">
+                        <div class="cat-box-text">
+                        <?php echo $_category->getDescription() ?>
+                        </div>
+                    </div>
+                </td>
+            <?php endif; ?>
+            </tr>
+        </table>
+    <?php endforeach; ?>
+</div>

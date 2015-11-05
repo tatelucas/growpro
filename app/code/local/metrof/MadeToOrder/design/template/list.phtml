@@ -1,0 +1,210 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Open Software License (OSL 3.0)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/osl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * @category   design_default
+ * @package    Mage
+ * @copyright  Copyright (c) 2004-2007 Irubin Consulting Inc. DBA Varien (http://www.varien.com)
+ * @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ */
+?>
+<?
+
+//custom
+//$sortvalues = array('1'=>'area_wh', '0'=>'depth', '2'=>'efficiency_pct', '3'=>'pockets_num');
+
+$sortvalues = array('area_wh'=>'0', 'depth'=>'1', 'efficiency'=>'2', 'pockets'=>'3', 'loft'=>4, 'case_ct'=>5, 'sku1'=>6, 'sku2'=>7, 'part_num'=>9);
+
+
+$data = array();
+$headers = array();
+$labels = array();
+
+$_productCollection=$this->getLoadedProductCollection();
+
+if (iterator_count($_productCollection) > 0 ) {
+foreach ($_productCollection as $_item):
+	$attributes = $_item->getAttributes();
+
+          foreach ($attributes as $key => $attribute) {
+
+              if ($attribute->getIsVisibleOnFront() && $attribute->getIsUserDefined()) {
+                  $value = $attribute->getFrontend()->getValue($_item);
+                  if (!empty($value)) {
+                      $data[$_item->getEntityId()][$attribute->getAttributeCode()] = array(
+                         'label' => __($attribute->getFrontend()->getLabel()),
+                         'value' => $attribute->getFrontend()->getValue($_item)
+                      );
+
+                      $headers[$attribute->getAttributeCode()] = array(
+                         'label' => __($attribute->getFrontend()->getLabel())
+                      );
+                  }
+              }
+          }
+
+endforeach;
+$psuedo_sort = array ();
+/*
+	  //resort each entity's data so that size is first and depth is second.
+	  $psuedo_sort = array (1,0,2,3);
+	  $attr_sort = $data[$_item->getEntityId()];
+	  array_multisort($psuedo_sort, $attr_sort);
+	  $data[$_item->getEntityId()] = $attr_sort;
+*/
+
+	$sortkeys = array_keys($sortvalues);
+	$idx = 0;
+	foreach ($headers as $key=>$val) {
+		if (in_array($key,$sortkeys)) { $psuedo_sort[] = $sortvalues[$key];  } 
+	}
+
+	//var_dump($psuedo_sort);
+	//var_dump($headers);
+	$sort_copy = $psuedo_sort;
+	@array_multisort($sort_copy, $headers);
+
+	foreach ($data as $itemId => $itemRec) {
+	  $sort_copy = $psuedo_sort;
+	  @array_multisort($sort_copy, $itemRec);
+	  $data[$itemId] = $itemRec;
+	}
+//print_r($sort_copy);
+//print_r($itemRec);
+}
+
+
+?>
+<?
+/**
+ * Product list template
+ *
+ * @see Mage_Catalog_Block_Product_List
+ */
+?>
+<?$_productCollection=$this->getLoadedProductCollection()?>
+<?if(!$_productCollection->getSize()):?>
+<div class="note-msg">
+    <?=$this->__('There are no products matching the selection.')?>
+</div>
+<?else:?>
+
+<?//$this->getToolbarHtml()?>
+<?// List mode?>
+<?// force list mode for now...?>
+<?if($this->getMode()!='grid' || true):?>
+<div class="listing-type-list catalog-listing">
+
+<table border="0" class="data-table">
+
+<thead>
+<tr>
+<? foreach ($headers as $_header) { ?>
+            <th><?=$this->__($_header['label'])?></th>
+<? } ?>
+<th>&nbsp;</th>
+</tr>
+</thead>
+
+
+<tbody>
+<?foreach ($_productCollection as $_product):?>
+<tr>
+<!--
+    <div class="listing-item ">
+-->
+
+
+<?php
+
+        if ( isset($data[$_product->getEntityId()]) ) {
+        foreach ($data[$_product->getEntityId()] as $_attribute) {
+//try to link the partnumber like the old sku
+/*
+     <a href="  $_product->getProductUrl()  " title="  $this->htmlEscape($_product->getName())  ">  $_product->getSku()  </a> 
+*/
+
+?>
+            <td><?=$_attribute['value']?></td>
+<?php
+        }
+	}
+?>
+
+<td>
+
+        <?// Product description?>
+            <?php echo $this->helper('catalog/product')->getPriceHtml($_product) ?>
+            <?if($_product->isSaleable()):?>
+<!--
+            <button class="form-button" onclick="setLocation('<?=$this->getAddToCartUrl($_product)?>')"><span><?=$this->__('Add to Cart')?></span></button>
+-->
+		    <a href="<?=$_product->getProductUrl()?>" title="<?=$this->htmlEscape($_product->getName())?>">buy&nbsp;now</a>
+            <?endif;?>
+<!--
+    </div>
+-->
+</td></tr>
+<?endforeach;?>
+</tbody>
+</table>
+</div>
+
+
+<?else:?>
+
+<?// Grid Mode?>
+<div class="listing-type-grid  catalog-listing"> <!-- the class name will change to .listing-type-cell if viewing in list mode -->
+<?$_collectionSize = $_productCollection->count()?>
+    <table cellspacing="0" class="generic-product-grid" id="product-list-table">
+    <?$i=0; foreach ($_productCollection as $_product):?>
+    <?if ($i++%3==0):?>
+    <tr>
+    <?endif?>
+        <td>
+            <p class="product-image">
+                <a href="<?=$_product->getProductUrl()?>" title="<?=$this->htmlEscape($_product->getName())?>">
+                    <img src="<?=$_product->getSmallImageUrl()?>" width="135" height="135" alt="<?=$this->htmlEscape($_product->getName())?>"/>
+                </a>
+            </p>
+            <h5><a href="<?=$_product->getProductUrl()?>" title="<?=$this->htmlEscape($_product->getName())?>)"><?=$_product->getName()?></a></h5>
+            <?=$this->helper('review/product')->getSummaryHtml($_product, 'short')?>
+            <?=$this->helper('catalog/product')->getPriceHtml($_product)?>
+            <?if($_product->isSaleable()):?>
+            <button class="form-button" onclick="setLocation('<?=$this->getAddToCartUrl($_product)?>')"><span><?=$this->__('Add to Cart')?></span></button>
+            <?endif;?>
+            <div class="clear"></div>
+            <p class="add-to">
+                <a href="<?=$this->getAddToWishlistUrl($_product)?>" class="link-cart"><?=$this->__('Add to Wishlist')?></a>
+                <?if($_compareUrl=$this->getAddToCompareUrl($_product)):?><br/>
+                <a href="<?=$_compareUrl?>"><?=$this->__('Add to Compare')?></a>
+                <?endif;?>
+            </p>
+        </td>
+    <?if ($i%3==0):?>
+    </tr>
+    <?endif?>
+    <?endforeach?>
+    <?for($i;$i%3!=0;$i++):?>
+        <td class="empty-product">&nbsp;</td>
+    <?endfor?>
+    <?if ($i%3==0):?>
+    </tr>
+    <?endif?>
+    </table>
+    <script type="text/javascript">decorateTable('product-list-table')</script>
+</div>
+
+<?endif;?>
+<?php echo $this->getToolbarHtml()?>
+<?endif;?>

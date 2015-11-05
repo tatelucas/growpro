@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <MageDev_Checkout>
+            <active>true</active>
+            <codePool>local</codePool>
+        </MageDev_Checkout>
+    </modules>
+</config>

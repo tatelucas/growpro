@@ -1,0 +1,59 @@
+How to use MTO module after it is installed
+================================================================================
+
+Please read the INSTALL file for instruction on installing.
+
+Please read the REDME file for changes and important tips for the latest 
+version.
+
+Always refresh your cache after installation of layout XML files or the module 
+itself.
+
+1. How MTO Works
+================================================================================
+
+MTO works basically in 2 ways: one is dimensional mode, where attributes are 
+used to represent the physical size of a product, the other mode is standard 
+mode.  In dimensional MTO reads certain attributes from your products and 
+creates form input fields on the product info page to accept input in a certain 
+format.  In standard mode, only a textbox is shown to the end user, and the 
+product's attribute is only used as a title for the field.
+
+2. Creating Dimensional Attributes
+================================================================================
+
+For MTO to work with dimensional features, it expects a range of possible 
+values.  So, you must make 3 attributes for every dimension that you want to 
+record:
+
+- Dimension Minimum
+- Dimension Maximum
+- Dimension Stepping
+
+The minimum and maximum are used as starting and ending points for creating 
+form inputs.  The stepping is used to determin the amount of values that can 
+be chosen by the user that lie in between two whole amounts.  So, for inches
+a stepping value of "1/4" would allow the user to choose 1/4 in., 1/2 in., and 
+3/4 in. increments of every whole inch.  
+
+For metric, the stepping is the smallest centimeter amount that can be chosen 
+by the user.  The metric mode treats "whole values" as 10 times the step value. 
+So, for a stepping of 1, the first form field would allow values like :
+
+- 10
+- 20
+- 30
+- 40
+- ... (up to mto_xxx_max)
+
+With a second input allowing 1 centimeter increments of 1-9.  For a stepping 
+of 10, the first input would contain
+
+- 100
+- 200
+- 300
+- 400
+- ... (up to mto_xxx_max)
+
+With a second input allowing 10 centimeter increments from 10 to 90.
+

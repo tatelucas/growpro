@@ -1,0 +1,109 @@
+<?xml version="1.0"?>
+<!-- 
+/**
+ * Magiccart 
+ * @category    Magiccart 
+ * @copyright   Copyright (c) 2014 Magiccart (http://www.magiccart.net/) 
+ * @license     http://www.magiccart.net/license-agreement.html
+ * @Author: DOng NGuyen<nguyen@dvn.com>
+ * @@Create Date: 2014-07-15 19:12:28
+ * @@Modify Date: 2015-01-13 17:02:43
+ * @@Function:
+ */ 
+-->
+<config>
+    <tabs>
+        <themevast translate="label">
+            <label>Themevast</label>
+            <sort_order>100</sort_order>
+        </themevast>
+    </tabs>
+    <sections>
+        <fbfanbox translate="label" module="fbfanbox">
+            <label>Facebook Fanbox</label>
+            <tab>themevast</tab>
+            <frontend_type>text</frontend_type>
+            <sort_order>50</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+            <groups>
+                <general translate="label">
+                    <label>Facebook Fanbox</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>10</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <enabled translate="label">
+                            <label>Enabled</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </enabled>
+                        <fb_page_url translate="label">
+                             <label>Facebook Page URL</label>
+                            <frontend_type>text</frontend_type>                            
+                            <sort_order>2</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment></comment>
+                        </fb_page_url>
+                        <width translate="label comment">
+                            <label>Width of the box in pixel</label>
+                            <frontend_type>text</frontend_type>                            
+                            <sort_order>3</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Width of the box in pixel</comment>
+                        </width> 
+                        <height translate="label comment">
+                            <label>Height of the box in pixel</label>
+                            <frontend_type>text</frontend_type>                            
+                            <sort_order>4</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Height of the box in pixel</comment>
+                        </height>
+                        <connection translate="label comment">
+                            <label>Connections</label>
+                            <frontend_type>text</frontend_type>                            
+                            <sort_order>5</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Show a sample of this many users who have liked this page</comment>
+                        </connection>
+                        <stream translate="label comment">
+                            <label>Streams</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>6</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Show the profile stream for the public profile</comment>
+                        </stream>
+                        <header translate="label comment">
+                            <label>Header</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>7</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Show the 'find us on Facebook' bar at top</comment>
+                        </header>
+                    </fields>
+                </general>
+            </groups>
+        </fbfanbox>
+    </sections>
+</config>

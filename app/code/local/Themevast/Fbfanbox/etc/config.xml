@@ -1,0 +1,69 @@
+<?xml version="1.0"?>
+<!-- 
+/**
+ * Magiccart 
+ * @category 	Magiccart 
+ * @copyright 	Copyright (c) 2014 Magiccart (http://www.magiccart.net/) 
+ * @license 	http://www.magiccart.net/license-agreement.html
+ * @Author: DOng NGuyen<nguyen@dvn.com>
+ * @@Create Date: 2014-07-15 19:04:59
+ * @@Modify Date: 2014-08-20 22:42:35
+ * @@Function:
+ */ 
+-->
+<config>
+	<modules>
+		<Themevast_Fbfanbox>
+			<version>0.1.0</version>
+		</Themevast_Fbfanbox>
+	</modules>
+	<frontend>
+		<routers>
+			<fbfanbox>
+				<use>stardard</use>
+				<args>
+					<module>Themevast_Fbfanbox</module>
+					<frontName>fbfanbox</frontName>
+				</args>
+			</fbfanbox>
+		</routers>
+		<layout>
+			<updates>
+				<fbfanbox>
+					<file>themevast/fbfanbox.xml</file>
+				</fbfanbox>
+			</updates>
+		</layout>
+	</frontend>
+	<global>
+		<models>
+			<fbfanbox>
+				<class>Themevast_Fbfanbox_Model</class>
+				<resourceModel>fbfanbox_mysql4</resourceModel>
+			</fbfanbox>
+		</models>
+		<blocks>
+			<fbfanbox>
+				<class>Themevast_Fbfanbox_Block</class>
+			</fbfanbox>
+		</blocks>
+		<helpers>
+			<fbfanbox>
+				<class>Themevast_Fbfanbox_Helper</class>
+			</fbfanbox>
+		</helpers>
+	</global>
+    <default>
+		<fbfanbox>
+			<general>
+				<enabled>1</enabled>
+				<fb_page_url><![CDATA[https://www.facebook.com/envatomarket]]></fb_page_url>
+				<header>0</header>
+				<width>330</width>
+				<height>340</height>
+				<connection>10</connection>				
+			</general>
+		</fbfanbox>
+    </default>
+</config>
+

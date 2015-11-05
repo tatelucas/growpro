@@ -1,0 +1,367 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category   design_default
+ * @package    Mage
+ * @copyright  Copyright (c) 2008 Irubin Consulting Inc. DBA Varien (http://www.varien.com)
+ * @license    http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+
+/**
+ * Product view template
+ *
+ * @see Mage_Catalog_Block_Product_View
+ * @see Mage_Review_Block_Product_View
+ */
+?>
+<?php
+    $_helper = $this->helper('catalog/output');
+	$_product = $this->getProduct();
+	$cartArray = array();
+	$cartProducts = array();
+		$pricing_category = $_product->getCategoryTierPrice();
+		//This model now just being used for master content management (description, etc)
+		$MasterProductList = Mage::getModel('catalog/product')->getCollection()
+			->addAttributeToFilter('category_tier_price', $pricing_category)
+			->addAttributeToFilter('category_tier_price_master', 1)
+			->addAttributeToFilter('category_tier_price_sku', 'N')
+			->addAttributeToSelect('*');
+		
+		foreach($MasterProductList as $MasterProduct) {continue;}
+
+		$cartItems = Mage::getModel('checkout/session')->getQuote()->getAllItems(); //These items do not have the master product ID. 
+		if ($cartItems != NULL) {	
+	
+		foreach ($cartItems as $cartItem) {
+			if ($cartItem->getproductId() == $_product->getId()) {$thisCartItem = &$cartItem;}
+
+			if (substr($cartItem->getSku(), -2, 1) == '-'){
+				$cartItemSKU = substr($cartItem->getSku(), -1);
+				switch ($cartItemSKU) {
+					case "N" :
+						$cartItemSKUhandle = 'no-imprint';
+					break;
+					case "B" :
+						$cartItemSKUhandle = 'black-imprint';
+					break;
+					case "C" :
+						$cartItemSKUhandle = 'single-color-imprint';
+						$cartItemSKU = "B";
+					break;
+			}
+			}else {
+				//single-option master products may have an SKu of 'N', so set cartitemsku to this in order to correctly match the master
+				$cartItemSKU = "N";
+				$cartItemSKUhandle = 'price';
+			}
+			
+			$ProductModel = Mage::getModel('catalog/product')->load($cartItem->getProductId());
+			$MasterProductListC = Mage::getModel('catalog/product')->getCollection()
+				->addAttributeToFilter('category_tier_price', $ProductModel->getCategoryTierPrice())
+				->addAttributeToFilter('category_tier_price_master', 1)
+				->addAttributeToSelect('*');
+			foreach ($MasterProductListC as $MasterProductC) {
+					if ( $MasterProductC->getCategoryTierPriceSku() == $cartItemSKU) {
+						$cartArray[$MasterProductC->getCategoryTierPrice()][$MasterProductC->getId()]['SKU'] = $cartItemSKU; //might not need this in the array
+						$cartArray[$MasterProductC->getCategoryTierPrice()][$MasterProductC->getId()]['SKU-handle'] = $cartItemSKUhandle;
+						$cartArray[$MasterProductC->getCategoryTierPrice()][$MasterProductC->getId()]['Price-type'] = $MasterProductC->getCategoryPricing();				
+							if ($MasterProductC->getCategoryPricing() == 1){
+									if (!array_key_exists('category-qty', $cartArray[$MasterProductC->getCategoryTierPrice()][$MasterProductC->getId()])) {
+										$cartArray[$MasterProductC->getCategoryTierPrice()][$MasterProductC->getId()]['category-qty'] = 0;
+									}
+								$cartArray[$MasterProductC->getCategoryTierPrice()][$MasterProductC->getId()]['category-qty'] = $cartArray[$MasterProductC->getCategoryTierPrice()][$MasterProductC->getId()]['category-qty'] + $cartItem->getQty();
+							} else {
+								$cartArray[$MasterProductC->getCategoryTierPrice()][$MasterProductC->getId()][$cartItem->getProductId()] = $cartItem->getQty();		
+							}
+					}
+			}
+		}
+
+			if (array_key_exists($pricing_category, $cartArray)) {
+					foreach ($cartArray[$pricing_category] as $optionArray) {
+						if ($optionArray['Price-type'] == 1 ) {
+								$cartProducts[$optionArray['SKU-handle']] = $optionArray['category-qty'];
+						} else if (array_key_exists($_product->getId(), $optionArray) ) {
+								$cartProducts[$optionArray['SKU-handle']] = $optionArray[$_product->getId()];
+						}
+					}
+				}
+}
+
+// print_r($cartArray) ;
+// 	print_r($cartProducts);
+
+?>
+
+
+<script type="text/javascript">
+<?php
+if ($cartProducts) {
+$jsObjpre = "var cartItems = {";
+$jsObj = '';
+foreach ($cartProducts as $cartProductName=>$cartItemQty) {
+	$jsObj .= '"' . $cartProductName . '" : '  . $cartItemQty . ' ,'; }
+$jsObj = substr($jsObj, 0, -1) . '};';
+echo $jsObjpre . $jsObj;
+} else {
+	echo("var cartItems = 0;");
+};
+
+?>
+
+    var optionsPrice = new Product.OptionsPrice(<?php echo $this->getJsonConfig() ?>);
+</script>
+<div id="messages_product_view"><?php echo $this->getMessagesBlock()->getGroupedHtml() ?></div>
+<div class="product-info-box">
+            <h3 class="product-name">
+                <?php echo ($_helper->productAttribute($_product, $this->htmlEscape($_product->getName()), 'name') . " #" . $_helper->productAttribute($_product, $this->htmlEscape($_product->getSku()), 'sku')) ?>
+            </h3>
+    <div class="product-essential">
+    <form action="<?php echo $this->getAddToCartUrl($_product) ?>" method="post" id="product_addtocart_form"<?php if($_product->getOptions()): ?> enctype="multipart/form-data"<?php endif; ?>>
+
+        <div class="product-img-box">
+            <?php echo $this->getChildHtml('media') ?>
+<?php echo $this->getChildHtml('addto') ?>
+        </div>
+	<div class='short-description'>
+	 <?php if ($_product->getShortDescription()):?>
+                <h4><?php echo $this->__('Quick Overview') ?></h4>
+                <?php echo $_helper->productAttribute($_product, nl2br($_product->getShortDescription()), 'short_description') ?>
+	<?php else:?>
+				<h4><?php echo $this->__('Quick Overview') ?></h4>
+			    	<?php echo $_helper->productAttribute($_product, nl2br($MasterProduct->getShortDescription()), 'short_description') ?>
+     <?php endif;?>
+	</div>
+
+        <div class="product-shop">
+
+
+           <!-- <?php if ($this->canEmailToFriend()): ?>
+                <a href="<?php echo $this->helper('catalog/product')->getEmailToFriendUrl($_product) ?>"><?php echo $this->__('Email to a Friend') ?></a><br />
+            <?php endif; ?> 
+
+            <?php echo $this->getReviewsSummaryHtml($_product, false, true)?>-->
+
+            <fieldset class="no-display">
+              <input type="hidden" name="product" value="<?php echo $_product->getId() ?>" />
+              <input type="hidden" name="related_product" id="related-products-field" value="" />
+            </fieldset>
+
+         
+        <div id='product-tabs'>   
+			<ul id='product-tabs'>
+				<?php $tabs_class = (($_product->getHowItWorks() || $MasterProduct->getHowItWorks())? 'third' : 'half') ?>
+					<li class='<?php echo $tabs_class ?>'><a href='#product-ordering'>Pricing</a></li>
+				<li class='<?php echo $tabs_class ?>'><a href='#product-specs'>Product Description</a></li>
+			
+				<?php if ($_product->getHowItWorks() || $MasterProduct->getHowItWorks()): ?>
+				<li class='<?php echo $tabs_class ?>'><a href='#product-nextsteps'>Next Steps</a></li>
+				<?php endif ?>
+			</ul>
+			<div id='product-specs'>
+				 <?php if ($_product->getDescription()):?>
+			          <div class="tab-content">
+						<?php echo $_helper->productAttribute($_product, nl2br($_product->getDescription()), 'description') ?>
+					</div> 
+				<?php else:?>
+					  <div class="tab-content">
+						<?php echo $_helper->productAttribute($_product, nl2br($MasterProduct->getDescription()), 'description') ?>
+					  </div>
+			     <?php endif;?>
+			</div>			
+			<div id='product-ordering'>
+
+			<div id='tab-content'>
+	   			<?php echo $this->getTierPriceHtml();
+					
+				 // if  ($tierPrice_result == "test") {
+				 // 				 	echo $this->getChildHtml('alert_urls');
+				 // 			        echo $this->getChildHtml('product_type_data'); }
+			?>  
+
+		      <?php if ($_product->isSaleable() && $this->hasOptions()):?>
+		            <?php echo $this->getChildChildHtml('container2', '', true, true) ?>
+		      <?php endif;?>
+			</div>
+			</div>
+			<?php if ($_product->getHowItWorks() || $MasterProduct->getHowItWorks()): ?>
+			<div id='product-nextsteps' class='third'>
+				<?php if ($_product->getHowItWorks()):?>
+			          <div class="tab-content">
+						<?php echo $_helper->productAttribute($_product, nl2br($_product->getHowItWorks()), 'how_it_works') ?>
+					</div> 
+				<?php else:?>
+					  <div class="tab-content">
+						<?php echo $_helper->productAttribute($_product, nl2br($MasterProduct->getHowItWorks()), 'how_it_works') ?>
+					  </div>
+			     <?php endif;?>
+			</div>
+			<?php endif ?>
+		</div>
+		<div id='add-to-holder'>
+			<!-- ADD SELECTION STATUS STUFF HERE-->
+			<div id='selection-status'></div>
+			 <?php echo $this->getChildHtml('addtocart') ?>
+		</div>
+
+
+         <!--  <?php if (!$this->hasOptions()):?>
+                        <div class="add-to-holder">
+                            <?php if($_product->isSaleable()): ?>
+                                <?php echo $this->getChildHtml('addtocart') ?>
+                               <?php if( $this->helper('wishlist')->isAllow() || $_compareUrl=$this->helper('catalog/product_compare')->getAddUrl($_product)): ?>
+                                   <span class="add-or"><?php echo $this->__('OR') ?></span>
+                               <?php endif; ?>
+                            <?php endif; ?>
+                            <?php echo $this->getChildHtml('addto') ?>
+                        </div>
+                    <?php else:?>
+                        <?php echo $this->getChildHtml('addto') ?>
+                    <?php endif; ?> -->
+
+            <!-- <div class="divider"></div> -->
+
+          
+
+            <?php echo $this->getChildHtml('other');?>
+
+            <?php if ($_product->isSaleable() && $this->hasOptions()):?>
+                          <?php // echo $this->getChildChildHtml('container1', '', true, true) ?>
+                      <?php endif;?>
+
+        </div>
+        <div class="clear"></div>
+        <?php if ($_product->isSaleable() && $this->hasOptions()):?>
+                     <?php 	//	echo $this->getChildChildHtml('container2', '', true, true) ?> 
+                   <?php endif;?>
+    </form>
+    <script type="text/javascript">
+            var productAddToCartForm = new VarienForm('product_addtocart_form');
+            productAddToCartForm.submit = function(){
+                    if (this.validator.validate()) {
+                            this.form.submit();
+                    }
+            }.bind(productAddToCartForm);
+    </script>
+    </div>
+
+    <!-- <div class="product-collateral">
+            <?php if ($_description = $this->getChildHtml('description')):?>
+              <div class="collateral-box">
+                               <div class="head">
+                                   <h4><?php echo $this->__('Product Description') ?></h4>
+                               </div>
+                               <?php echo $_description ?>
+                           </div> 
+           <?php endif;?>
+           <?php if ($_additional = $this->getChildHtml('additional')):?>
+                    <div class="collateral-box">
+                        <div class="head">
+                            <h4><?php echo $this->__('Additional Information') ?></h4>
+                        </div>
+                        <?php echo $_additional ?>
+                    </div>
+                <?php endif;?>
+           <?php echo $this->getChildHtml('upsell_products') ?>
+           <?php echo $this->getChildHtml('product_additional_data') ?>
+       </div> -->
+</div><!-- end view-->
+<?php 
+		
+		
+		//get cart item's price category (if any)
+		// $ProductModel = Mage::getModel('catalog/product')->load($cartItem->getProductId());
+		// 	$MasterProductListC = Mage::getModel('catalog/product')->getCollection()
+		// 		->addAttributeToFilter('category_tier_price', $ProductModel->getCategoryTierPrice())
+		// 		->addAttributeToFilter('category_tier_price_master', 1)
+		// 		->addAttributeToSelect('*'); 
+		// if 
+		// 
+		// 
+		// 	foreach ($MasterProductListC as $MasterProductC) {
+		// 		$MasterProductC->getCategoryTierPriceSku() == "" ? $MPSkuSuffix = "none" : $MPSkuSuffix = $MasterProductC->getCategoryTierPriceSku();
+		// 		$cartArray['price-type'][$ProductModel->getCategoryTierPrice()][$MPSkuSuffix] = $MasterProductC->getCategoryPricing();
+		// 			if (count($MasterProductListC) > 1) {
+		// 				//Multiple Master Products (eg imprint prices)
+		// 				$cartItemSKU = substr($cartItem->getSku(), -1);
+		// 				$MasterProductC->getCategoryTierPriceSku() == $cartItemSKU ? $cartQty = $cartItem->getQty() :  $cartQty = 0;
+		// 				$cartArray['multi'][$MPSkuSuffix][$cartItem->getProductId()] = $cartQty;
+		// 			}
+		// 			
+		// 			if ($MasterProductC->getCategoryPricing() == $pricing_category) {
+		// 				
+		// 			}
+		// 	}
+		// 	
+		// 	 if(count($MasterProductListC) ==  1){
+		// 		//Single Master Product
+		// 		$cartArray['single'][$cartItem->getProductId()] = $cartItem->getQty();
+		// 	} else if (count($MasterProductListC) < 1){
+		// 		//No Master Product
+		// 		$cartArray['none'][$cartItem->getProductId()] = $cartItem->getQty();
+		// 	}
+
+
+
+		// $MasterProductList = Mage::getModel('catalog/product')->getCollection()
+		// 	->addAttributeToFilter('category_tier_price', $pricing_category)
+		// 	->addAttributeToFilter('category_tier_price_master', 1)
+		// 	->addAttributeToFilter('category_tier_price_sku', 'N')
+		// 	->addAttributeToSelect('*');
+		// 
+		// foreach($MasterProductList as $MasterProduct) {continue;}
+		// 
+		// $cartItems = Mage::getModel('checkout/session')->getQuote()->getAllItems(); //These items do not have the master product ID.
+		// 
+		// $productItems = Mage::getModel('catalog/product')->getCollection()
+		// 					->addAttributeToFilter('category_tier_price', $_ID)
+		// 					->addAttributeToFilter('category_tier_price_master', 0)
+		// 					->addAttributeToSelect('entity_id');
+		// 
+		// $cartProducts = array();
+		// 
+		// foreach ($cartItems as $cartItem){
+		// 	$cartItemPID = $cartItem->getProductId();
+		// 	$cartItemId = $cartItem->getId();
+		// 		foreach ($productItems as $productItem) {
+		// 			if ($productItem['entity_id'] == $cartItemPID) {
+		// 				switch (substr($cartItem->getSku(), -1)) {
+		// 						case "N" :
+		// 							$cartProducts['no-imprint'] = $cartItem->getQty();
+		// 						break;
+		// 						
+		// 						case "B" :
+		// 							$cartProducts['black-imprint'] = $cartItem->getQty();
+		// 						break;
+		// 						
+		// 						case "C" :
+		// 							$cartProducts['single-color-imprint'] = $cartItem->getQty();
+		// 						break;
+		// 						default:
+		// 							$cartProducts['price'] = $cartItem->getQty();
+		// 						
+		// 				}
+		// 			
+		// 			} 
+		// 		}
+		// };
+
+
+?>

@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<mto_pricingrules>
+	<productLine line="50050">
+		<product sku="VL-OR1">
+			<condition type="eq" attrib="thickness" value="1">
+				<calculation attrib="sqft">0.86</calculation>
+			</condition>
+			<condition type="eq" attrib="thickness" value="2">
+				<calculation attrib="sqft">0.96</calculation>
+			</condition>
+		</product>
+	</productLine>
+	<productLine line="20000">
+		<product sku="20000">
+			<condition type="range" attrib="width" value="0-33">
+				<condition type="eq" attrib="depth" value="1/2">
+						<condition type="range" attrib="sqft" value="0-99">$3.20</condition>
+						<condition type="range" attrib="sqft" value="100-199">$3.28</condition>
+						<condition type="range" attrib="sqft" value="200-249">$3.42</condition>
+				</condition>
+				<condition type="eq" attrib="depth" value="1">
+						<condition type="range" attrib="sqft" value="0-99">$3.30</condition>
+						<condition type="range" attrib="sqft" value="100-199">$3.28</condition>
+						<condition type="range" attrib="sqft" value="200-249">$3.42</condition>
+				</condition>
+				<condition type="eq" attrib="depth" value="2">
+					<condition type="range" attrib="sqft" value="0-99">$3.40</condition>
+					<condition type="range" attrib="sqft" value="100-199">$3.28</condition>
+					<condition type="range" attrib="sqft" value="200-249">$3.99</condition>
+				</condition>
+			</condition>
+			<condition type="range" attrib="width" value="34-66">
+				<condition type="eq" attrib="depth" value="1/2">
+					<condition type="range" attrib="sqft" value="0-99">$9.10</condition>
+					<condition type="range" attrib="sqft" value="100-199">$9.28</condition>
+					<condition type="range" attrib="sqft" value="200-249">$9.42</condition>
+				</condition>
+				<condition type="eq" attrib="depth" value="1">
+					<condition type="range" attrib="sqft" value="0-99">$9.10</condition>
+					<condition type="range" attrib="sqft" value="100-199">$9.28</condition>
+					<condition type="range" attrib="sqft" value="200-249">$9.42</condition>
+				</condition>
+				<condition type="eq" attrib="depth" value="2">
+					<condition type="range" attrib="sqft" value="0-99">$9.10</condition>
+					<condition type="range" attrib="sqft" value="100-199">$9.28</condition>
+					<condition type="range" attrib="sqft" value="200-249">$9.99</condition>
+				</condition>
+			</condition>
+		</product>
+	</productLine>
+</mto_pricingrules>

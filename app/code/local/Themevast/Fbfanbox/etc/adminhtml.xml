@@ -1,0 +1,76 @@
+<?xml version="1.0"?>
+<!-- 
+/**
+ * Magiccart 
+ * @category    Magiccart 
+ * @copyright   Copyright (c) 2014 Magiccart (http://www.magiccart.net/) 
+ * @license     http://www.magiccart.net/license-agreement.html
+ * @Author: DOng NGuyen<nguyen@dvn.com>
+ * @@Create Date: 2014-07-15 19:01:41
+ * @@Modify Date: 2015-01-13 17:29:37
+ * @@Function:
+ */ 
+-->
+<config>
+    <menu>
+        <themevast>
+            <title>Themevast</title>
+            <sort_order>89</sort_order>
+            <children>
+                <fbfanbox module="fbfanbox">
+                    <title>Facebook Fanbox</title>
+                    <sort_order>30</sort_order>
+                    <action>adminhtml/system_config/edit/section/fbfanbox</action>
+                </fbfanbox>
+            </children> 
+        </themevast>
+    </menu>
+    <acl>
+        <resources>
+            <admin>
+                <children>
+                    <themevast>
+                        <children>
+                            <config>
+                                <children>
+                                    <fbfanbox>
+                                        <title>Facebook Fanbox</title>
+                                    </fbfanbox>
+                                </children>
+                            </config>
+                        </children>
+                    </themevast>       
+                    <themevast translate="title" module="fbfanbox">
+                        <title>Themevast</title>
+                        <sort_order>99</sort_order>               
+                        <children>
+                            <fbfanbox translate="title" module="fbfanbox">
+                                <title>Facebook Fanbox</title>
+                                <sort_order>20</sort_order>
+                                <children>
+                                    <configuration>
+                                        <title>Configuration</title>
+                                        <sort_order>1</sort_order>
+                                        <action>adminhtml/system_config/edit/section/fbfanbox</action>
+                                    </configuration>
+                                </children>
+                            </fbfanbox>
+                        </children>
+                    </themevast>   
+                    <system>
+                        <children>
+                            <config>
+                                <children>
+                                    <fbfanbox>
+                                        <title>Facebook Fanbox</title>
+                                    </fbfanbox>
+                                </children>
+                            </config>
+                        </children>
+                    </system>                 
+                </children>
+            </admin>
+        </resources>
+    </acl>
+</config>
+

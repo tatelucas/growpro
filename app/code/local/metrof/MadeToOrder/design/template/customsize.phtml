@@ -1,0 +1,79 @@
+
+<?php $_product = $this->getProduct(); ?>
+<? 
+ $hMax = $this->getAttributeValue($_product, 'mto_height_max');
+ $hMin = $this->getAttributeValue($_product, 'mto_height_min');
+ $hStp = $this->getAttributeValue($_product, 'mto_height_step');
+ $wMax = $this->getAttributeValue($_product, 'mto_width_max');
+ $wMin = $this->getAttributeValue($_product, 'mto_width_min');
+ $wStp = $this->getAttributeValue($_product, 'mto_width_step');
+?>
+
+<div id="mto-container" style="clear:both;">
+<div class="product-attributes">
+
+<input type="hidden" name="id" class="mto-attribute" value="<?php echo $_product->getId(); ?>">
+Width:&nbsp; <select name="mto_width" class="mto-attribute">
+<?= $this->getOptions($wMin, $wMax, $wStp); ?>
+</select>
+
+<select name="mto_width_frac" class="mto-attribute">
+<?= $this->getOptionsFrac($wStp); ?>
+</select>
+
+<br/>
+
+Height: <select name="mto_height" class="mto-attribute">
+<?= $this->getOptions($hMin, $hMax, $hStp); ?>
+</select>
+<select name="mto_height_frac" class="mto-attribute">
+<?= $this->getOptionsFrac($hStp); ?>
+</select>
+</div>
+</div>
+
+
+<br/>
+
+<script type="text/javascript">
+
+Product.Mto = Class.create();
+Product.Mto.Configurable = Class.create();
+
+Product.Mto.Configurable.prototype = {
+    initialize: function(container, observeCss, updateUrl, updatePriceUrl, priceContainerId) {
+        this.container = $(container);
+        this.observeCss = observeCss;
+        this.updateUrl = updateUrl;
+        this.updatePriceUrl = updatePriceUrl;
+        this.priceContainerId = priceContainerId;
+        this.registerObservers();
+    },
+    registerObservers: function() {
+        var elements = this.container.getElementsByClassName(this.observeCss);
+        elements.each(function(element){
+            Event.observe(element, 'change', this.update.bindAsEventListener(this));
+        }.bind(this));
+        return this;
+    },
+    update: function(event) {
+        var elements = this.container.getElementsByClassName(this.observeCss);
+        var parameters = Form.serializeElements(elements, true);
+
+/*
+        new Ajax.Updater(this.container, this.updateUrl + '?ajax=1', {
+                parameters:parameters,
+                onComplete:this.registerObservers.bind(this)
+        });
+*/
+        var priceContainer = $(this.priceContainerId);
+        if(priceContainer) {
+            new Ajax.Updater(priceContainer, this.updatePriceUrl + '?ajax=1', {
+                parameters:parameters
+            });
+        }
+    }
+}
+
+var spMto = new Product.Mto.Configurable('mto-container', 'mto-attribute', '<?php echo $this->helper('madetoorder')->getDynPriceUrl(); ?>', '<?php echo $this->helper('madetoorder')->getDynPriceUrl(); ?>', 'product-price-<?php echo $_product->getId();?>');
+</script>

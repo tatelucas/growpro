@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Cclohman_Catalog>
+            <version>0.1.0</version>
+        </Cclohman_Catalog>
+    </modules>
+
+    <global>
+		<sales>
+            <quote>
+                <item>
+                    <product_attributes>
+                        <count_per_pack/>
+                    </product_attributes>
+                </item>
+            </quote>
+        </sales>
+        <models>
+            <catalog>
+                <rewrite>
+                    <product_type_price>Cclohman_Catalog_Model_Product_Type_Price</product_type_price>
+                </rewrite>
+            </catalog>
+        </models>
+    </global>
+</config>

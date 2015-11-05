@@ -1,0 +1,217 @@
+<?xml version="1.0"?>
+<config>
+    <sections>
+        <mto translate="label" module="madetoorder">
+            <label>Made To Order</label>
+            <tab>catalog</tab>
+            <frontend_type>text</frontend_type>
+            <sort_order>75</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+            <groups>
+                <measurement_class translate="label">
+					<label>Measurements</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>1</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <metric translate="label">
+                            <label>Use Metric?</label>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+						</metric>
+                    </fields>
+                </measurement_class>
+
+
+                <mto_field_1 translate="label">
+					<label>Variable 1</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>20</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <field_name translate="label">
+                            <label>Variable Name</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </field_name>
+                        <field_type translate="label">
+                            <label>Variable Type</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>madetoorder/system_config_source_types</source_model>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </field_type>
+                        <use_as_dimension translate="label">
+                            <label>Use As Dimension</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>madetoorder/system_config_source_dimensions</source_model>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </use_as_dimension>
+                    </fields>
+                </mto_field_1>
+                <mto_field_2 translate="label">
+					<label>Variable 2</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>30</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <field_name translate="label">
+                            <label>Variable Name</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </field_name>
+                        <field_type translate="label">
+                            <label>Variable Type</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>madetoorder/system_config_source_types</source_model>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </field_type>
+                        <use_as_dimension translate="label">
+                            <label>Use As Dimension</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>madetoorder/system_config_source_dimensions</source_model>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </use_as_dimension>
+                    </fields>
+                </mto_field_2>
+                <mto_field_3 translate="label">
+					<label>Variable 3</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>40</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <field_name translate="label">
+                            <label>Variable Name</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </field_name>
+                        <field_type translate="label">
+                            <label>Variable Type</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>madetoorder/system_config_source_types</source_model>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </field_type>
+                        <use_as_dimension translate="label">
+                            <label>Use As Dimension</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>madetoorder/system_config_source_dimensions</source_model>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </use_as_dimension>
+                    </fields>
+                </mto_field_3>
+                <mto_field_4 translate="label">
+					<label>Variable 4</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>50</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <field_name translate="label">
+                            <label>Variable Name</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </field_name>
+                        <field_type translate="label">
+                            <label>Variable Type</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>madetoorder/system_config_source_types</source_model>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </field_type>
+                        <use_as_dimension translate="label">
+                            <label>Use As Dimension</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>madetoorder/system_config_source_dimensions</source_model>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </use_as_dimension>
+                    </fields>
+                </mto_field_4>
+                <mto_field_5 translate="label">
+					<label>Variable 5</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>60</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <field_name translate="label">
+                            <label>Variable Name</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </field_name>
+                        <field_type translate="label">
+                            <label>Variable Type</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>madetoorder/system_config_source_types</source_model>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </field_type>
+                        <use_as_dimension translate="label">
+                            <label>Use As Dimension</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>madetoorder/system_config_source_dimensions</source_model>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </use_as_dimension>
+                    </fields>
+                </mto_field_5>
+			</groups>
+		</mto>
+	</sections>
+</config>

@@ -1,0 +1,212 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category   design_default
+ * @package    Mage
+ * @copyright  Copyright (c) 2008 Irubin Consulting Inc. DBA Varien (http://www.varien.com)
+ * @license    http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+?>
+
+<?php
+/**
+ * @see Mage_Catalog_Block_Product_View
+ */
+		$_product = $this->getProduct();
+		$_pricecat = $_product->getCategoryTierPrice();
+		
+		if (is_numeric($_pricecat) & $_pricecat != 0 ) { //if there is a master price table
+		$masterProductList = Mage::getModel('catalog/product')
+			->getCollection()
+			->addAttributeToFilter('category_tier_price', $_pricecat)
+			->addAttributeToFilter('category_tier_price_master', 1)
+			->addAttributeToSelect('entity_id')
+			->addAttributetoSelect('count_per_pack')
+			->addAttributetoSelect('tier_price')
+			->addAttributeToSelect('category_tier_price_sku')
+			->addAttributeToSelect('category_pricing')
+			->load();
+			
+			//Test for the price case
+			// echo $_pricecat;
+			// echo count($masterProductList);
+			switch (count($masterProductList)) {
+					case (1):  //Single Master, non-imprint tier item
+			
+					 	foreach($masterProductList as $masterProduct) {continue;}
+					   			$countperpack = $masterProduct['count_per_pack']; 
+								$product_prices =  array("Price"=>load_prices($masterProduct));
+								
+								if ($masterProduct['category_pricing'] == 0) {
+									output_table($product_prices, $countperpack, 'product');	
+								} else {
+									output_table($product_prices, $countperpack, 'category');		
+								};
+
+					break;		
+			
+					case (count($masterProductList) > 1): //Multiple Masters, assume imprint options
+				
+						foreach($masterProductList as $masterProduct) {	
+								$countperpack =	 $masterProduct['count_per_pack']; 
+								if ($masterProduct['category_tier_price_sku'] == 'N'){$nonImprint_prices = load_prices($masterProduct);}	
+		 				};
+							if ($masterProduct['category_tier_price_sku'] == 'B') {
+								$blkImprint_prices = load_prices($masterProduct);
+								$clrImprint_prices = $blkImprint_prices;
+									foreach ($clrImprint_prices as $qty => $price_row) {
+										// add 40 to every price in blkimprint
+									   	$clrImprint_prices[$qty]['website_price'] = ($blkImprint_prices[$qty]['website_price'] + (40 / $qty));
+									}
+							};
+								$product_prices = array(
+									"No Imprint"=>$nonImprint_prices,
+									"Black Imprint" => $blkImprint_prices,
+									"Single Color Imprint" => $clrImprint_prices
+								);
+										output_table($product_prices, $countperpack, 'category');
+					break;}
+			} else{ //there is not a master price table
+				if ($_product->getTierPrice()){
+					$countperpack =	 $_product['count_per_pack']; 
+					$product_prices =  array("Price"=>load_prices($_product));
+					output_table($product_prices, $countperpack, 'product');
+				} else {
+					output_singleprice($_product);
+				}	
+			}
+	
+		//output the pricing table
+		// output_table($product_prices, $countperpack);
+		
+
+//functions
+
+function load_prices($product) {
+	$productID = $product->getId();
+	$product_master = Mage::getModel('catalog/product')->load($productID);
+	$prices = $product_master->getTierPrice();
+	$new_array = array();
+	
+	foreach ($prices as $price) {
+		$quantity = $price['price_qty'];
+		$new_array[$quantity] = $price;
+	 }
+	
+	return $new_array;
+}
+
+function sanitize_string($str){
+	return strtolower(str_replace(" ", "-", $str));
+}
+
+function output_table($arrayPricing,  $countperpack, $discounttype) { 	
+	?>
+
+		<?php if ($discounttype !== 'none'):
+			if ($discounttype == 'category'){$discountname = 'Mix N Match';} else {$discountname = 'Quantity';};
+			?>	
+				<div id='cat-discount-widget'>	
+					<h4>Your <?php echo $discountname ;?> Discount:</h4>
+					<span id='disount-msg'>Hover over the price chart to see your discounted pricing.</span>
+				</div>
+		<?php endif ?>
+
+	
+	 <div class='price-table-outer'> 
+		<div class='price-table-inner'><!-- put pricechart into js array -->
+		<?php 
+			$strPriceChartpre = "var priceChart = {";
+			$strPriceChart = "";
+
+			foreach ($arrayPricing as $column_name=>$price_column){
+					$strPriceChart .= '"' . sanitize_string($column_name) . '" : { 0 : 0, ';
+					foreach ($price_column as $qty=>$fields) {
+						$strPriceChart .= ' ' . $qty . ' : ' . $fields['website_price'] . ',';
+					};
+					$strPriceChart = substr($strPriceChart, 0, -1); //remove last comma
+					$strPriceChart .= '},';
+				};
+				$strPriceChart = substr($strPriceChart, 0, -1); //remove last comma
+
+
+			$strPricechartpost = "};";				
+			$strpriceChart = $strPriceChartpre . $strPriceChart . $strPricechartpost;
+			?>
+			
+		<script type="text/javascript">
+				var discountType = "<?php echo $discounttype; ?>";
+		<?php if ($countperpack == false) {$countperpack = 1;}
+		 	  echo "var packCount = " . $countperpack . "; ";
+			  echo $strpriceChart; ?>
+		</script>		
+
+
+		<table class="price-table"  cellspacing="0" cellpadding="0" border="0">
+				<thead>
+					<tr>
+						<?php $colClass = "w" . count($arrayPricing);?>
+						<th class='quantity <?php echo($colClass)?>'>Quantity</th>
+								
+								 <?php foreach ($arrayPricing as $column_name=>$price_column): ?>
+									<th class='<?php echo($colClass)?>'><?php echo($column_name)?></th>
+								<?php endforeach ?>
+
+
+					</tr>
+				</thead>
+				<tbody><?php
+					$pp_keys = array_keys($arrayPricing);
+					$pp_key = $pp_keys[0]; ?>
+						<?php foreach ($arrayPricing[$pp_key] as $price_row=>$row_content):  //only display quantities included in first array 
+							  $row_quantity = $price_row;
+							 $output_quantity = (number_format($price_row,0));?>	
+
+						<tr class="<? echo ('pricetable_row ' . ($output_quantity & 1 ? 'odd':'even') . ' ' . $colClass) ?> " >
+							<td class='quantity'><?php echo ($output_quantity * $countperpack) ?></td>
+								 <?php foreach ($arrayPricing as $price_row=>$row_content): 
+										$column = sanitize_string($price_row);?>
+									 <td class=<?php echo('"' . $column . '"') ?> >
+									
+										<?php //round to dollar to accommodate old Meggie system
+										echo('$' . number_format($row_content[$row_quantity]['website_price'] *  $row_quantity, 2)) ?>
+									</td>
+								<?php endforeach ?>
+
+
+						</tr>
+						<?php endforeach ?>
+
+			</tbody>
+		</table></div>
+	</div>
+
+<?php } ?>
+
+<?php function output_singleprice($_thisProduct) { ?>
+			<script type="text/javascript">
+				var discountType = "none";
+			</script>
+			
+			<div class='price-box'>	<span class='label'>Price:</span> <?php
+				echo ("<span class='price'>" . number_format($_thisProduct->getPrice(), 2) . "</span></div>");
+			// echo $_thisProduct->getChildHtml('alert_urls');
+			// echo $_thisProduct->getChildHtml('product_type_data'); 
+	} ?>

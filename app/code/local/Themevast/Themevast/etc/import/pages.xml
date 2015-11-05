@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<modern>
+    <resources>
+        <resource>
+            <title>Modern Home page</title>
+            <identifier>home_modern2</identifier>
+            <root_template>one_column</root_template>
+		<content><![CDATA[
+		<div class="home-content">{{block type="cms/block" block_id="home_banner_content2"}} {{block type="producttabs/producttabs" rows="2" name="producttabs" template="themevast/producttabs/producttabs.phtml" }} {{block type="cms/block" block_id="home_banner_content3"}}
+		<div class="home-content2">
+		<div class="row">
+		<div class="col-sm-3 col-sms-6 ">{{block type="newproduct/newproduct" name="newproduct" template="themevast/newproduct/newproduct.phtml"}}</div>
+		<div class="col-sm-3 col-sms-6 ">{{block type="saleproduct/saleproduct" name="saleproduct" template="themevast/saleproduct/saleproduct.phtml"}}</div>
+		<div class="col-sm-3 col-sms-6 ">{{block type="bestseller/bestseller" name="bestseller" template="themevast/bestseller/bestseller.phtml"}}</div>
+		<div class="col-sm-3 col-sms-6">{{block type="onsaleslider/onsaleslider" name="onsaleslider" template="themevast/onsaleslider/onsaleslider.phtml"}}</div>
+		</div>
+		</div>
+		</div>
+		]]></content>
+		<sort_order>1</sort_order>
+            <is_active>1</is_active>
+        </resource>
+    </resources>
+</modern>

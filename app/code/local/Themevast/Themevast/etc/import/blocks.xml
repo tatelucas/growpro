@@ -1,0 +1,367 @@
+<?xml version="1.0"?>
+<modern>
+    <blocks>
+	
+	<block>
+            <title>Footer Social</title>
+            <identifier>footer_social</identifier>
+            <content>
+                <![CDATA[
+					<ul class="social">
+					<li class="first"><a class="social1" href="#"><img alt="" src="{{media url="wysiwyg/paypan.png"}}" /></a></li>
+					<li><a class="social2" href="#"><img alt="" src="{{media url="wysiwyg/visa.png"}}" /></a></li>
+					<li><a class="social3" href="#"><img alt="" src="{{media url="wysiwyg/maestro.png"}}" /></a></li>
+					<li><a class="social4" href="#"><img alt="" src="{{media url="wysiwyg/maestro2.png"}}" /></a></li>
+					<li class="last"><a class="social5" href="#"><img alt="" src="{{media url="wysiwyg/discover.png"}}" /></a></li>
+					</ul>
+		]]>
+            </content>
+            <is_active>1</is_active>
+        </block>
+		
+	<block>
+            <title>Block Menu Links</title>
+            <identifier>megamenu_link</identifier>
+            <content>
+                <![CDATA[
+		<p><a href="{{store direct_url="blog"}}">Blog</a></p>
+		]]>
+            </content>
+            <is_active>1</is_active>
+	</block>
+    
+	<block>
+            <title>Menu Features</title>
+            <identifier>megamenu_extra</identifier>
+            <content>
+                <![CDATA[
+		<div class="custom-menu-wrapper">
+		<div class="row">
+		<div class="col-xs-12 col-sm-4">
+		<div class="menu-col menu-col1">
+		<div class="menu-custom-title">&nbsp;<em class="fa fa-cogs"></em>
+		<h3>Easy Customization</h3>
+		</div>
+		<div class="menu-custom-des">Lorem ipsum dolor sit, consectetures adipi-scing elit. Etiam neque velit setiux blandit rory solare de equis.</div>
+		<a href="#">Read more <em class="fa fa-arrow-circle-right"></em></a></div>
+		</div>
+		<div class="col-xs-12 col-sm-4">
+		<div class="menu-col menu-col1">
+		<div class="menu-custom-title">&nbsp;<em class="fa fa-desktop"></em>
+		<h3>Responsive Design</h3>
+		</div>
+		<div class="menu-custom-des">Lorem ipsum dolor sit, consectetures adipi-scing elit. Etiam neque velit setiux blandit rory solare de equis.</div>
+		<a href="#">Read more <em class="fa fa-arrow-circle-right"></em></a></div>
+		</div>
+		<div class="col-xs-12 col-sm-4">
+		<div class="menu-col menu-col1">
+		<div class="menu-custom-title">&nbsp;<em class="fa fa-file-text-o"></em>
+		<h3>Easy Documentation</h3>
+		</div>
+		<div class="menu-custom-des">Lorem ipsum dolor sit, consectetures adipi-scing elit. Etiam neque velit setiux blandit rory solare de equis.</div>
+		<a href="#">Read more <em class="fa fa-arrow-circle-right"></em></a></div>
+		</div>
+		</div>
+		<div class="banner-custom"><img src="{{media url="wysiwyg/banner-custommenu.jpg"}}" alt="" /></div>
+		</div>
+		]]>
+            </content>
+            <is_active>1</is_active>
+	</block>
+	
+	<block>
+            <title>Block Social Right</title>
+            <identifier>block_social_right</identifier>
+            <content>
+                <![CDATA[
+			<div class="block-social-right">
+			<ul>
+			<li class="social-icon icon-facebook">
+			<div class="box-inner">
+			<div class="fb-content">{{block type="fbfanbox/fbfanbox" after="-" name="fbfanbox" template="themevast/fbfanbox/fbfanbox.phtml" }}</div>
+			</div>
+			</li>
+			<li class="social-icon icon-twitter">
+			<div class="box-inner">{{block type="core/template" after="-" name="lastesttweet" template="themevast/lastesttweet/lastesttweet.phtml" }}</div>
+			</li>
+			<li class="social-icon icon-youtube">
+			<div class="box-inner">
+			<div class="box-youtube"><iframe src="https://www.youtube.com/embed/Y5AehBA3IsE" height="315" width="560"></iframe></div>
+			</div>
+			</li>
+			</ul>
+			</div>
+		]]>
+            </content>
+            <is_active>1</is_active>
+	</block>
+	
+	<block>
+            <title>Contact Maps</title>
+            <identifier>contact_maps</identifier>
+            <content>
+                <![CDATA[
+			<div class="col-md-3 col-sm-6 store-info">
+			<ul class="list-info">
+			<li class="item-info main-info">
+			<div class="info-content"><em class="fa fa-map-marker">&nbsp;</em>
+			<h2>Address 1</h2>
+			<div class="des-info">Sed ut perspiciatis unde omnis 907 Street Name, Los Angeles</div>
+			</div>
+			</li>
+			<li class="item-info email-info">
+			<div class="info-content"><em class="fa fa-envelope">&nbsp;</em>
+			<h2>Email</h2>
+			<div class="des-info"><a class="mailto" title="Send Email" href="mailto:Support1@themevast.com">Support1@themevast.com</a><br /> <a class="mailto" title="Send Email" href="mailto:Support2@themevast.com">Support2@themevast.com</a></div>
+			</div>
+			</li>
+			<li class="item-info phone-info">
+			<div class="info-content"><em class="fa fa-phone">&nbsp;</em>
+			<h2>Phone</h2>
+			<div class="des-info"><a class="call-phone" title="Call: 0123-4567-89" href="tel:0123-4567-89">0123-4567-89</a><br /> <a class="call-phone" title="Call: 0123-4567-89" href="tel:0123-4567-89">0123-4567-89</a></div>
+			</div>
+			</li>
+			</ul>
+			</div>
+			<div class="col-md-3 col-sm-6 store-info">
+			<ul class="list-info">
+			<li class="item-info main-info">
+			<div class="info-content"><em class="fa fa-map-marker">&nbsp;</em>
+			<h2>Address 2</h2>
+			<div class="des-info">Sed ut perspiciatis unde omnis 709 Street Name, Los Angeles</div>
+			</div>
+			</li>
+			<li class="item-info email-info">
+			<div class="info-content"><em class="fa fa-envelope">&nbsp;</em>
+			<h2>Email</h2>
+			<div class="des-info"><a class="mailto" title="Send Email" href="mailto:Support1@themevast.com">Support1@themevast.com</a><br /> <a class="mailto" title="Send Email" href="mailto:Support2@themevast.com">Support2@themevast.com</a></div>
+			</div>
+			</li>
+			<li class="item-info phone-info">
+			<div class="info-content"><em class="fa fa-phone">&nbsp;</em>
+			<h2>Phone</h2>
+			<div class="des-info"><a class="call-phone" title="Call: 0123-4567-89" href="tel:0123-4567-89">0123-4567-89</a><br /> <a class="call-phone" title="Call: 0123-4567-89" href="tel:0123-4567-89">0123-4567-89</a></div>
+			</div>
+			</li>
+			</ul>
+			</div>
+			<div class="col-md-3 col-sm-6 store-info">
+			<ul class="list-info">
+			<li class="item-info main-info">
+			<div class="info-content"><em class="fa fa-map-marker">&nbsp;</em>
+			<h2>Address 3</h2>
+			<div class="des-info">Sed ut perspiciatis unde omnis 709 Street Name, Los Angeles</div>
+			</div>
+			</li>
+			<li class="item-info email-info">
+			<div class="info-content"><em class="fa fa-envelope">&nbsp;</em>
+			<h2>Email</h2>
+			<div class="des-info"><a class="mailto" title="Send Email" href="mailto:Support1@themevast.com">Support1@themevast.com</a><br /> <a class="mailto" title="Send Email" href="mailto:Support2@themevast.com">Support2@themevast.com</a></div>
+			</div>
+			</li>
+			<li class="item-info phone-info">
+			<div class="info-content"><em class="fa fa-phone">&nbsp;</em>
+			<h2>Phone</h2>
+			<div class="des-info"><a class="call-phone" title="Call: 0123-4567-89" href="tel:0123-4567-89">0123-4567-89</a><br /> <a class="call-phone" title="Call: 0123-4567-89" href="tel:0123-4567-8910">0123-4567-89</a></div>
+			</div>
+			</li>
+			</ul>
+			</div>
+			<div class="col-md-3 col-sm-6 store-info">
+			<ul class="list-info">
+			<li class="item-info main-info">
+			<div class="info-content"><em class="fa fa-map-marker">&nbsp;</em>
+			<h2>Address 4</h2>
+			<div class="des-info">Sed ut perspiciatis unde omnis 907 Street Name, Los Angeles</div>
+			</div>
+			</li>
+			<li class="item-info email-info">
+			<div class="info-content"><em class="fa fa-envelope">&nbsp;</em>
+			<h2>Email</h2>
+			<div class="des-info"><a class="mailto" title="Send Email" href="mailto:Support1@themevast.com">Support1@themevast.com</a><br /> <a class="mailto" title="Send Email" href="mailto:Support2@themevast.com">Support2@themevast.com</a></div>
+			</div>
+			</li>
+			<li class="item-info phone-info">
+			<div class="info-content"><em class="fa fa-phone">&nbsp;</em>
+			<h2>Phone</h2>
+			<div class="des-info"><a class="call-phone" title="Call: 0123-4567-89" href="tel:0123-4567-89">0123-4567-89</a><br /> <a class="call-phone" title="Call: 0123-4567-89" href="tel:0123-4567-89">0123-4567-89</a></div>
+			</div>
+			</li>
+			</ul>
+			</div>
+		]]>
+            </content>
+            <is_active>1</is_active>
+	</block>
+	
+	<block>
+            <title>Footer Information</title>
+            <identifier>footer_info</identifier>
+            <content>
+                <![CDATA[
+			<div class="footer-info-1 row">
+			<div class="f-col f-col1 col-sm-6 col-md-3 col-sms-6 col-smb-12">
+			<div class="footer-static-title">
+			<h3>CONTACT INFO</h3>
+			</div>
+			<div class="footer-static-content">
+			<p class="home">108 Sky Tower, Street name, AZ District, New York City, USA</p>
+			<p><em class="fa fa-envelope-o">&nbsp;</em>Modern@foxstore.com</p>
+			<p><em class="fa fa-phone">&nbsp;</em>+123.456.789</p>
+			<p><em class="fa fa-globe">&nbsp;</em>Modern.com</p>
+			</div>
+			</div>
+			<div class="f-col f-col2 col-sm-6 col-md-2 col-sms-6 col-smb-12">
+			<div class="footer-static-title">
+			<h3>Information</h3>
+			</div>
+			<div class="footer-static-content">
+			<ul>
+			<li><a href="{{store direct_url="contacts"}}">Delivery Information</a></li>
+			<li><a href="{{store direct_url="contacts"}}">Discount</a></li>
+			<li class="first"><a href="{{store direct_url="catalog/seo_sitemap/category"}}">Sitemap</a></li>
+			<li><a href="{{store direct_url="privacy-policy-cookie-restriction-mode"}}">Privacy Policy</a></li>
+			<li><a href="{{store direct_url="customer/account/index"}}">My Account</a></li>
+			</ul>
+			</div>
+			</div>
+			<div class="f-col f-col3 col-sm-6 col-md-2 col-sms-6 col-smb-12">
+			<div class="footer-static-title">
+			<h3>Our Services</h3>
+			</div>
+			<div class="footer-static-content">
+			<ul>
+			<li class="first"><a href="{{store direct_url="catalog/seo_sitemap/category"}}">Sitemap</a></li>
+			<li><a href="{{store direct_url="contacts"}}">Contact us</a></li>
+			<li><a href="{{store direct_url="customer/account/index"}}">My Account</a></li>
+			<li><a href="{{store direct_url="privacy-policy-cookie-restriction-mode"}}">Privacy Policy</a></li>
+			<li class="last"><a href="{{store direct_url="catalogsearch/advanced"}}">Advanced Search</a></li>
+			</ul>
+			</div>
+			</div>
+			<div class="f-col f-col-3 col-sm-6 col-md-2 col-sms-6 col-smb-12">
+			<div class="footer-static-title account">
+			<h3>My Account</h3>
+			</div>
+			<div class="footer-static-content ">
+			<ul>
+			<li><a href="{{store direct_url="customer/account/index"}}">My Account</a></li>
+			<li><a href="{{store direct_url="catalog/seo_sitemap/category"}}">Sitemap</a></li>
+			<li><a href="{{store direct_url="about-magento-demo-store"}}">About us</a></li>
+			<li><a href="{{store direct_url="customer-service"}}">Custom Service</a></li>
+			<li><a href="{{store direct_url="contacts"}}">Contact Us</a></li>
+			</ul>
+			</div>
+			</div>
+			<div class="f-col f-col-3 col-sm-6 col-sms-6 col-md-3 col-sm-12 col-smb-12">{{block type="tag/popular" name="tags_popular" template="tag/popular.phtml"}}</div>
+			</div>
+		]]>
+            </content>
+            <is_active>1</is_active>
+        </block>
+		<block>
+            <title>static block hotline</title>
+            <identifier>static-block-hotline</identifier>
+            <content>
+                <![CDATA[
+		<p class="hotline">Call: (1234) 123-113</p>
+		]]>
+            </content>
+            <is_active>1</is_active>
+	</block>
+	<block>
+            <title>Banner Left</title>
+            <identifier>banner_left</identifier>
+            <content>
+                <![CDATA[
+		<div class="banner-left"><a href="#"><img alt="" src="{{media url="wysiwyg/banner-left_1.png"}}" /></a></div>
+		]]>
+            </content>
+            <is_active>1</is_active>
+	</block>
+	<block>
+            <title>footer info 2</title>
+            <identifier>footer_info_2</identifier>
+            <content>
+                <![CDATA[
+		<div class="footer-info-2">
+		<div class="container">
+		<div class="logo-bottom"><a href="#"><img alt="" src="{{media url="wysiwyg/logo_bottom_1.png"}}" /></a></div>
+		<div class="des">
+		<p>We&rsquo;re confident we&rsquo;ve provided all the best for you. Stay connect with us</p>
+		</div>
+		<ul class="link-follow ">
+		<li class="first"><a class="facebook fa fa-facebook" href="#"><span>facebook</span></a></li>
+		<li><a class="twitter fa fa-twitter" href="#"><span>twitter</span></a></li>
+		<li><a class="rss fa fa-rss" href="#"><span>rss</span></a></li>
+		<li><a class="google fa fa-google-plus" href="#"><span>google+</span></a></li>
+		<li class="last"><a class="pinterest fa fa-pinterest" href="#"><span>pinterest</span></a></li>
+		</ul>
+		</div>
+		</div>
+		]]>
+            </content>
+            <is_active>1</is_active>
+	</block>
+	
+	<block>
+            <title>Vmegamenu Links New Arrivals</title>
+            <identifier>v_new_arrivals</identifier>
+            <content>
+                <![CDATA[
+		<div class="vmegamenu-title v-new-arrivals-title">
+		<h2>New Arrivals</h2>
+		</div>
+		<div class="box-link">
+		<ul>
+		<li class="first"><a href="{{store direct_url="newproduct"}}">Shop</a></li>
+		<li><a href="{{store direct_url="saleproduct"}}">Clearance</a></li>
+		<li><a href="{{store direct_url="customer-service"}}">Custom Service</a></li>
+		<li class="last"><a href="#">Discount</a></li>
+		</ul>
+		</div>
+		]]>
+            </content>
+            <is_active>1</is_active>
+	</block>
+	
+	<block>
+            <title>Home Banner Content 2</title>
+            <identifier>home_banner_content2</identifier>
+            <content>
+                <![CDATA[
+		<div class="home-banner-content2">
+		<div class="row">
+		<div class="col-sm-3"><a href="#"><img alt="" src="{{media url="wysiwyg/home_banner_2.1.png"}}" /></a></div>
+		<div class="col-sm-6"><a href="#"><img alt="" src="{{media url="wysiwyg/home_banner_2.2.png"}}" /></a></div>
+		<div class="col-sm-3">
+		<div class="letter-banner1">
+		<h2>FREE DELIVERY</h2>
+		<h2 class="text-banner-letter">&amp;SHIPPING</h2>
+		<span>On order over $180.00</span></div>
+		</div>
+		</div>
+		</div>
+		]]>
+            </content>
+            <is_active>1</is_active>
+	</block>
+	<block>
+            <title>Home Banner Content 3</title>
+            <identifier>home_banner_content3</identifier>
+            <content>
+                <![CDATA[
+		<div class="home-banner-content3">
+		<div class="row">
+		<div class="col-sm-6"><a href="#"><img alt="" src="{{media url="wysiwyg/banner_home2.1.png"}}" /></a></div>
+		<div class="col-sm-6"><a href="#"><img alt="" src="{{media url="wysiwyg/banner_home2.2.png"}}" /></a></div>
+		</div>
+		</div>
+		]]>
+            </content>
+            <is_active>1</is_active>
+	</block>
+    </blocks>
+
+</modern>
+

@@ -1,0 +1,78 @@
+<?php
+    $_product = $this->getProduct();
+    $_helper = $this->helper('catalog/output');
+    
+    $_lightboxConfig = Mage::getStoreConfig('easy_lightbox/general');
+    /* Main Image Size */
+    if (strstr($_lightboxConfig['mainImageSize'], '_')) {
+        $mainImageSize = explode('_', $_lightboxConfig['mainImageSize'], 2);
+    } else {
+        $mainImageSize = array(265, 265);
+    }
+    /* Additional Images Size */
+    if (strstr($_lightboxConfig['additionalImageSize'], '_')) {
+        $additionalImageSize = explode('_', $_lightboxConfig['additionalImageSize'], 2);
+    } else {
+        $additionalImageSize = array(60, 60);
+    }
+?>
+<!-- <a href="<?php echo $this->helper('catalog/image')->init($_product, 'image'); ?>" 
+    rel="lightbox[rotation]" 
+    title="<?php echo $this->htmlEscape($_product->getName());?>"
+    onclick="return false;"
+> --><img src="<?php echo $this->helper('catalog/image')->init($_product, 'image')->resize($mainImageSize[0], $mainImageSize[1]); ?>" alt="<?php echo $this->htmlEscape($_product->getImageLabel());?>"
+/><!-- </a> -->
+<?php if (count($this->getGalleryImages()) > 0): ?>
+<div class="more-views">
+	 <a href="<?php echo $this->helper('catalog/image')->init($this->getProduct(), 'image', $this->getGalleryImages()->getFirstItem()->getFile()); ?>" 
+            rel="lightbox[rotation]" 
+            title="<?php echo $_product->getName();?>"
+            onclick="return false;"
+        >Additional Views</a>
+ <!-- <h4><?php echo $this->__('More Views') ?></h4> -->
+        <ul  style='display:none;'>
+        <?php foreach ($this->getGalleryImages() as $_image): ?>
+		<?php if (($_image->getFile()) !== ($this->getGalleryImages()->getFirstItem()->getFile())): ?>
+        <li>
+            <a href="<?php echo $this->helper('catalog/image')->init($this->getProduct(), 'image', $_image->getFile()); ?>" 
+                rel="lightbox[rotation]" 
+                title="<?php echo $_product->getName();?>"
+                onclick="return false;"
+            ><img src="<?php echo $this->helper('catalog/image')->init($this->getProduct(), 'thumbnail', $_image->getFile())->resize($additionalImageSize[0], $additionalImageSize[1]); ?>" alt="<?php echo $_product->getName();?>"
+            /></a>
+        </li>
+	<?php endif; ?>
+        <?php endforeach; ?>
+        </ul> 
+	<?php if ($_product->getPdfFilename()): ?>
+		<a href="<?php echo(Mage::getBaseUrl() )?>media/catalog/pdfs/<?php echo($_product->getPdfFilename()) ?>">Download PDF</a>
+	<?php endif; ?>
+</div>
+<?php endif; ?>
+
+
+
+<script type="text/javascript">
+function initLightbox(){
+    new Lightbox({
+        fileLoadingImage: '<?php echo $this->getSkinUrl('images/lightbox/loading.gif') ?>',
+        fileBottomNavCloseImage: '<?php echo $this->getSkinUrl('images/lightbox/closelabel.gif') ?>',
+        overlayOpacity: <?php echo $_lightboxConfig['overlayOpacity'] ?>,
+        animate: <?php echo $_lightboxConfig['animate'] ?>,
+        resizeSpeed: <?php echo $_lightboxConfig['resizeSpeed'] ?>,
+        borderSize: <?php echo $_lightboxConfig['borderSize'] ?>,
+        labelImage: '<?php echo $_lightboxConfig['labelImage'] ?>',
+        labelOf: '<?php echo $_lightboxConfig['labelOf'] ?>'
+    });
+}
+
+document.observe("dom:loaded", function(){
+    if (Prototype.Browser.IE) {
+        window.onload = function(){ //KB927917 fix
+            initLightbox();
+        }
+    } else {
+        initLightbox();
+    }
+})
+</script>

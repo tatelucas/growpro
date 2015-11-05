@@ -1,0 +1,35 @@
+Release 0.7.0
+============================
+
+  * Fixed broken metric calculations
+  * Removed debug code which caused a crash on "configurable" products.
+  * Force cart page to behave like product page for "order-by-the-case" feature.
+
+
+Release 0.6.0
+============================
+
+  * Add support for metric measurements
+  * Add support for plain text custom inputs
+
+
+Release 0.5.0
+============================
+
+  * Fix bug in sidebar to show customized prices
+  * Added better instructions to install.files/INSTALL
+
+
+Release 0.4.0
+============================
+
+  * Fix bug in dynamic pricing URL
+  * Added some instructions on setting up the dynamic price XML
+
+
+Release 0.3.0
+============================
+
+The design/layout/checkout.xml file should no longer be used.
+All layout updates are in design/layout/madetoorder.xml
+

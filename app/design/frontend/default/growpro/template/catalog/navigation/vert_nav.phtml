@@ -1,0 +1,16 @@
+<!--from http://www.magentocommerce.com/wiki/how_to_create_a_vertical_left_hand_menu -->
+<div class="vertical-nav-container" box="">
+	<div class="vertical-nav">
+		<div class="”head”">
+			<h4>
+				<?php echo $this->__('Categories') ?>
+			</h4>
+		</div>
+		<h4 class="no-display">
+			<?php echo $this->__('Category Navigation:') ?>
+		</h4>
+	<ul id="nav_vert">
+			<?php foreach ($this->getStoreCategories() as $_category): ?><?php echo $this->drawsItem($_category) ?><?php endforeach ?>
+		</ul>
+	</div><?php echo $this->getChildHtml('topLeftLinks') ?>
+</div>

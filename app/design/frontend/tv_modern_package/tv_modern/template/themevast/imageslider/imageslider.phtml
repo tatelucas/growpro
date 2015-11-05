@@ -1,0 +1,186 @@
+<?php 
+if(!$this->getConfig('enabled')) return;
+$slider = $this->getSlider();
+if(!count($slider)) return;				
+$media = Mage::getBaseUrl('media');	
+$caption = $this->getConfig('caption');
+?>
+<section class="banner-slideshow">
+	<div id="slider1_container" class="" style="position: relative; top: 0px; left: 0px; width: <?php echo Mage::getStoreConfig('imageslider/general/slide_width') ?>px; height: <?php echo Mage::getStoreConfig('imageslider/general/slide_height') ?>px; overflow: hidden; ">
+	 <!-- Loading Screen -->
+        <div u="loading" class="loadding" style="position: absolute; top: 50% !important; left: 50% !important; z-index: 999; color: #fff; width: 32px; height: 32px; text-align: center;">
+            <i class="fa fa-spinner fa-spin"></i>
+        </div>
+		<div  u="slides" id="tv-inivoslider" class="sliders" style="cursor: move; position: absolute; left: 0px; top: 0px; width: <?php echo Mage::getStoreConfig('imageslider/general/slide_width') ?>px; height: <?php echo Mage::getStoreConfig('imageslider/general/slide_height') ?>px; overflow: hidden;">
+		<?php
+			$i = 1;
+			foreach($slider as $slide) {
+				$img = $media .$slide['image']; ?>
+				<div>
+					<img u="image"  src="<?php echo $img?>"  title="#caption<?php echo $i; ?>" alt="image" />	
+					<?php if($caption) { ?>
+						<?php if(Mage::getStoreConfig('imageslider/general/caption') == 1): ?>
+						<div data-u=caption data-t="*" id="caption<?php echo $i; ?>" style="position:absolute; left:600px; top: 130px; width:300px; height:30px;">
+							<div class="<?php echo $slide['effect']?>">
+								<div class="title"><?php echo $this->__($slide['title']) ?></div>
+								<div class="description"><?php echo $this->__($slide['description']) ?></div>
+								<?php if( $slide['link'] ) { ?>
+									<!--<div class="readmore">
+										<a href="<?php //echo $slide['link']?>" title="<?php //echo $this->__('Read more') ?>"><?php //echo $this->__('Read more') ?></a>	
+									</div>-->
+								<?php } ?>
+							</div>
+						</div>	
+					<?php endif; ?>
+					<?php } ?>									
+				</div>
+				<?php $i++; ?>
+				<?php
+			} // end foreach
+		?>
+		  <!--#region Bullet Navigator Skin Begin -->
+
+        <!-- bullet navigator container -->
+        <div u="navigator" class="jssorb01" style="bottom: 16px; width: 100%;">
+            <!-- bullet navigator item prototype -->
+            <div u="prototype"></div>
+        </div>
+        <!--#endregion Bullet Navigator Skin End -->
+        
+        <!--#region Arrow Navigator Skin Begin -->
+	
+        <!-- Arrow Left -->
+        <span u="arrowleft" class="jssora02l"><i class="fa fa-angle-left"></i></span>
+        <!-- Arrow Right -->
+        <span u="arrowright" class="jssora02r"><i class="fa fa-angle-right"></i></span>
+	</div>
+	</div>
+</section>
+
+<script>
+
+        jQuery(document).ready(function ($) {
+
+            var _SlideshowTransitions = [ 
+            <?php if(Mage::getStoreConfig('imageslider/general/effect') or Mage::getStoreConfig('imageslider/general/effect') != ''): echo Mage::getStoreConfig('imageslider/general/effect');?>
+           	<?php endif; ?>
+            ];
+            var _CaptionTransitions = [
+            <?php if(Mage::getStoreConfig('imageslider/general/caption_effect') or Mage::getStoreConfig('imageslider/general/caption_effect') != ''): echo Mage::getStoreConfig('imageslider/general/caption_effect');?>
+    
+            <?php endif; ?>
+            ];
+
+            var options = {
+                $AutoPlay: true,                                    //[Optional] Whether to auto play, to enable slideshow, this option must be set to true, default value is false
+                $AutoPlaySteps: 1,                                  //[Optional] Steps to go for each navigation request (this options applys only when slideshow disabled), the default value is 1
+                $AutoPlayInterval: 4000,                            //[Optional] Interval (in milliseconds) to go for next slide since the previous stopped if the slider is auto playing, default value is 3000
+                $PauseOnHover: 1,                               //[Optional] Whether to pause when mouse over if a slider is auto playing, 0 no pause, 1 pause for desktop, 2 pause for touch device, 3 pause for desktop and touch device, 4 freeze for desktop, 8 freeze for touch device, 12 freeze for desktop and touch device, default value is 1
+
+                $ArrowKeyNavigation: true,   			            //[Optional] Allows keyboard (arrow key) navigation or not, default value is false
+                $SlideDuration: <?php echo Mage::getStoreConfig('imageslider/general/animSpeed') ?>,                                //[Optional] Specifies default duration (swipe) for slide in milliseconds, default value is 500
+                $MinDragOffsetToSlide: 20,                          //[Optional] Minimum drag offset to trigger slide , default value is 20
+                //$SlideWidth: 600,                                 //[Optional] Width of every slide in pixels, default value is width of 'slides' container
+                //$SlideHeight: 300,                                //[Optional] Height of every slide in pixels, default value is height of 'slides' container
+                $SlideSpacing: 0, 					                //[Optional] Space between each slide in pixels, default value is 0
+                $DisplayPieces: 1,                                  //[Optional] Number of pieces to display (the slideshow would be disabled if the value is set to greater than 1), the default value is 1
+                $ParkingPosition: 0,                                //[Optional] The offset position to park slide (this options applys only when slideshow disabled), default value is 0.
+                $UISearchMode: 1,                                   //[Optional] The way (0 parellel, 1 recursive, default value is 1) to search UI components (slides container, loading screen, navigator container, arrow navigator container, thumbnail navigator container etc).
+                $PlayOrientation: 1,                                //[Optional] Orientation to play slide (for auto play, navigation), 1 horizental, 2 vertical, 5 horizental reverse, 6 vertical reverse, default value is 1
+                $DragOrientation: 3,                                //[Optional] Orientation to drag slide, 0 no drag, 1 horizental, 2 vertical, 3 either, default value is 1 (Note that the $DragOrientation should be the same as $PlayOrientation when $DisplayPieces is greater than 1, or parking position is not 0)
+                $SlideshowOptions: {                                //[Optional] Options to specify and enable slideshow or not
+	                $Class: $JssorSlideshowRunner$,                 //[Required] Class to create instance of slideshow
+	                $Transitions: _SlideshowTransitions,            //[Required] An array of slideshow transitions to play slideshow
+	                //$TransitionsOrder: 0,                           //[Optional] The way to choose transition to play slide, 1 Sequence, 0 Random
+	            	$TransitionsOrder: 0,	                $ShowLink: true                                    //[Optional] Whether to bring slide link on top of the slider when slideshow is running, default value is false
+	            },
+	            <?php if(Mage::getStoreConfig('imageslider/general/caption') == 1): ?>
+                $CaptionSliderOptions: {                            //[Optional] Options which specifies how to animate caption
+                    $Class: $JssorCaptionSlider$,                   //[Required] Class to create instance to animate caption
+                    $CaptionTransitions: _CaptionTransitions,       //[Required] An array of caption transitions to play caption, see caption transition section at jssor slideshow transition builder
+                    $PlayInMode: 1,                                 //[Optional] 0 None (no play), 1 Chain (goes after main slide), 3 Chain Flatten (goes after main slide and flatten all caption animations), default value is 1
+                    $PlayOutMode: 3                                 //[Optional] 0 None (no play), 1 Chain (goes before main slide), 3 Chain Flatten (goes before main slide and flatten all caption animations), default value is 1
+                },
+                <?php endif; ?>
+                $BulletNavigatorOptions: {                                //[Optional] Options to specify and enable navigator or not
+                    $Class: $JssorBulletNavigator$,                       //[Required] Class to create navigator instance
+                    $ChanceToShow: <?php if(Mage::getStoreConfig('imageslider/general/controlNav') == 1): ?>2
+                    				<?php else: ?>0<?php endif; ?>,                               //[Required] 0 Never, 1 Mouse Over, 2 Always
+                    $AutoCenter: 0,                                 //[Optional] Auto center navigator in parent container, 0 None, 1 Horizontal, 2 Vertical, 3 Both, default value is 0
+                    $Steps: 1,                                      //[Optional] Steps to go for each navigation request, default value is 1
+                    $Lanes: 1,                                      //[Optional] Specify lanes to arrange items, default value is 1
+                    $SpacingX: 5,                                   //[Optional] Horizontal space between each item in pixel, default value is 0
+                    $SpacingY: 10,                                   //[Optional] Vertical space between each item in pixel, default value is 0
+                    $Orientation: 1                                 //[Optional] The orientation of the navigator, 1 horizontal, 2 vertical, default value is 1
+                },
+
+                $ArrowNavigatorOptions: {
+                    $Class: $JssorArrowNavigator$,              //[Requried] Class to create arrow navigator instance
+                    $ChanceToShow: <?php if(Mage::getStoreConfig('imageslider/general/directionNav') == 1): ?>1
+                    				<?php else: ?>0<?php endif; ?>
+                    ,                               //[Required] 0 Never, 1 Mouse Over, 2 Always
+                    $AutoCenter: 2,                                 //[Optional] Auto center arrows in parent container, 0 No, 1 Horizontal, 2 Vertical, 3 Both, default value is 0
+                    $Steps: 1                                       //[Optional] Steps to go for each navigation request, default value is 1
+                }
+            };
+            var jssor_slider1 = new $JssorSlider$("slider1_container", options);
+            //responsive code begin
+            //you can remove responsive code if you don't want the slider scales while window resizes
+            function ScaleSlider() {
+              
+
+                //reserve blank width for margin+padding: margin+padding-left (10) + margin+padding-right (10)
+                var paddingWidth = 0;
+
+                //minimum width should reserve for text
+                var minReserveWidth = 225;
+
+                var parentElement = jssor_slider1.$Elmt.parentNode;
+
+                //evaluate parent container width
+                var parentWidth = parentElement.clientWidth;
+
+                if (parentWidth) {
+
+                    //exclude blank width
+                    var availableWidth = parentWidth - paddingWidth;
+
+                    //calculate slider width as 70% of available width
+                    var sliderWidth = availableWidth * 0.7;
+
+                    //slider width is maximum 600
+                    sliderWidth = Math.min(sliderWidth, 600);
+
+                    //slider width is minimum 200
+                    sliderWidth = Math.max(sliderWidth, 1920);
+                    var clearFix = "none";
+
+                    //evaluate free width for text, if the width is less than minReserveWidth then fill parent container
+                    if (availableWidth - sliderWidth < minReserveWidth) {
+
+                        //set slider width to available width
+                        sliderWidth = availableWidth;
+
+                        //slider width is minimum 200
+                        sliderWidth = Math.max(sliderWidth, 200);
+
+                        clearFix = "both";
+                    }
+
+                    //clear fix for safari 3.1, chrome 3
+                    $('#clearFixDiv').css('clear', clearFix);
+
+                    jssor_slider1.$ScaleWidth(sliderWidth);
+                }
+                else
+                    window.setTimeout(ScaleSlider, 30);
+            }
+            ScaleSlider();
+
+            $(window).bind("load", ScaleSlider);
+            $(window).bind("resize", ScaleSlider);
+            $(window).bind("orientationchange", ScaleSlider);
+            //responsive code end
+        });
+    </script>
+
