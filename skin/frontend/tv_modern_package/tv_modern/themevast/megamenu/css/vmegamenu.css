@@ -1,0 +1,64 @@
+.nav-vcontainer { margin-bottom: 20px;}
+.cms-index-index .nav-vcontainer { margin-bottom: 0;}
+.vmegamenu-title {
+  position: relative;
+  padding-bottom: 15px;
+  margin-bottom: 10px;
+}
+.vmegamenu-title:after {
+  content: "";
+  border-bottom: 1px solid #dedede;
+  width: 38px;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+}
+.vmegamenu-title h2 {
+  font-weight: 700;
+  font-size: 20px;
+  font-stretch: normal;
+  font-family: open sans;
+}
+.vmegamenu-contain { margin-bottom: 20px;}
+.nav_vmegamenu li.parent {
+  position: relative;
+}
+.nav_vmegamenu li.parent:before {
+  content: "\f0da";
+  font: normal normal normal 12px/1 FontAwesome;
+  position: absolute;
+  right: 15px;
+  top: 17px;
+  color: #ccc;
+}
+.nav_vmegamenu li ul {
+  position: absolute;
+  width: 200px;
+  border: 1px solid #eee;
+  left: 100%;
+  top: -1px;
+  margin-left: -10px;
+  z-index: 999;
+  background: #fff;
+  display: none;
+}
+.nav_vmegamenu > li:hover > ul.level0,
+.nav_vmegamenu > li > ul.level0 > li:hover ul.level1,
+.nav_vmegamenu > li > ul.level0 > li ul.level1 > li:hover ul.level2 {
+  display: block;
+}
+.nav_vmegamenu li { padding: 0 10px;}
+.nav_vmegamenu > li.level0 { padding: 0;}
+.nav_vmegamenu li a {
+  line-height: 25px;
+  display: block;
+  text-transform: capitalize;
+  font-family: utm_avoregular;
+  font-weight: normal;
+  font-size:14px;
+  padding:10px;
+}
+.nav_vmegamenu li:hover { background:#262626;}
+.nav_vmegamenu li:hover > a {color:#fff;}
+
+.box-link li a { display: block; line-height: 25px; font-size:14px; font-family: utm_avoregular; font-weight:300;}

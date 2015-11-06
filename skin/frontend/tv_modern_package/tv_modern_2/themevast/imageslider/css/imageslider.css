@@ -1,0 +1,142 @@
+.loadding {
+    width: 32px !important;
+    height: 32px !important;
+    text-align: center;
+    line-height: 50px;
+    font-size: 16px;
+    color: #666;
+    background-color: #fff;
+    box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.5);
+    -webkit-box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.5);
+    margin-top: -16px;
+    margin-left: -16px;
+    border-radius: 3px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    top: 50%;
+    left: 50%;
+    position: fixed;
+    display: none;
+    z-index: 999;
+}
+.title h3 { color:#fff;
+    font-size: 23px;
+    font-family: Arial;
+    font-weight: normal;
+    color: #ffffff;
+    text-transform:capitalize;}
+/*.title h2 {
+    font-size: 55px;
+    font-family: Montserrat;
+    font-weight: bold;
+    color: #ffffff;
+    text-transform:capitalize;
+}
+.title h2 h2 {
+    font-size: 55px;
+    font-family: Montserrat;
+    font-weight: bold;
+    color: #ffffff;
+    text-transform:capitalize;*/
+}
+.description {  font-size: 18px;
+  font-family: Arial;
+  font-weight: normal;
+  color: #ffffff;
+  }
+
+
+
+
+
+  .captionOrange, .captionBlack
+        {
+            color: #fff;
+            font-size: 20px;
+            line-height: 30px;
+            text-align: center;
+            border-radius: 4px;
+        }
+        .captionOrange
+        {
+            background: #EB5100;
+            background-color: rgba(235, 81, 0, 0.6);
+        }
+        .captionBlack
+        {
+        	font-size:16px;
+            background: #000;
+            background-color: rgba(0, 0, 0, 0.4);
+        }
+        a.captionOrange, A.captionOrange:active, A.captionOrange:visited
+        {
+        	color: #ffffff;
+        	text-decoration: none;
+        }
+        a.captionOrange:hover
+        {
+            color: #eb5100;
+            text-decoration: underline;
+            background-color: #eeeeee;
+            background-color: rgba(238, 238, 238, 0.7);
+        }
+        .bricon
+        {
+            background: url(../images/browser-icons.png);
+        }
+          /* jssor slider arrow navigator skin 02 css */
+            /*
+            .jssora02l                  (normal)
+            .jssora02r                  (normal)
+            .jssora02l:hover            (normal mouseover)
+            .jssora02r:hover            (normal mouseover)
+            .jssora02l.jssora02ldn      (mousedown)
+            .jssora02r.jssora02rdn      (mousedown)
+            */
+            .jssora02l, .jssora02r {
+                display: block;
+                position: absolute;
+                cursor: pointer;
+                overflow: hidden;
+		color: #fff;
+		top: 50%;
+		width: 52px;
+		height: 40px;
+		line-height: 45px;
+		text-align: center;
+		margin-top: -3px;
+		background: rgba(0, 0, 0, 0.7);
+            }
+	    .jssora02l .fa  , .jssora02r .fa {
+		font-size: 20px;
+	    }
+            .jssora02l { left: 0;}
+            .jssora02r { right: 0;}
+            .jssora02l:hover,
+            .jssora02r:hover { opacity: 0.5; }
+                /* jssor slider bullet navigator skin 01 css */
+            /*
+            .jssorb01 div           (normal)
+            .jssorb01 div:hover     (normal mouseover)
+            .jssorb01 .av           (active)
+            .jssorb01 .av:hover     (active mouseover)
+            .jssorb01 .dn           (mousedown)
+            */
+            .jssorb01 {
+                position: absolute;
+		width: 100% !important;
+		text-align: center;
+            }
+            .jssorb01 div {
+                position: static !important;
+                width: 12px;
+                height: 12px;
+                overflow: hidden;
+                cursor: pointer;
+                border: #fff 1px solid;
+		display: inline-block;
+		margin: 0 3px;
+            }
+            .jssorb01 div:hover, .jssorb01 .av:hover { background-color: #fff; }
+            .jssorb01 .av { background-color: #fff; }
+            .jssorb01 .dn, .jssorb01 .dn:hover { background-color: #fff; }
