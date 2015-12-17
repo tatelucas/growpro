@@ -31,10 +31,10 @@
 <header class="header-wrapper">
     <?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('header_promotion')->toHtml() ?>
     <div class="header-quick-access">
-       
+
             <div class="container-inner">
                 <div class="quick-access">
-                    <p class="welcome-msg"><?php echo $this->getChildHtml('welcome') ?> <?php echo $this->getAdditionalHtml() ?></p>
+                    <!--<p class="welcome-msg"><?php echo $this->getChildHtml('welcome') ?> <?php echo $this->getAdditionalHtml() ?></p>-->
                     <?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('static-block-hotline')->toHtml() ?>
                     <div class="header-toplinks">
                         <label class="my-account"><?php echo $this->__('My account') ?><i class="fa fa-angle-down"></i></label>
@@ -46,13 +46,13 @@
                     <div class="header-language">
                         <?php echo $this->getChildHtml('store_language') ?>
                     </div>
-                    
+
                 </div>
             </div>
-        
+
     </div>
     <div class="header">
-        
+
             <div class="container-inner">
                 <div class="page-header-content">
                     <div class="header-left-logo">
@@ -70,10 +70,6 @@
                     </div>
                 </div>
             </div>
-        
+
     </div>
 </header>
-
-
-
-
