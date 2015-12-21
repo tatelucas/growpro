@@ -195,10 +195,10 @@ button.button::-moz-focus-inner { padding:0; border:0; } /* FF Fix */
 button.button { -webkit-border-fit:lines; } /* <- Safari & Google Chrome Fix */
 button.button { overflow:visible; width:auto; border:none; padding:0; margin:0; background: none; cursor:pointer;}
 button.button span span { display: inline-block;text-align:center; white-space:nowrap; color:#fff;   font-size: 14px; padding:8px 15px; background:#333;}
-button.button:hover span span { color: #fff; background:#F46E6F;}
+button.button:hover span span { color: #fff; background:#781B23;}
 .form-search button.button span span { border: none;display: inline-block;width: 40px;height: 40px; background: none; padding:0;}
 .form-search button.button span span .fa { line-height:40px;}
-.form-search button.button span span .fa:hover  {color:#f46e6f;}
+.form-search button.button span span .fa:hover  {color:#781B23;}
 .products-grid .item button.btn-cart span span,
 .products-list .item button.btn-cart span span,
 .product-view button.btn-cart span span  { font-size: 13px;  font-weight: normal;  font-family: Open Sans;  text-transform: capitalize;
@@ -383,7 +383,7 @@ p.required { font-size:11px; text-align:right; color:#EB340A; }
 
 .breadcrumbs {  line-height: 15px; margin: 0;  margin: 0 0 30px; position:relative;}
 .breadcrumbs li { display:inline; }
-.breadcrumbs li.product {color:#f46e6f;}
+.breadcrumbs li.product {color:#781B23;}
 .breadcrumbs li span { margin: 0 2px;}
 .breadcrumbs li strong { text-decoration: underline; font-family: Karla; font-size:14px; font-weight:400;}
 .breadcrumbs li a {font-family: Karla; font-size:14px; font-weight:400;}
@@ -853,7 +853,7 @@ font-weight:normal; color:#010101;}
 .header-toplinks .links li.first a:before,
 .header-toplinks .links li.login-register a:before { }
 .cms-index-index .header-wrapper {width: 100%;z-index:9;}
- .header { padding:29px 0 20px;  }
+ .header { padding: 20px 0;  }
 .page-header-content {  position: relative; float: left; width: 100%; }
 .page-header-content .header-left-logo {   min-width: 200px; z-index: 98; margin-bottom: 26px;}
 .page-header-content .header-right { float:right;}
@@ -1438,7 +1438,7 @@ font-family:Karla; font-weight:600;}
 
 .price-box { margin:10px 0; }
 .price-box p { display: inline-block; }
-.price-box .price {   color:#f46e6f;  }
+.price-box .price {   color:#781B23;  }
 
 /* Regular price */
 .regular-price { color:#c76200; }
@@ -2856,7 +2856,7 @@ text-align: center; margin:0 10px 0 0; font-size: 12px; color: #fff;  }
     font-weight: normal;
     color: #888;
 }
-.footer address a { color: #f46e6f;}
+.footer address a { color: #781B23;}
 .footer ul { margin-top: 20px; }
 .footer ul.links { display:block; }
 .footer ul.links li {
@@ -3088,7 +3088,7 @@ height:30px;
   font-weight: normal;
   text-align: center;
   line-height: 38px;
-  background-color: #f46e6f;
+  background-color: #781B23;
   color: #fff;
 }
 #back-top:hover {
@@ -3113,7 +3113,7 @@ height:30px;
 
 .home-banner-content1 .img-banner { position:relative;}
 
-.home-banner-content2 .letter-banner1 {   background: url('../images/plane.png') no-repeat 103px 32px #f46e6f; color:#fff; padding:112px 60px 14px; text-align:center;}
+.home-banner-content2 .letter-banner1 {   background: url('../images/plane.png') no-repeat 103px 32px #781B23; color:#fff; padding:112px 60px 14px; text-align:center;}
 .home-banner-content2 .letter-banner1 h2 { position:relative; font-size:20px; font-family: Karla; font-weight:600; margin:0; line-height:22px;}
 .home-banner-content2 .letter-banner1 h2.text-banner-letter:after { content:""; width:50px; height:1px; position:absolute; bottom:-20px; left:35%; background:#fff;}
 .home-banner-content2 .letter-banner1 span { font-size:12px; font-family:Open Sans; font-weight:400; line-height:100px;}
@@ -3283,7 +3283,7 @@ padding:0 20px; line-height:40px; text-transform:uppercase; background:#ff5b5c; 
     text-align: left;  line-height: 32px;
 }
 .blog-content li.item:hover h3.title  { }
-.blog-content li.item h3.title:hover { text-decoration: underline; color:#f46e6f;}
+.blog-content li.item h3.title:hover { text-decoration: underline; color:#781B23;}
 .blog-content .fa { font-size: 14px; color: #ccc;   margin-right: 3px; }
 .blog-content li.item p.author {
     color: #666;
@@ -3327,7 +3327,7 @@ padding:0 20px; line-height:40px; text-transform:uppercase; background:#ff5b5c; 
 .blog-content .time1 p { margin:0 !important; font-family:Open Sans; font-weight:normal; font-size:13px; color:#666666; float:left; padding-right:40px;   line-height: 40px;position:relative;}
 .blog-content .time1 p.date-month-year:after { content:""; width:1px; height:10px; background:#666; position:absolute; top:16px; right:20px;}
 .blog-content .box-info a {font-family:Open Sans; font-weight:normal; font-size:13px; color:#666666;  line-height: 40px;}
-.blog-content .box-info a:hover { color:#f46e6f;}
+.blog-content .box-info a:hover { color:#781B23;}
 /*--------------------------------------------------------------------------------*/
 
 /*Brand Logo*/
@@ -3703,6 +3703,6 @@ font-family: Karla;}
 .fancybox-skin .block-content .input-box input { border:1px solid #bebec0; width:520px; height:45px; padding-left:17px;}
 .fancybox-skin .block-content .actions button.button span span { font-size:14px; font-family: Karla; font-weight:600; color:#fff;
 padding:12px 25px; background:#000; border-radius:0; text-transform: uppercase;}
-.fancybox-skin .block-content .actions button.button span span:hover { background:#f46e6f;}
+.fancybox-skin .block-content .actions button.button span span:hover { background:#781B23;}
 .fancybox-skin .subscribe-bottom input { margin:-3px 15px 0 0;}
 .fancybox-skin .subscribe-bottom { color:#333; font-size:13px; font-family: Karla; font-weight: 400; margin-top:20px; margin-top:110px;}
