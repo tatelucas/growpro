@@ -189,6 +189,13 @@ Product view
         <reference name="head">
             <action method="addJs"><script>varien/product.js</script></action>
             <action method="addJs"><script>varien/configurable.js</script></action>
+			<action method="addJs"><script>jquery/jquery-ui-1.7.2.custom.min.js</script></action>			
+			<action method="addJs"><script>jquery/productpage.js</script></action>
+			<action method="addJs"><script>jquery/categorypage.js</script></action>
+			
+	<action method="addItem"><type>js_css</type><name>jquery/growpro/jquery-ui-1.7.2.custom.css</name><params/><!--<if/><condition>can_load_calendar_js</condition>--></action>
+	<action method="addItem"><type>js_css</type><name>/jquery/jquery.lightbox-0.5.css</name></action>
+			
 
             <action method="addItem"><type>js_css</type><name>calendar/calendar-win2k-1.css</name><params/><!--<if/><condition>can_load_calendar_js</condition>--></action>
             <action method="addItem"><type>js</type><name>calendar/calendar.js</name><!--<params/><if/><condition>can_load_calendar_js</condition>--></action>
@@ -280,7 +287,7 @@ Product view
                     <action method="setDataByKey"><key>alias_in_layout</key><value>container2</value></action>
                     <action method="setDataByKeyFromRegistry"><key>options_container</key><key_in_registry>product</key_in_registry></action>
                     <action method="append"><block>product.info.options.wrapper</block></action>
-                    <action method="append"><block>product.info.options.wrapper.bottom</block></action>
+                    <!-- <action method="append"><block>product.info.options.wrapper.bottom</block></action> -->
                 </block>
                 <action method="unsetCallChild"><child>container1</child><call>ifEquals</call><if>0</if><key>alias_in_layout</key><key>options_container</key></action>
                 <action method="unsetCallChild"><child>container2</child><call>ifEquals</call><if>0</if><key>alias_in_layout</key><key>options_container</key></action>

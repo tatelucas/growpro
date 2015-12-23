@@ -33,6 +33,83 @@
 ?>
 <?php $_helper = $this->helper('catalog/output'); ?>
 <?php $_product = $this->getProduct(); ?>
+
+<?php //adding code from previous website -dwl
+	$cartArray = array();
+	$cartProducts = array();
+		$pricing_category = $_product->getCategoryTierPrice();
+		//This model now just being used for master content management (description, etc)
+		$MasterProductList = Mage::getModel('catalog/product')->getCollection()
+			->addAttributeToFilter('category_tier_price', $pricing_category)
+			->addAttributeToFilter('category_tier_price_master', 1)
+			->addAttributeToFilter('category_tier_price_sku', 'N')
+			->addAttributeToSelect('*');
+		
+		foreach($MasterProductList as $MasterProduct) {continue;}
+
+		$cartItems = Mage::getModel('checkout/session')->getQuote()->getAllItems(); //These items do not have the master product ID. 
+		if ($cartItems != NULL) {	
+	
+		foreach ($cartItems as $cartItem) {
+			if ($cartItem->getproductId() == $_product->getId()) {$thisCartItem = &$cartItem;}
+
+			if (substr($cartItem->getSku(), -2, 1) == '-'){
+				$cartItemSKU = substr($cartItem->getSku(), -1);
+				switch ($cartItemSKU) {
+					case "N" :
+						$cartItemSKUhandle = 'no-imprint';
+					break;
+					case "B" :
+						$cartItemSKUhandle = 'black-imprint';
+					break;
+					case "C" :
+						$cartItemSKUhandle = 'single-color-imprint';
+						$cartItemSKU = "B";
+					break;
+			}
+			}else {
+				//single-option master products may have an SKu of 'N', so set cartitemsku to this in order to correctly match the master
+				$cartItemSKU = "N";
+				$cartItemSKUhandle = 'price';
+			}
+			
+			$ProductModel = Mage::getModel('catalog/product')->load($cartItem->getProductId());
+			$MasterProductListC = Mage::getModel('catalog/product')->getCollection()
+				->addAttributeToFilter('category_tier_price', $ProductModel->getCategoryTierPrice())
+				->addAttributeToFilter('category_tier_price_master', 1)
+				->addAttributeToSelect('*');
+			foreach ($MasterProductListC as $MasterProductC) {
+					if ( $MasterProductC->getCategoryTierPriceSku() == $cartItemSKU) {
+						$cartArray[$MasterProductC->getCategoryTierPrice()][$MasterProductC->getId()]['SKU'] = $cartItemSKU; //might not need this in the array
+						$cartArray[$MasterProductC->getCategoryTierPrice()][$MasterProductC->getId()]['SKU-handle'] = $cartItemSKUhandle;
+						$cartArray[$MasterProductC->getCategoryTierPrice()][$MasterProductC->getId()]['Price-type'] = $MasterProductC->getCategoryPricing();				
+							if ($MasterProductC->getCategoryPricing() == 1){
+									if (!array_key_exists('category-qty', $cartArray[$MasterProductC->getCategoryTierPrice()][$MasterProductC->getId()])) {
+										$cartArray[$MasterProductC->getCategoryTierPrice()][$MasterProductC->getId()]['category-qty'] = 0;
+									}
+								$cartArray[$MasterProductC->getCategoryTierPrice()][$MasterProductC->getId()]['category-qty'] = $cartArray[$MasterProductC->getCategoryTierPrice()][$MasterProductC->getId()]['category-qty'] + $cartItem->getQty();
+							} else {
+								$cartArray[$MasterProductC->getCategoryTierPrice()][$MasterProductC->getId()][$cartItem->getProductId()] = $cartItem->getQty();		
+							}
+					}
+			}
+		}
+
+			if (array_key_exists($pricing_category, $cartArray)) {
+					foreach ($cartArray[$pricing_category] as $optionArray) {
+						if ($optionArray['Price-type'] == 1 ) {
+								$cartProducts[$optionArray['SKU-handle']] = $optionArray['category-qty'];
+						} else if (array_key_exists($_product->getId(), $optionArray) ) {
+								$cartProducts[$optionArray['SKU-handle']] = $optionArray[$_product->getId()];
+						}
+					}
+				}
+}
+?>
+
+
+
+
 <?php // Previous and Next product links in product page
 
 if(!$_product->getCategoryIds())
@@ -69,7 +146,25 @@ $_prev_prod = Mage::getModel('catalog/product')->load( end($cat_prod_ids) );
 }
 ?>
 <script type="text/javascript">
+
+<?php
+if ($cartProducts) {
+$jsObjpre = "var cartItems = {";
+$jsObj = '';
+foreach ($cartProducts as $cartProductName=>$cartItemQty) {
+	$jsObj .= '"' . $cartProductName . '" : '  . $cartItemQty . ' ,'; }
+$jsObj = substr($jsObj, 0, -1) . '};';
+echo $jsObjpre . $jsObj;
+} else {
+	echo("var cartItems = 0;");
+};
+
+?>
+
     var optionsPrice = new Product.OptionsPrice(<?php echo $this->getJsonConfig() ?>);
+	
+	
+	
 </script>
 <div id="messages_product_view"><?php echo $this->getMessagesBlock()->getGroupedHtml() ?></div>
 <div class="product-view">   
@@ -95,7 +190,8 @@ $_prev_prod = Mage::getModel('catalog/product')->load( end($cat_prod_ids) );
                     <h1><?php echo $_helper->productAttribute($_product, $_product->getName(), 'name') ?></h1>
                 </div>
                 <?php echo $this->getReviewsSummaryHtml($_product, false, true)?>
-                <?php echo $this->getChildHtml('product_type_data') ?>
+                <?php //turning off instock and list price display - actually, this should be conditional: if tiered pricing, then no price display - dwl - 12/23/15
+				// echo $this->getChildHtml('product_type_data') ?>
 
                 <?php if ($_product->getShortDescription()):?>
                     <div class="short-description">
@@ -103,8 +199,69 @@ $_prev_prod = Mage::getModel('catalog/product')->load( end($cat_prod_ids) );
                         <div class="std"><?php echo $_helper->productAttribute($_product, nl2br($_product->getShortDescription()), 'short_description') ?></div>
                     </div>
                 <?php endif;?>
-         
-                <?php echo $this->getTierPriceHtml() ?>
+				
+<?php //somewhere in here we attempt to add the product-tabs from the old site - dwl							
+?>
+
+        <div id='product-tabs'>   
+			<ul id='product-tabs'>
+				<?php $tabs_class = (($_product->getHowItWorks() || $MasterProduct->getHowItWorks())? 'third' : 'half') ?>
+					<li class='<?php echo $tabs_class ?>'><a href='#product-ordering'>Pricing</a></li>
+				<li class='<?php echo $tabs_class ?>'><a href='#product-specs'>Product Description</a></li>
+			
+				<?php if ($_product->getHowItWorks() || $MasterProduct->getHowItWorks()): ?>
+				<li class='<?php echo $tabs_class ?>'><a href='#product-nextsteps'>Next Steps</a></li>
+				<?php endif ?>
+			</ul>
+			<div id='product-ordering'>
+
+			<div id='tab-content'>
+	   			<?php echo $this->getTierPriceHtml();
+					
+				 // if  ($tierPrice_result == "test") {
+				 // 				 	echo $this->getChildHtml('alert_urls');
+				 // 			        echo $this->getChildHtml('product_type_data'); }
+			?>  
+
+		      <?php if ($_product->isSaleable() && $this->hasOptions()):?>
+		            <?php  echo $this->getChildChildHtml('container2', '', true, true) ?>
+		      <?php endif;?>
+			</div>
+			</div>			
+			<div id='product-specs'>
+				 <?php if ($_product->getDescription()):?>
+			          <div class="tab-content">
+						<?php echo $_helper->productAttribute($_product, nl2br($_product->getDescription()), 'description') ?>
+					</div> 
+				<?php else:?>
+					  <div class="tab-content">
+						<?php echo $_helper->productAttribute($_product, nl2br($MasterProduct->getDescription()), 'description') ?>
+					  </div>
+			     <?php endif;?>
+			</div>			
+			<?php if ($_product->getHowItWorks() || $MasterProduct->getHowItWorks()): ?>
+			<div id='product-nextsteps' class='third'>
+				<?php if ($_product->getHowItWorks()):?>
+			          <div class="tab-content">
+						<?php echo $_helper->productAttribute($_product, nl2br($_product->getHowItWorks()), 'how_it_works') ?>
+					</div> 
+				<?php else:?>
+					  <div class="tab-content">
+						<?php echo $_helper->productAttribute($_product, nl2br($MasterProduct->getHowItWorks()), 'how_it_works') ?>
+					  </div>
+			     <?php endif;?>
+			</div>
+			<?php endif ?>
+		</div>
+		<div id='add-to-holder'>
+			<!-- ADD SELECTION STATUS STUFF HERE-->
+			<div id='selection-status'></div>
+			 <?php echo $this->getChildHtml('addtocart') ?>
+		</div>
+		
+		
+
+                <?php // echo $this->getTierPriceHtml() ?>
                 <?php echo $this->getChildHtml('alert_urls') ?>
                 <?php echo $this->getChildHtml('extrahint') ?>
                 
@@ -120,7 +277,7 @@ $_prev_prod = Mage::getModel('catalog/product')->load( end($cat_prod_ids) );
                     <div class="add-to-box-cart">
                         
                         <?php if($_product->isSaleable()): ?>
-                            <?php echo $this->getChildHtml('addtocart') ?>
+                            <?php // echo $this->getChildHtml('addtocart') ?>
                         <?php endif; ?>
                         <?php //echo $this->getChildHtml('addto') ?>
                     </div>
@@ -137,7 +294,7 @@ $_prev_prod = Mage::getModel('catalog/product')->load( end($cat_prod_ids) );
                 <?php endif;?>
                 
                 <?php if ($_product->isSaleable() && $this->hasOptions()):?>
-                    <?php echo $this->getChildChildHtml('container2', '', true, true) ?>         
+                    <?php // echo $this->getChildChildHtml('container2', '', true, true) ?>         
                 <?php endif;?>
                 
                 </div>   

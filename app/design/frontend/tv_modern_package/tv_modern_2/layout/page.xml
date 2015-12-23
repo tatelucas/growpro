@@ -48,6 +48,10 @@ Default layout, loads most of the pages
                 <action method="addJs"><script>varien/menu.js</script></action>
                 <action method="addJs"><script>mage/translate.js</script></action>
                 <action method="addJs"><script>mage/cookies.js</script></action>
+                <action method="addCss"><stylesheet>css/reset.css</stylesheet></action>
+                <action method="addCss"><stylesheet>css/boxes.css</stylesheet></action>
+                <action method="addCss"><stylesheet>css/menu.css</stylesheet></action>
+                <action method="addCss"><stylesheet>css/clears.css</stylesheet></action>				
 
                 <block type="page/js_cookie" name="js_cookies" template="page/js/cookie.phtml"/>
                 <action method="addJs"><script>themevast/jquery.min.js</script></action>
