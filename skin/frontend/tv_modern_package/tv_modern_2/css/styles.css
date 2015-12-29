@@ -620,7 +620,7 @@ tr.summary-details-excluded { font-style:italic; }
 #search_mini_form {  position: absolute;  top: 2px;  right: 7%; z-index: 9;}
 #mini_cart_block   { position:absolute; top:2px; right:1%; z-index:9;}
  .header-quick-access { height:40px;}
-.quick-access {  position: relative; z-index: 999;   display: inline-block;  width: 100%;  height: 40px;  border-bottom: 1px solid #ddd;}
+.quick-access {  position: relative; z-index: 999;   display: inline-block;  width: 100%;  height: 40px;  border-bottom: 1px solid #ddd; margin-top: 10px;}
 .language-currency { float: left;}
 /*.header-language{ float: right;}*/
 .header-currency { float:right; position:relative;}
