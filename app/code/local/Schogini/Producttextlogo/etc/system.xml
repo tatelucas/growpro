@@ -1,0 +1,63 @@
+<?xml version="1.0"?>
+<config>
+	<sections>
+		<schogini module="producttextlogo">
+            <label>Schogini Product Text Logo</label>
+            <tab>sales</tab>
+            <frontend_type>text</frontend_type>
+            <sort_order>900</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+			<groups>
+				<settings translate="label" module="producttextlogo">
+                    <label>Schogini Product Text Logo</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>10</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <comment><![CDATA[Please note that the image type & the dimension changes that you make here will be reflected only on products that you add or edit after the save.]]></comment>
+                    <fields>
+                        <active translate="label">
+                            <label>Enabled</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </active>
+						<filetypes translate="label,comment">           
+                            <label>Allowed file types</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>2</sort_order>     
+                            <show_in_default>1</show_in_default> 
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>A comma separated list of file extensions</comment> 
+                        </filetypes>
+                        <maxwidth translate="label,comment">           
+                            <label>Image max width</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>3</sort_order>     
+                            <show_in_default>1</show_in_default> 
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Max width in pixels</comment> 
+                        </maxwidth>
+                        <maxheight translate="label,comment">           
+                            <label>Image max height</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>4</sort_order>     
+                            <show_in_default>1</show_in_default> 
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Max height in pixels</comment> 
+                        </maxheight>
+                    </fields>
+				</settings>
+			</groups>
+		</schogini>
+	</sections>
+</config>
