@@ -992,6 +992,12 @@ font-weight:normal; color:#010101;}
 /********** < Navigation */
 .nav-container {}
 .nav_megamenu div.megamenu.act .level-top a { background: none !important;}
+
+div.megamenu ul.level0 li.level1 a {
+  line-height: 2;
+  padding: 5px 0;
+}
+
 #nav { width:918px; margin:0 auto; padding:0 16px; font-size:13px; }
 
 /* All Levels */ /* Style consistent throughout all nav levels */
