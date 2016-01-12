@@ -45,7 +45,7 @@ Default layout, loads most of the pages
     <default>
         <!-- Mage_Catalog -->
         <reference name="left">
-            
+
         </reference>
         <reference name="footer_links">
             <action method="addLink" translate="label title" module="catalog" ifconfig="catalog/seo/site_map"><label>Site Map</label><url helper="catalog/map/getCategoryUrl" /><title>Site Map</title></action>
@@ -55,7 +55,7 @@ Default layout, loads most of the pages
             <block type="page/html" name="cat.img" template="themevast/img_categories.phtml"/>
         </reference>
         <reference name="left">
-            
+
         </reference>
     </default>
 
@@ -108,7 +108,7 @@ Category layered navigation layout
     <catalog_category_layered translate="label">
         <label>Catalog Category (Anchor)</label>
         <reference name="root">
-            <action method="setTemplate"><template>page/2columns-left.phtml</template></action>
+            <action method="setTemplate"><template>page/1column.phtml</template></action>
         </reference>
         <reference name="left">
             <block type="catalog/layer_view" name="catalog.leftnav" before="-" template="catalog/layer/view.phtml"/>
@@ -189,13 +189,13 @@ Product view
         <reference name="head">
             <action method="addJs"><script>varien/product.js</script></action>
             <action method="addJs"><script>varien/configurable.js</script></action>
-			<action method="addJs"><script>jquery/jquery-ui-1.7.2.custom.min.js</script></action>			
+			<action method="addJs"><script>jquery/jquery-ui-1.7.2.custom.min.js</script></action>
 			<action method="addJs"><script>jquery/productpage.js</script></action>
 			<action method="addJs"><script>jquery/categorypage.js</script></action>
-			
+
 	<action method="addItem"><type>js_css</type><name>jquery/growpro/jquery-ui-1.7.2.custom.css</name><params/><!--<if/><condition>can_load_calendar_js</condition>--></action>
 	<action method="addItem"><type>js_css</type><name>/jquery/jquery.lightbox-0.5.css</name></action>
-			
+
 
             <action method="addItem"><type>js_css</type><name>calendar/calendar-win2k-1.css</name><params/><!--<if/><condition>can_load_calendar_js</condition>--></action>
             <action method="addItem"><type>js</type><name>calendar/calendar.js</name><!--<params/><if/><condition>can_load_calendar_js</condition>--></action>
@@ -214,13 +214,13 @@ Product view
                 </block>
 
                 <action method="setTierPriceTemplate"><template>catalog/product/view/tierprices.phtml</template></action>
-                
+
                 <block type="catalog/product_view_tabs" name="product.info.tabs" as="info_tabs" template="catalog/product/view/tabs.phtml" >
                     <action method="addTab" translate="title" module="catalog"><alias>description</alias><title>Product Description</title><block>catalog/product_view_description</block><template>catalog/product/view/description.phtml</template></action>
                     <!--<action method="addTab" translate="title" module="catalog"><alias>upsell_products</alias><title>We Also Recommend</title><block>catalog/product_list_upsell</block><template>catalog/product/list/upsell.phtml</template></action>-->
                     <action method="addTab" translate="title" module="catalog"><alias>additional</alias><title>Additional Information</title><block>catalog/product_view_attributes</block><template>catalog/product/view/attributes.phtml</template></action>
                     <!--<action method="addTab" translate="title" module="catalog"><alias>related_products</alias><title>Related Products</title><block>catalog/product_list_related</block><template>catalog/product/list/related.phtml</template></action>-->
-                    <block type="review/form" name="product.review.form" as="review_form"/>			                               
+                    <block type="review/form" name="product.review.form" as="review_form"/>
                     <action method="addTab" translate="title" module="review">
                          <alias>product_additional_data</alias>
                          <title>Reviews</title>
@@ -233,7 +233,7 @@ Product view
                     <action method="setColumnCount"><columns>4</columns></action>
                     <action method="setItemLimit"><type>upsell</type><limit>4</limit></action>
                 </block>
-                
+
                 <block type="catalog/product_view_additional" name="product.info.additional" as="product_additional_data" />
                 <block type="catalog/product_view_description" name="product.description" as="description" template="catalog/product/view/description.phtml">
                     <action method="addToParentGroup"><group>detailed_info</group></action>
@@ -296,7 +296,7 @@ Product view
         <reference name="right">
             <block type="catalog/product_list_related" name="catalog.product.related" before="-" template="catalog/product/list/related.phtml"/>
         </reference>
-        
+
     </catalog_product_view>
 
 <!--
