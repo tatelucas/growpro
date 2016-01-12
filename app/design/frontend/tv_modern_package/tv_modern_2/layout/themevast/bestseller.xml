@@ -19,7 +19,8 @@
                 <block type="blog/tags" name="blog_tags" />
             </block>
             <block type="page/html" name="banner.left" after="-" template="themevast/banner_left.phtml"/>
-        </reference>
+        </reference>
+
         <reference name="content">
             <block type="bestseller/product_list" name="bestseller_list" template="catalog/product/list.phtml">
                 <block type="catalog/product_list_toolbar" name="product_list_toolbar" template="catalog/product/list/toolbar.phtml">
@@ -29,5 +30,4 @@
             </block>
         </reference>
     </bestseller_index_index>
-</layout> 
-
+</layout>

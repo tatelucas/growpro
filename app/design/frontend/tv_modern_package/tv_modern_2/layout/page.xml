@@ -48,10 +48,14 @@ Default layout, loads most of the pages
                 <action method="addJs"><script>varien/menu.js</script></action>
                 <action method="addJs"><script>mage/translate.js</script></action>
                 <action method="addJs"><script>mage/cookies.js</script></action>
+
+                <!-- Tate - 1/13/16 - Removing these -->
+                <!--
                 <action method="addCss"><stylesheet>css/reset.css</stylesheet></action>
                 <action method="addCss"><stylesheet>css/boxes.css</stylesheet></action>
                 <action method="addCss"><stylesheet>css/menu.css</stylesheet></action>
-                <action method="addCss"><stylesheet>css/clears.css</stylesheet></action>				
+                <action method="addCss"><stylesheet>css/clears.css</stylesheet></action>
+                -->
 
                 <block type="page/js_cookie" name="js_cookies" template="page/js/cookie.phtml"/>
                 <action method="addJs"><script>themevast/jquery.min.js</script></action>
@@ -59,9 +63,9 @@ Default layout, loads most of the pages
                 <action method="addJs"><script>themevast/plugin/jquery.fancybox.pack.js</script></action>
                 <action method="addJs"><script>themevast/bootstrap/bootstrap.js</script></action>
                 <action method="addJs"><script>themevast/bootstrap/bootstrap-tooltip.js</script></action>
-                
+
                 <action method="addItem"><type>js</type><name>themevast/themevast.js</name></action>
-                
+
                 <action method="addCss"><stylesheet>themevast/plugin/css/jquery.fancybox.css</stylesheet></action>
                 <action method="addCss"><stylesheet>themevast/plugin/css/jquery.bxslider.css</stylesheet></action>
                 <action method="addCss"><stylesheet>bootstrap/bootstrap.css</stylesheet></action>
@@ -101,15 +105,15 @@ Default layout, loads most of the pages
             </block>
 
             <block type="page/html_breadcrumbs" name="breadcrumbs" as="breadcrumbs"/>
-            
+
             <block type="core/text_list" name="blog_content" as="blog_content" translate="label" />
             <block type="core/text_list" name="image_slider" as="image_slider" translate="label" />
             <block type="core/text_list" name="cat_img" as="cat_img" translate="label" />
             <block type="core/text_list" name="banner_left" as="banner_left" translate="label" />
             <block type="core/text_list" name="home_banner_content1" as="home_banner_content1" translate="label" />
-            
-            
-            
+
+
+
             <block type="core/text_list" name="left" as="left" translate="label">
                 <label>Left Column</label>
             </block>

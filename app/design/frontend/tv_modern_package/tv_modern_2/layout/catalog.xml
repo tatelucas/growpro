@@ -72,7 +72,7 @@ Category default layout
         <reference name="left">
             <block type="catalog/navigation" name="catalog.leftnav" before="-" template="catalog/navigation/left.phtml"/>
             <block type="catalog/product_compare_sidebar" after="catalog.leftnav" name="catalog.compare.sidebar" template="catalog/product/compare/sidebar.phtml"/>
-            <block type="page/html" name="banner.left" after="catalog.compare.sidebar" template="themevast/banner_left.phtml"/>
+            <!--<block type="page/html" name="banner.left" after="catalog.compare.sidebar" template="themevast/banner_left.phtml"/>-->
         </reference>
         <reference name="content">
             <block type="catalog/category_view" name="category.products" template="catalog/category/view.phtml">
