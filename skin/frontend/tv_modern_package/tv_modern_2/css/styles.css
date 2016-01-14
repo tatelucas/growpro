@@ -3302,7 +3302,7 @@ padding:0 20px; line-height:40px; text-transform:uppercase; background:#ff5b5c; 
 /*-------------------------------------------------------------------------------*/
 /*Blog Content*/
 .blog-content .bx-title { margin-bottom:97px;}
-.blog-content { margin: 0; position:relative;padding: 40px 0 60px 0;background-color: #f8f8f8; border-top:1px solid #ddd;}
+.blog-content { margin: 0; position:relative;padding: 40px 0 60px 0; /*background-color: #f8f8f8; border-top:1px solid #ddd; */}
 .blog-content li.item .item-inner {  background: #fff;}
 .blog-content li.item .box-img { position:relative; float:left; overflow:hidden; background:#333;}
 .blog-content li.item .box-info { padding: 20px; display:inline-block;}
@@ -3310,7 +3310,7 @@ padding:0 20px; line-height:40px; text-transform:uppercase; background:#ff5b5c; 
 .box-img i:hover {background:#cf4647 !important; color:#fff !important;}
 .item-inner:hover i { opacity:1;}
 .blog-content li.item:hover a {}
-.blog-content li.item .box-info .link-more{  }
+.blog-content li.item .box-info .link-more{ display: none; }
 .blog-content li.item .box-info .link-more a {
     font-size: 13px;
     font-family: arialregular;
@@ -3369,8 +3369,10 @@ padding:0 20px; line-height:40px; text-transform:uppercase; background:#ff5b5c; 
 .blog-content .box-info .des img { display: none; }
 .postContent img { margin-bottom: 15px;}
 
-.blog-content .time1 p { margin:0 !important; font-family:Open Sans; font-weight:normal; font-size:13px; color:#666666; float:left; padding-right:40px;   line-height: 40px;position:relative;}
+.blog-content .time1 p { margin:0 0 5px !important; font-family:Open Sans; font-weight:normal; font-size:13px; color:#666666; float:left; padding-right:40px;  /* line-height: 40px; */ position:relative;}
+/*
 .blog-content .time1 p.date-month-year:after { content:""; width:1px; height:10px; background:#666; position:absolute; top:16px; right:20px;}
+*/
 .blog-content .box-info a {font-family:Open Sans; font-weight:normal; font-size:13px; color:#666666;  line-height: 40px;}
 .blog-content .box-info a:hover { color:#781B23;}
 /*--------------------------------------------------------------------------------*/
