@@ -15,20 +15,30 @@ $caption = $this->getConfig('caption');
 		<?php
 			$i = 1;
 			foreach($slider as $slide) {
-				$img = $media .$slide['image']; ?>
+				$img = $media .$slide['image'];
+				if ($slide['title'] && !empty($slide['title'])) {
+					$title = $slide['title'];
+				} else {
+					$title = '';
+				}
+
+				?>
 				<div>
-					<img u="image"  src="<?php echo $img?>"  title="#caption<?php echo $i; ?>" alt="image" />	
+					<!-- <img u="image"  src="<?php echo $img?>"  title="#caption<?php echo $i; ?>" alt="image" />	-->
+					<?php if( $slide['link'] ) { ?>	
+						<a href="<?php echo $slide['link']?>">
+					        <img u="image"  src="<?php echo $img?>"  title="<?php echo $title; ?>" alt="image" />
+					    </a>
+					<?php } else { ?>
+						<img u="image"  src="<?php echo $img?>"  title="<?php echo $title; ?>" alt="image" />
+					<?php } ?>
+					
 					<?php if($caption) { ?>
 						<?php if(Mage::getStoreConfig('imageslider/general/caption') == 1): ?>
 						<div data-u=caption data-t="*" id="caption<?php echo $i; ?>" style="position:absolute; left:600px; top: 130px; width:300px; height:30px;">
 							<div class="<?php echo $slide['effect']?>">
 								<div class="title"><?php echo $this->__($slide['title']) ?></div>
 								<div class="description"><?php echo $this->__($slide['description']) ?></div>
-								<?php if( $slide['link'] ) { ?>
-									<!--<div class="readmore">
-										<a href="<?php //echo $slide['link']?>" title="<?php //echo $this->__('Read more') ?>"><?php //echo $this->__('Read more') ?></a>	
-									</div>-->
-								<?php } ?>
 							</div>
 						</div>	
 					<?php endif; ?>
