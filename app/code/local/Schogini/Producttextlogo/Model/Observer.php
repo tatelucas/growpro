@@ -24,109 +24,116 @@
 
 class Schogini_Producttextlogo_Model_Observer 
 {
-	public function add_product_text_logo($observer) 
-	{
-		$isActive 		= Mage::getStoreConfig('schogini/settings/active');
-		$fileTypes 		= Mage::getStoreConfig('schogini/settings/filetypes');
-		$maxWidth 		= Mage::getStoreConfig('schogini/settings/maxwidth');
-		$maxHeight 		= Mage::getStoreConfig('schogini/settings/maxheight');
-		$addTextOption 	= true;
-		$addLogoOption 	= true;
-		$newoptions 	= array();
+    public function add_product_text_logo($observer) 
+    {
+        $isActive       = Mage::getStoreConfig('schogini/settings/active');
+        $fileTypes      = Mage::getStoreConfig('schogini/settings/filetypes');
+        $maxWidth       = Mage::getStoreConfig('schogini/settings/maxwidth');
+        $maxHeight      = Mage::getStoreConfig('schogini/settings/maxheight');
+        $addTextOption  = true;
+        $addLogoOption  = true;
+        $newoptions     = array();
 
 
-		if (!$isActive) return;
+        if (!$isActive) return;
 
-		if ($actionInstance = Mage::app()->getFrontController()->getAction()) {
-	        $action = $actionInstance->getFullActionName();
-	        if ($action == 'adminhtml_catalog_product_save') { //if on admin save action
-	            $product 		= $observer->getProduct();
-	            $flagEnabled 	= $product->getSchProductTextImage();
+        if ($actionInstance = Mage::app()->getFrontController()->getAction()) {
+            $action = $actionInstance->getFullActionName();
+            if ($action == 'adminhtml_catalog_product_save') { //if on admin save action
+                $product        = $observer->getProduct();
+                $flagEnabled    = $product->getSchProductTextImage();
 
-	            // If the product doesn't have this field enabled then, do not add options
-			    if (!$flagEnabled) {
-			    	$addTextOption = false;
-			    	$addLogoOption = false;
-			    }
+                // If the product doesn't have this field enabled then, do not add options
+                if (!$flagEnabled) {
+                    $addTextOption = false;
+                    $addLogoOption = false;
+                }
 
-	            $options = $product->getProductOptions();
-			    foreach ($options as $key => $option) {
-			    	// echo $option['title'] . '---' . $option['type'] . '<br />';
-			        if ($option['title'] == 'Custom Text' && $option['type'] == 'field' && !$option['is_delete']) {
-			            // we already added the option
-			            $addTextOption = false;
-			            if (!$flagEnabled) {
-			            	$option['is_delete'] = 1;
-			            	$newoptions[$key] 	 = $option;
+                $options = $product->getProductOptions();
+                if (!is_array($options) || empty($options)) {
+                    // Only if the Custom Options Tab is explicitly clicked will the getProductOptions()
+                    // function return a value. Else, it will be empty. Hence, we need to reload the data
+                    // from the tables and get the options.
+                    $options = Mage::getModel('catalog/product')->load($product->getId())->getOptions();
+                }
 
-			            }
+                foreach ($options as $key => $option) {
+                    // echo $option['title'] . '---' . $option['type'] . '<br />';
+                    if ($option['title'] == 'Custom Text' && $option['type'] == 'field' && !$option['is_delete']) {
+                        // we already added the option
+                        $addTextOption = false;
+                        if (!$flagEnabled) {
+                            $option['is_delete'] = 1;
+                            $newoptions[$key]    = $option;
 
-			        }
+                        }
 
-			        if ($option['title'] == 'Customer Logo' && $option['type'] == 'file' && !$option['is_delete']) {
-			        	// we already added the option
-			        	$addLogoOption = false;
-			        	if (!$flagEnabled) {
-			            	$option['is_delete'] = 1;
-			            	$newoptions[$key] 	 = $option;
+                    }
 
-			            }
+                    if ($option['title'] == 'Customer Logo' && $option['type'] == 'file' && !$option['is_delete']) {
+                        // we already added the option
+                        $addLogoOption = false;
+                        if (!$flagEnabled) {
+                            $option['is_delete'] = 1;
+                            $newoptions[$key]    = $option;
 
-			        }
+                        }
 
-			    }
-				
-			    if ($addTextOption == true) {
-			    	// echo 'Add Text';
-			    	$newoptions[] = array(
-					    'title' => 'Custom Text',
-					    'type' => 'field',
-					    'is_require' => 0,
-					    'sort_order' => 1,
-					    'is_delete' => '',
-					    'previous_type' => '',
-					    'previous_group' => '',
-					    'price' => '0.00',
-					    'price_type' => 'fixed',
-					    'sku' => ''
-					);
-			    }
-			    if ($addLogoOption == true) {
-			    	// echo 'Add Logo';
-			    	$newoptions[] = array(
-				        'title' => 'Customer Logo',
-				        'type' => 'file',
-				        'is_require' => 0,
-				        'sort_order' => 2,
-				        'is_delete' => '',
-					    'previous_type' => '',
-					    'previous_group' => '',
-				        'price' => '0.00',
-					    'price_type' => 'fixed',
-					    'sku' => '',
-				        'file_extension' => $fileTypes,
-				        'image_size_x' => $maxwidth,
-				        'image_size_y' => $maxheight
-					);
-			    }
-			    
-			    if (is_array($newoptions) && !empty($newoptions) && sizeof($newoptions) > 0) {
-			    	$product->setCanSaveCustomOptions(true);
-			    	foreach ($newoptions as $option) {
-			    		$product->getOptionInstance()->addOption($option);
-			    	}
-					$product->setHasOptions(true);
-					// echo "Added Options";exit;
+                    }
 
-			    } else {
-			    	// echo "Why?";exit;
+                }
+                
+                if ($addTextOption == true) {
+                    // echo 'Add Text';
+                    $newoptions[] = array(
+                        'title' => 'Custom Text',
+                        'type' => 'field',
+                        'is_require' => 0,
+                        'sort_order' => 1,
+                        'is_delete' => '',
+                        'previous_type' => '',
+                        'previous_group' => '',
+                        'price' => '0.00',
+                        'price_type' => 'fixed',
+                        'sku' => ''
+                    );
+                }
+                if ($addLogoOption == true) {
+                    // echo 'Add Logo';
+                    $newoptions[] = array(
+                        'title' => 'Customer Logo',
+                        'type' => 'file',
+                        'is_require' => 0,
+                        'sort_order' => 2,
+                        'is_delete' => '',
+                        'previous_type' => '',
+                        'previous_group' => '',
+                        'price' => '0.00',
+                        'price_type' => 'fixed',
+                        'sku' => '',
+                        'file_extension' => $fileTypes,
+                        'image_size_x' => $maxwidth,
+                        'image_size_y' => $maxheight
+                    );
+                }
+                
+                if (is_array($newoptions) && !empty($newoptions) && sizeof($newoptions) > 0) {
+                    $product->setCanSaveCustomOptions(true);
+                    foreach ($newoptions as $option) {
+                        $product->getOptionInstance()->addOption($option);
+                    }
+                    $product->setHasOptions(true);
+                    // echo "Added Options";exit;
 
-			    }
+                } else {
+                    // echo "Why?";exit;
 
-	        }
+                }
 
-	    }
+            }
 
-	}
+        }
+
+    }
 
 }
