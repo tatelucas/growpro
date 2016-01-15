@@ -24,7 +24,7 @@
     70%{-webkit-transform:scale(.9);transform:scale(.9)}
     100%{opacity:1;-webkit-transform:scale(1);transform:scale(1)}
     }
-	
+
 @keyframes bounceIn{
     0%{opacity:0;-webkit-transform:scale(.3);-ms-transform:scale(.3);transform:scale(.3)}
     50%{opacity:1;-webkit-transform:scale(1.05);-ms-transform:scale(1.05);transform:scale(1.05)}
@@ -72,7 +72,7 @@ a .fa-arrow-circle-right,
 .header-toplinks .links li a,
 .home-banner-content2 .letter-banner1,
 .bx-wrapper img{
-   -webkit-transition:all 0.5s ease; 
+   -webkit-transition:all 0.5s ease;
   	-moz-transition:all 0.5s ease;
      	-ms-transition:all 0.5s ease;
      	-o-transition:all 0.5s ease;
@@ -148,7 +148,7 @@ button.button span span {
 }
 /*.products-list .item-inner .add-to-links,
 .products-grid .item-inner .add-to-links {
-  -webkit-transform: scale(0); 
+  -webkit-transform: scale(0);
   -moz-transform: scale(0);
   -ms-transform: scale(0);
   -o-transform: scale(0);
@@ -156,7 +156,7 @@ button.button span span {
 }*/
 /*.products-list .item-inner:hover .add-to-links,
 .products-grid .item-inner:hover .add-to-links {
-  -webkit-transform: scale(1); 
+  -webkit-transform: scale(1);
   -moz-transform: scale(1);
   -ms-transform: scale(1);
   -o-transform: scale(1);
@@ -164,7 +164,7 @@ button.button span span {
 }*/
 .home-banner-content1 a ,
 .home-banner-content2 a ,
-.home-banner-content3 a 
+.home-banner-content3 a
  {
 background:#222222;
 }
@@ -179,8 +179,7 @@ background:#222222;
   -ms-transform: scale(1.1);
   transform: scale(1.1);*/
 }
-.home-banner-content2 a:before, .home-banner-content2 a:after,
-.home-banner-content3 a:before, .home-banner-content3 a:after{
+a.outlinehover:before, a.outlinehover:after {
     position: absolute;
   top: 15px;
   right: 15px;
@@ -191,26 +190,26 @@ background:#222222;
   -webkit-transition: opacity 0.35s, -webkit-transform 0.35s;
   transition: opacity 0.35s, transform 0.35s;
 }
-.home-banner-content2 a:before,
-.home-banner-content3 a:before{   border-top: 1px solid #ddd;
+a.outlinehover:before,
+a.outlinehover:before{   border-top: 1px solid #ddd;
   border-bottom: 1px solid #ddd;
   -webkit-transform: scale(0,1);
   transform: scale(0,1);}
-.home-banner-content2 a:after,
-.home-banner-content3 a:after{  border-right: 1px solid #ddd;
+a.outlinehover:after,
+a.outlinehover:after{  border-right: 1px solid #ddd;
   border-left: 1px solid #ddd;
   -webkit-transform: scale(1,0);
   transform: scale(1,0);}
-.home-banner-content2 a:hover::before, .home-banner-content2 a:hover::after,
-.home-banner-content3 a:hover::before, .home-banner-content3 a:hover::after{  opacity: 1;
+a.outlinehover:hover::before, a.outlinehover:hover::after,
+a.outlinehover:hover::before, a.outlinehover:hover::after{  opacity: 1;
   -webkit-transform: scale(1);
   transform: scale(1);}
-.home-banner-content2 a:hover::before,
-.home-banner-content3 a:hover::before{ left:10px; right:10px;z-index:99;}
-.home-banner-content2 a:hover::after,
-.home-banner-content3 a:hover::after{ top:10px; bottom:10px; z-index:100;}
-  
-  
+a.outlinehover:hover::before,
+a.outlinehover:hover::before{ left:10px; right:10px;z-index:99;}
+a.outlinehover:hover::after,
+a.outlinehover:hover::after{ top:10px; bottom:10px; z-index:100;}
+
+
  img.img-face-back {
   position: absolute;
   opacity:0;
@@ -259,8 +258,8 @@ background:#222222;
 .blog-content li.item .item-inner:hover img {tranform:scale(1.2); -webkit-transform: scale(1.2);  -moz-transform: scale(1.2); transition:0.4s ease all; opacity:0.7;}
 .blog-content li.item .box-img {transition:ease 0.4s all; -webkit-transform: ease 0.4s all; -moz-transform:ease 0.4s all;}
 .box-img i {opacity:0; transition: all aese 0.4s; -webkit-transition: all aese 0.4s; -moz-transition: all aese 0.4s;}
-.widget-static-block a {border-radius:2px;-webkit-border-radius:2px;-moz-border-radius:2px;}  
-  
+.widget-static-block a {border-radius:2px;-webkit-border-radius:2px;-moz-border-radius:2px;}
+
 .block-newsletter-content a:before, .block-newsletter-content a:after {  opacity: 0;
   -webkit-transition: opacity 0.35s, -webkit-transform 0.35s;
   transition: opacity 0.35s, transform 0.35s;
