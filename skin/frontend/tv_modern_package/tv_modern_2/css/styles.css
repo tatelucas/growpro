@@ -1022,6 +1022,13 @@ div.megamenu ul.level0 li.level1 a {
 
 #nav { width:918px; margin:0 auto; padding:0 16px; font-size:13px; }
 
+div.megamenu ul.level0 li.level1 a,
+.nav_megamenu div.megamenu .level-top a, .nav_megamenu div.megamenu .level-top span.block-title,
+.nav_megamenu div.megamenu .level-top a,
+.nav_megamenu div.megamenu .level-top span.block-title {
+font-family: Karla !important;
+}
+
 /* All Levels */ /* Style consistent throughout all nav levels */
 #nav li { position:relative; text-align:left; }
 #nav li.over { z-index:998; }
@@ -3844,4 +3851,3 @@ dl.item-options dd { padding-left:10px; }
 
 
 #add-to-holder { position: relative; width: 98%; padding: 10px; margin: 5px; background: #F5ECD9; float: left; min-height: 40px; padding-right: 25%;}
-
