@@ -47,6 +47,18 @@ class Themevast_Producttabs_Block_Product_List extends Mage_Catalog_Block_Produc
         $Collection = $this->getBestsellerProducts();
         $this->_TitleProduct = $this->__('Bestseller');
         break;
+      case 'communicatebetter':
+        $Collection = $this->getCommunicatebetterProducts();
+        $this->_TitleProduct = $this->__('Communicatebetter');
+        break;	
+      case 'moreleads':
+        $Collection = $this->getMoreleadsProducts();
+        $this->_TitleProduct = $this->__('Moreleads');
+        break;			
+      case 'moresales':
+        $Collection = $this->getMoresalesProducts();
+        $this->_TitleProduct = $this->__('Moresales');
+        break;			
       case 'featured':
         $Collection = $this->getFeaturedProducts();
         break;
@@ -101,6 +113,64 @@ class Themevast_Producttabs_Block_Product_List extends Mage_Catalog_Block_Produc
         return $collection;
     }
 
+    public function getCommunicatebetterProducts(){
+		
+        $collection = Mage::getModel('catalog/product')->getCollection()
+                            ->addAttributeToSelect(Mage::getSingleton('catalog/config')->getProductAttributes())
+                            ->addAttributeToFilter('communicate_better', 1, 'left')
+                            ->addMinimalPrice()
+                            ->addTaxPercents()
+                            ->addStoreFilter();
+        Mage::getSingleton('catalog/product_status')->addVisibleFilterToCollection($collection);
+        Mage::getSingleton('catalog/product_visibility')->addVisibleInSearchFilterToCollection($collection);
+
+        $collection->setPageSize($this->getNumProduct());
+		
+        if($this->useFlatCatalogProduct())
+        {
+            foreach ($collection as $product) 
+            {
+                $productId = $product->_data['entity_id'];
+                $_product = Mage::getModel('catalog/product')->load($productId); //Product ID
+                $product->_data['name']        = $_product->getName();
+                $product->_data['thumbnail']   = $_product->getThumbnail();
+                $product->_data['small_image'] = $_product->getSmallImage();
+            }            
+        }		
+		
+        return $collection; 		
+    }	
+	
+    public function getMoreleadsProducts(){
+
+        $collection = Mage::getModel('catalog/product')->getCollection()
+                            ->addAttributeToSelect(Mage::getSingleton('catalog/config')->getProductAttributes())
+                            ->addAttributeToFilter('more_leads', 1, 'left')
+                            ->addMinimalPrice()
+                            ->addTaxPercents()
+                            ->addStoreFilter();
+        Mage::getSingleton('catalog/product_status')->addVisibleFilterToCollection($collection);
+        Mage::getSingleton('catalog/product_visibility')->addVisibleInSearchFilterToCollection($collection);
+
+        $collection->setPageSize($this->getNumProduct());
+        return $collection; 
+    }	
+	
+    public function getMoresalesProducts(){
+
+        $collection = Mage::getModel('catalog/product')->getCollection()
+                            ->addAttributeToSelect(Mage::getSingleton('catalog/config')->getProductAttributes())
+                            ->addAttributeToFilter('more_sales', 1, 'left')
+                            ->addMinimalPrice()
+                            ->addTaxPercents()
+                            ->addStoreFilter();
+        Mage::getSingleton('catalog/product_status')->addVisibleFilterToCollection($collection);
+        Mage::getSingleton('catalog/product_visibility')->addVisibleInSearchFilterToCollection($collection);
+
+        $collection->setPageSize($this->getNumProduct());
+        return $collection; 
+    }		
+	
     public function getFeaturedProducts(){
 
         $collection = Mage::getModel('catalog/product')->getCollection()
