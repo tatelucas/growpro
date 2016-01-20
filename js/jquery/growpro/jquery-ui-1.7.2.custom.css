@@ -42,7 +42,7 @@
 * jQuery UI CSS Framework
 * Copyright (c) 2009 AUTHORS.txt (http://jqueryui.com/about)
 * Dual licensed under the MIT (MIT-LICENSE.txt) and GPL (GPL-LICENSE.txt) licenses.
-* To view and modify this theme, visit http://jqueryui.com/themeroller/?ffDefault=Verdana,Arial,sans-serif&fwDefault=bold&fsDefault=1.1em&cornerRadius=3px&bgColorHeader=ffffff&bgTextureHeader=03_highlight_soft.png&bgImgOpacityHeader=75&borderColorHeader=ffffff&fcHeader=222222&iconColorHeader=222222&bgColorContent=ffffff&bgTextureContent=01_flat.png&bgImgOpacityContent=75&borderColorContent=aaaaaa&fcContent=222222&iconColorContent=222222&bgColorDefault=f5ecd9&bgTextureDefault=02_glass.png&bgImgOpacityDefault=75&borderColorDefault=&fcDefault=cfa866&iconColorDefault=888888&bgColorHover=cfa866&bgTextureHover=06_inset_hard.png&bgImgOpacityHover=75&borderColorHover=ffffff&fcHover=fff&iconColorHover=454545&bgColorActive=cfa866&bgTextureActive=03_highlight_soft.png&bgImgOpacityActive=65&borderColorActive=fff&fcActive=ffffff&iconColorActive=454545&bgColorHighlight=fbf9ee&bgTextureHighlight=02_glass.png&bgImgOpacityHighlight=55&borderColorHighlight=fcefa1&fcHighlight=363636&iconColorHighlight=2e83ff&bgColorError=fef1ec&bgTextureError=02_glass.png&bgImgOpacityError=95&borderColorError=cd0a0a&fcError=cd0a0a&iconColorError=cd0a0a&bgColorOverlay=aaaaaa&bgTextureOverlay=01_flat.png&bgImgOpacityOverlay=0&opacityOverlay=30&bgColorShadow=aaaaaa&bgTextureShadow=01_flat.png&bgImgOpacityShadow=0&opacityShadow=30&thicknessShadow=8px&offsetTopShadow=-8px&offsetLeftShadow=-8px&cornerRadiusShadow=8px
+* To view and modify this theme, visit http://jqueryui.com/themeroller/?ffDefault=Verdana,Arial,sans-serif&fwDefault=bold&fsDefault=1.1em&cornerRadius=3px&bgColorHeader=ffffff&bgTextureHeader=03_highlight_soft.png&bgImgOpacityHeader=75&borderColorHeader=ffffff&fcHeader=222222&iconColorHeader=222222&bgColorContent=ffffff&bgTextureContent=01_flat.png&bgImgOpacityContent=75&borderColorContent=aaaaaa&fcContent=222222&iconColorContent=222222&bgColorDefault=f5ecd9&bgTextureDefault=02_glass.png&bgImgOpacityDefault=75&borderColorDefault=&fcDefault=000&iconColorDefault=888888&bgColorHover=000&bgTextureHover=06_inset_hard.png&bgImgOpacityHover=75&borderColorHover=ffffff&fcHover=fff&iconColorHover=454545&bgColorActive=000&bgTextureActive=03_highlight_soft.png&bgImgOpacityActive=65&borderColorActive=fff&fcActive=ffffff&iconColorActive=454545&bgColorHighlight=fbf9ee&bgTextureHighlight=02_glass.png&bgImgOpacityHighlight=55&borderColorHighlight=fcefa1&fcHighlight=363636&iconColorHighlight=2e83ff&bgColorError=fef1ec&bgTextureError=02_glass.png&bgImgOpacityError=95&borderColorError=cd0a0a&fcError=cd0a0a&iconColorError=cd0a0a&bgColorOverlay=aaaaaa&bgTextureOverlay=01_flat.png&bgImgOpacityOverlay=0&opacityOverlay=30&bgColorShadow=aaaaaa&bgTextureShadow=01_flat.png&bgImgOpacityShadow=0&opacityShadow=30&thicknessShadow=8px&offsetTopShadow=-8px&offsetLeftShadow=-8px&cornerRadiusShadow=8px
 */
 
 
@@ -57,11 +57,11 @@
 
 /* Interaction states
 ----------------------------------*/
-.ui-state-default, .ui-widget-content .ui-state-default { border: 1px solid #; background: #f5ecd9 url(images/ui-bg_glass_75_f5ecd9_1x400.png) 50% 50% repeat-x; font-weight: bold; color: #cfa866; outline: none; }
-.ui-state-default a, .ui-state-default a:link, .ui-state-default a:visited { color: #cfa866; text-decoration: none; outline: none; }
-.ui-state-hover, .ui-widget-content .ui-state-hover, .ui-state-focus, .ui-widget-content .ui-state-focus { border: 0px solid #ffffff; background: #cfa866 url(images/ui-bg_inset-hard_75_cfa866_1x100.png) 50% 50% repeat-x; font-weight: bold; color: #fff; outline: none; }
+.ui-state-default, .ui-widget-content .ui-state-default { border: 1px solid #; background: #e1e1e1; font-weight: bold; color: #000; outline: none; }
+.ui-state-default a, .ui-state-default a:link, .ui-state-default a:visited { color: #000; text-decoration: none; outline: none; }
+.ui-state-hover, .ui-widget-content .ui-state-hover, .ui-state-focus, .ui-widget-content .ui-state-focus { border: 0px solid #ffffff; background: #000 url(images/ui-bg_inset-hard_75_000_1x100.png) 50% 50% repeat-x; font-weight: bold; color: #fff; outline: none; }
 .ui-state-hover a, .ui-state-hover a:hover { color: #fff; text-decoration: none; outline: none; }
-.ui-state-active, .ui-widget-content .ui-state-active { border: 1px solid #fff; background: #cfa866 url(images/ui-bg_highlight-soft_65_cfa866_1x100.png) 50% 50% repeat-x; font-weight: bold; color: #ffffff; outline: none; }
+.ui-state-active, .ui-widget-content .ui-state-active { border: 1px solid #fff; background: #000 url(images/ui-bg_highlight-soft_65_000_1x100.png) 50% 50% repeat-x; font-weight: bold; color: #ffffff; outline: none; }
 .ui-state-active a, .ui-state-active a:link, .ui-state-active a:visited { color: #ffffff; outline: none; text-decoration: none; }
 
 /* Interaction Cues
@@ -302,7 +302,7 @@
 .ui-datepicker .ui-datepicker-title { margin: 0 2.3em; line-height: 1.8em; text-align: center; }
 .ui-datepicker .ui-datepicker-title select { float:left; font-size:1em; margin:1px 0; }
 .ui-datepicker select.ui-datepicker-month-year {width: 100%;}
-.ui-datepicker select.ui-datepicker-month, 
+.ui-datepicker select.ui-datepicker-month,
 .ui-datepicker select.ui-datepicker-year { width: 49%;}
 .ui-datepicker .ui-datepicker-title select.ui-datepicker-year { float: right; }
 .ui-datepicker table {width: 100%; font-size: .9em; border-collapse: collapse; margin:0 0 .4em; }
@@ -353,7 +353,7 @@
 ----------------------------------*/
 .ui-dialog { position: relative; padding: .2em; width: 300px; }
 .ui-dialog .ui-dialog-titlebar { padding: .5em .3em .3em 1em; position: relative;  }
-.ui-dialog .ui-dialog-title { float: left; margin: .1em 0 .2em; } 
+.ui-dialog .ui-dialog-title { float: left; margin: .1em 0 .2em; }
 .ui-dialog .ui-dialog-titlebar-close { position: absolute; right: .3em; top: 50%; width: 19px; margin: -10px 0 0 0; padding: 1px; height: 18px; }
 .ui-dialog .ui-dialog-titlebar-close span { display: block; margin: 1px; }
 .ui-dialog .ui-dialog-titlebar-close:hover, .ui-dialog .ui-dialog-titlebar-close:focus { padding: 0; }
@@ -399,10 +399,8 @@
 .ui-tabs .ui-tabs-nav { list-style: none; position: relative; padding: .2em .2em 0; }
 .ui-tabs .ui-tabs-nav li { position: relative; float: left; border-bottom-width: 0 !important; margin: 0 .2em -1px 0; padding:  .3em 0; width: 32%;}
 .ui-tabs .ui-tabs-nav li a { float: left; text-decoration: none; padding: .5em 2%;  width: 95%; text-align: center; font-size: .8em;}
-.ui-tabs .ui-tabs-nav li.ui-tabs-selected { padding-bottom: 1px; border-bottom-width: 0; }
+.ui-tabs .ui-tabs-nav li.ui-tabs-selected { padding-bottom: 4px; border-bottom-width: 0; }
 .ui-tabs .ui-tabs-nav li.ui-tabs-selected a, .ui-tabs .ui-tabs-nav li.ui-state-disabled a, .ui-tabs .ui-tabs-nav li.ui-state-processing a { cursor: text; }
 .ui-tabs .ui-tabs-nav li a, .ui-tabs.ui-tabs-collapsible .ui-tabs-nav li.ui-tabs-selected a { cursor: pointer; } /* first selector in group seems obsolete, but required to overcome bug in Opera applying cursor: text overall if defined elsewhere... */
 .ui-tabs .ui-tabs-panel { padding: 1em 1.4em; display: block; border-width: 0; background: none; }
 .ui-tabs .ui-tabs-hide { display: none !important; }
-
-
