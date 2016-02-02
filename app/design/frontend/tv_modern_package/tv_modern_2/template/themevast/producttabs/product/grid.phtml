@@ -53,7 +53,7 @@
                 <div class="box-images">
                     <a href="<?php echo $_product->getProductUrl() ?>" title="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true) ?>" class="product-image">
 			<?php $imagehv = $_product->load('media_gallery')->getMediaGalleryImages()->getItemByColumnValue('position','2');
-				if($imagehv) : 
+				if($imagehv) :
 				$imagehv = $imagehv->getFile();
 				?>
 				<img class="img-face-back" src="<?php echo $this->helper('catalog/image')->init($_product, 'small_image', $imagehv)->resize(268, 346) ?>" alt="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true) ?>" />
@@ -61,13 +61,13 @@
 				<img class="img-face" src="<?php echo $this->helper('catalog/image')->init($_product, 'small_image')->resize(268, 346); ?>" alt="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true) ?>" />
 			</a>
                     <?php $actionCfg = $this->getProductCfg('product_action');
-                      if($actionCfg):   
+                      if($actionCfg):
                       $actions = explode(',', $actionCfg);
                     ?>
             <ul class="add-to-links">
                         <?php if($_product->isSaleable()): ?>
                         <li class="quickview"><a class="view-detail" <?php if(Mage::getStoreConfig('quickview/general/enabled')):?> id='fancybox<?php echo $_product->getId()?>'  href="<?php echo $this->getUrl('quickview/index/ajax',array('product_id'=>$_product->getId())); ?>"<?php else: ?> href="<?php echo $_product->getProductUrl() ?>" href="<?php echo $_product->getProductUrl() ?>" <?php endif ?> title="<?php echo $this->__('Quick View') ?>"></a></li>
-                                
+
                                 <?php endif; ?>
                                  <?php if(in_array("wishlist", $actions)):?>
                                     <?php if ($this->helper('wishlist')->isAllow()) : ?>
@@ -81,15 +81,24 @@
                                         <li class="add-to-Compare"><a href="<?php echo $_compareUrl ?>" title="<?php echo $this->__('Add to Compare') ?>" class="link-compare"><!--<i class="fa fa-bars"></i>--><?php //echo $this->__('Add to Compare') ?></a></li>
                                     <?php endif; ?>
                         </ul>
-                    <?php endif ?> 
-                </div>   
+                    <?php endif ?>
+                </div>
                 <div class="product-shop">
                     <h2 class="product-name">
                         <a href="<?php echo $_product->getProductUrl() ?>" title="<?php echo $this->stripTags($_product->getName(), null, true) ?>"><?php echo $_helper->productAttribute($_product, $_product->getName(), 'name') ?></a>
                     </h2>
                     <?php echo $this->getReviewsSummaryHtml($_product, 'short') ?>
-                    <?php echo $this->getPriceHtml($_product, true) ?>
+                    <?php
+                    // Tate - 02/01/16 - Hide price on non-product pages
+                    // echo $this->getPriceHtml($_product, true)
+                    ?>
+                    <?php
+                    /*
+                    // Tate - 02/01/16 - Hide price on non-product pages
                     <button type="button" title="<?php echo $this->__('Add to Cart') ?>" class="button btn-cart" onclick="setLocation('<?php echo $this->getAddToCartUrl($_product) ?>')"><span><span><?php echo $this->__('Add to Cart') ?></span></span></button>
+                    */
+                    ?>
+                    <button type="button" class="button btn-cart btn-learnmore" onclick="setLocation('<?php echo $_product->getProductUrl() ?>')"><span><span><?php echo $this->__('Learn More') ?></span></span></button>
                     <?php else: ?>
                     <button title="<?php echo $this->__('Out of stock') ?>" class="button btn-cart availability out-of-stock"><span><span><?php //echo $this->__('Out of stock') ?></span></span></button>
                     <?php endif; ?>
@@ -104,7 +113,7 @@
         <?php endforeach ?>
     </ul>
         <script type="text/javascript">decorateGeneric($$('ul.products-grid'), ['odd','even','first','last'])</script>
-  
+
 </div>
 
 <?php endif; ?>
