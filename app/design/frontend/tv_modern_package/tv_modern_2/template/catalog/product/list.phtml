@@ -46,33 +46,45 @@
     <?php $_iterator = 0; ?>
     <ol class="products-list" id="products-list">
     <?php foreach ($_productCollection as $_product): ?>
+
         <li class="item<?php if( ++$_iterator == sizeof($_productCollection) ): ?> last<?php endif; ?>">
             <div class="row">
                 <div class="product-images col-sm-4 col-md-4 col-sms-6 col-smb-12">
                     <div class="box-images">
                         <a href="<?php echo $_product->getProductUrl() ?>" title="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true) ?>" class="product-image">
                         <img class="img-face" src="<?php echo $this->helper('catalog/image')->init($_product, 'small_image')->resize(270, 348); ?>" alt="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true) ?>" /></a>
-                        
+
                         <div class="new-sale">
                             <?php echo $helpLabels->getLabels($_product); //Product labels ?>
                         </div>
                     </div>
                 </div>
-                <div class="product-shop col-sm-8 col-md-8 col-sms-6 col-smb-12">                
+                <div class="product-shop col-sm-8 col-md-8 col-sms-6 col-smb-12">
                         <?php $_productNameStripped = $this->stripTags($_product->getName(), null, true); ?>
                         <h2 class="product-name"><a href="<?php echo $_product->getProductUrl() ?>" title="<?php echo $_productNameStripped; ?>"><?php echo $_helper->productAttribute($_product, $_product->getName() , 'name'); ?></a></h2>
                         <?php if($_product->getRatingSummary()): ?>
                         <?php echo $this->getReviewsSummaryHtml($_product) ?>
                         <?php endif; ?>
-                        <?php echo $this->getPriceHtml($_product, true) ?>
+                        <?php
+                        // Tate - 02/01/16 - Hide price on non-product pages
+                        // echo $this->getPriceHtml($_product, true) ?>
                         <div class="desc std">
                             <?php //echo $_helper->productAttribute($_product, $_product->getShortDescription(), 'short_description') ?>
                             <?php echo substr($_helper->productAttribute($_product, $_product->getShortDescription(), 'short_description'),0,245) ?>
+                            <?php
+                            /*
                             <a href="<?php echo $_product->getProductUrl() ?>" title="<?php echo $_productNameStripped ?>" class="link-learn"><?php echo $this->__('Learn More') ?></a>
+                            */
+                            ?>
                         </div>
                         <ul class="add-to-links">
                             <?php if($_product->isSaleable()): ?>
+                                <?php
+                                /* Tate - 02/01/16 - Remove Add to Cart and replace with link
                                 <li><button type="button" title="<?php echo $this->__('Add to cart') ?>" class="button btn-cart" onclick="setLocation('<?php echo $this->getAddToCartUrl($_product) ?>')"><span><span><?php echo $this->__('Add to Cart') ?></span></span></button></li>
+                                */
+                                ?>
+                                <li><button type="button" class="button btn-cart btn-learnmore" onclick="setLocation('<?php echo $_product->getProductUrl() ?>')"><span><span><?php echo $this->__('Learn more') ?></span></span></button></li>
                             <?php else: ?>
                                 <li><button title="<?php echo $this->__('Out of stock') ?>" class="button btn-cart availability out-of-stock"><span><span><?php echo $this->__('Out of stock') ?></span></span></button></li>
                             <?php endif; ?>
@@ -82,12 +94,12 @@
                         <?php if ($this->helper('wishlist')->isAllow()) : ?>
                             <li class="add-to-wishlist"><a href="<?php echo $this->helper('wishlist')->getAddUrl($_product) ?>" title="<?php echo $this->__('Add to Wishlist') ?>" class="link-wishlist"><?php //echo $this->__('Add to Wishlist') ?></a></li>
                         <?php endif; ?>
-                                
+
                             </ul>
                 </div>
             </div>
-            
-            
+
+
         </li>
     <?php endforeach; ?>
     </ol>
@@ -108,11 +120,11 @@
                         <div class="box-images">
                         <a href="<?php echo $_product->getProductUrl() ?>" title="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true) ?>" class="product-image">
                         <img src="<?php echo $this->helper('catalog/image')->init($_product, 'small_image')->resize(270, 348); ?>" alt="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true) ?>" /></a>
-                        
+
                         <ul class="add-to-links">
                            <?php if($_product->isSaleable()): ?>
                         <li class="quickview"><a class="view-detail" <?php if(Mage::getStoreConfig('quickview/general/enabled')):?> id='fancybox<?php echo $_product->getId()?>'  href="<?php echo $this->getUrl('quickview/index/ajax',array('product_id'=>$_product->getId())); ?>"<?php else: ?> href="<?php echo $_product->getProductUrl() ?>" href="<?php echo $_product->getProductUrl() ?>" <?php endif ?> title="<?php echo $this->__('Quick View') ?>"></a></li>
-                                
+
                         <?php endif; ?>
                         <?php if ($this->helper('wishlist')->isAllow()) : ?>
                             <li class="add-to-wishlist"><a href="<?php echo $this->helper('wishlist')->getAddUrl($_product) ?>" title="<?php echo $this->__('Add to Wishlist') ?>" class="link-wishlist"><?php //echo $this->__('Add to Wishlist') ?></a></li>
@@ -120,19 +132,27 @@
                             <?php if($_compareUrl=$this->getAddToCompareUrl($_product)): ?>
                                 <li class="last add-to-Compare"><a href="<?php echo $_compareUrl ?>" title="<?php echo $this->__('Add to Compare') ?>" class="link-compare"><?php //echo $this->__('Add to Compare') ?></a></li>
                         <?php endif; ?>
-                     
-                                
+
+
                             </ul>
-                        
+
                         </div>
                         <div class="product-shop">
                             <h2 class="product-name"><a href="<?php echo $_product->getProductUrl() ?>" title="<?php echo $this->stripTags($_product->getName(), null, true) ?>"><?php echo $_helper->productAttribute($_product, $_product->getName(), 'name') ?></a></h2>
                             <?php if($_product->getRatingSummary()): ?>
                             <?php echo $this->getReviewsSummaryHtml($_product, 'short') ?>
                             <?php endif; ?>
-                            <?php echo $this->getPriceHtml($_product, true) ?>
+                            <?php
+                            // Tate - 02/01/16 - Hide price on non-product pages
+                            // echo $this->getPriceHtml($_product, true) ?>
                              <?php if($_product->isSaleable()): ?>
+                             <?php
+                              /*
+                              // Tate - 02/01/16 - Hide price on non-product pages
                                 <button type="button" title="<?php echo $this->__('Add to Cart') ?>" class="button btn-cart" onclick="setLocation('<?php echo $this->getAddToCartUrl($_product) ?>')"><span><span><?php echo $this->__('Add to Cart') ?></span></span></button>
+                              */
+                              ?>
+                              <button type="button" class="button btn-cart btn-learnmore" onclick="setLocation('<?php echo $_product->getProductUrl() ?>')"><span><span><?php echo $this->__('Learn More') ?></span></span></button>
                             <?php else: ?>
                               <button title="<?php echo $this->__('Out of stock') ?>" class="button btn-cart availability out-of-stock"><span><span><?php //echo $this->__('Out of stock') ?></span></span></button>
                             <?php endif; ?>
@@ -140,7 +160,7 @@
                         <div class="new-sale">
                             <?php echo $helpLabels->getLabels($_product); //Product labels ?>
                         </div>
-                    </div>   
+                    </div>
             </li>
         <?php if ($i%$_columnCount==0 || $i==$_collectionSize): ?>
         </ul>

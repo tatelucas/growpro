@@ -44,12 +44,12 @@
 			->addAttributeToFilter('category_tier_price_master', 1)
 			->addAttributeToFilter('category_tier_price_sku', 'N')
 			->addAttributeToSelect('*');
-		
+
 		foreach($MasterProductList as $MasterProduct) {continue;}
 
-		$cartItems = Mage::getModel('checkout/session')->getQuote()->getAllItems(); //These items do not have the master product ID. 
-		if ($cartItems != NULL) {	
-	
+		$cartItems = Mage::getModel('checkout/session')->getQuote()->getAllItems(); //These items do not have the master product ID.
+		if ($cartItems != NULL) {
+
 		foreach ($cartItems as $cartItem) {
 			if ($cartItem->getproductId() == $_product->getId()) {$thisCartItem = &$cartItem;}
 
@@ -72,7 +72,7 @@
 				$cartItemSKU = "N";
 				$cartItemSKUhandle = 'price';
 			}
-			
+
 			$ProductModel = Mage::getModel('catalog/product')->load($cartItem->getProductId());
 			$MasterProductListC = Mage::getModel('catalog/product')->getCollection()
 				->addAttributeToFilter('category_tier_price', $ProductModel->getCategoryTierPrice())
@@ -82,14 +82,14 @@
 					if ( $MasterProductC->getCategoryTierPriceSku() == $cartItemSKU) {
 						$cartArray[$MasterProductC->getCategoryTierPrice()][$MasterProductC->getId()]['SKU'] = $cartItemSKU; //might not need this in the array
 						$cartArray[$MasterProductC->getCategoryTierPrice()][$MasterProductC->getId()]['SKU-handle'] = $cartItemSKUhandle;
-						$cartArray[$MasterProductC->getCategoryTierPrice()][$MasterProductC->getId()]['Price-type'] = $MasterProductC->getCategoryPricing();				
+						$cartArray[$MasterProductC->getCategoryTierPrice()][$MasterProductC->getId()]['Price-type'] = $MasterProductC->getCategoryPricing();
 							if ($MasterProductC->getCategoryPricing() == 1){
 									if (!array_key_exists('category-qty', $cartArray[$MasterProductC->getCategoryTierPrice()][$MasterProductC->getId()])) {
 										$cartArray[$MasterProductC->getCategoryTierPrice()][$MasterProductC->getId()]['category-qty'] = 0;
 									}
 								$cartArray[$MasterProductC->getCategoryTierPrice()][$MasterProductC->getId()]['category-qty'] = $cartArray[$MasterProductC->getCategoryTierPrice()][$MasterProductC->getId()]['category-qty'] + $cartItem->getQty();
 							} else {
-								$cartArray[$MasterProductC->getCategoryTierPrice()][$MasterProductC->getId()][$cartItem->getProductId()] = $cartItem->getQty();		
+								$cartArray[$MasterProductC->getCategoryTierPrice()][$MasterProductC->getId()][$cartItem->getProductId()] = $cartItem->getQty();
 							}
 					}
 			}
@@ -162,27 +162,27 @@ echo $jsObjpre . $jsObj;
 ?>
 
     var optionsPrice = new Product.OptionsPrice(<?php echo $this->getJsonConfig() ?>);
-	
-	
-	
+
+
+
 </script>
 <div id="messages_product_view"><?php echo $this->getMessagesBlock()->getGroupedHtml() ?></div>
-<div class="product-view">   
+<div class="product-view">
     <div class="next-prev-page">
     <?php if($_next_prod != NULL): ?>
         <a class="btn-next" href="<?php print $_next_prod->getUrlPath(); if($search_parameter):?>?search=1<?php endif;?>"><span><?php echo $this->__('NEXT PRODUCT') ?><i class="fa fa-caret-right"></i></span></a>
     <?php endif; ?>
-    
+
     <?php if($_prev_prod != NULL): ?>
         <a class="btn-prev" href="<?php print $_prev_prod->getUrlPath(); if($search_parameter):?>?search=1<?php endif;?>"><span><i class="fa fa-caret-left"></i><?php echo $this->__('PREVIOUS PRODUCT') ?></span></a>
     <?php endif; ?>
     <span class="asc">/</span>
-    </div> 
+    </div>
     <div class="product-essential">
     <form action="<?php echo $this->getSubmitUrl($_product) ?>" method="post" id="product_addtocart_form"<?php if($_product->getOptions()): ?> enctype="multipart/form-data"<?php endif; ?>>
         <div class="row">
             <div class="product-img-box col-sm-4 col-md-4 col-sms-6 col-smb-12">
-                <?php echo $this->getChildHtml('media') ?>     
+                <?php echo $this->getChildHtml('media') ?>
             </div>
             <div class="col-sm-12 col-md-5 col-sms-6 col-smb-12">
                 <div class="product-shop">
@@ -199,16 +199,16 @@ echo $jsObjpre . $jsObj;
                         <div class="std"><?php echo $_helper->productAttribute($_product, nl2br($_product->getShortDescription()), 'short_description') ?></div>
                     </div>
                 <?php endif;?>
-				
-<?php //somewhere in here we attempt to add the product-tabs from the old site - dwl							
+
+<?php //somewhere in here we attempt to add the product-tabs from the old site - dwl
 ?>
 
-        <div id='product-tabs'>   
+        <div id='product-tabs'>
 			<ul id='product-tabs'>
 				<?php $tabs_class = (($_product->getHowItWorks() || $MasterProduct->getHowItWorks())? 'third' : 'half') ?>
 					<li class='<?php echo $tabs_class ?>'><a href='#product-ordering'>Pricing</a></li>
 				<li class='<?php echo $tabs_class ?>'><a href='#product-specs'>Product Description</a></li>
-			
+
 				<?php if ($_product->getHowItWorks() || $MasterProduct->getHowItWorks()): ?>
 				<li class='<?php echo $tabs_class ?>'><a href='#product-nextsteps'>Next Steps</a></li>
 				<?php endif ?>
@@ -217,34 +217,34 @@ echo $jsObjpre . $jsObj;
 
 			<div id='tab-content'>
 	   			<?php echo $this->getTierPriceHtml();
-					
+
 				 // if  ($tierPrice_result == "test") {
 				 // 				 	echo $this->getChildHtml('alert_urls');
 				 // 			        echo $this->getChildHtml('product_type_data'); }
-			?>  
+			?>
 
 		      <?php if ($_product->isSaleable() && $this->hasOptions()):?>
 		            <?php  echo $this->getChildChildHtml('container2', '', true, true) ?>
 		      <?php endif;?>
 			</div>
-			</div>			
+			</div>
 			<div id='product-specs'>
 				 <?php if ($_product->getDescription()):?>
 			          <div class="tab-content">
 						<?php echo $_helper->productAttribute($_product, nl2br($_product->getDescription()), 'description') ?>
-					</div> 
+					</div>
 				<?php else:?>
 					  <div class="tab-content">
 						<?php echo $_helper->productAttribute($_product, nl2br($MasterProduct->getDescription()), 'description') ?>
 					  </div>
 			     <?php endif;?>
-			</div>			
+			</div>
 			<?php if ($_product->getHowItWorks() || $MasterProduct->getHowItWorks()): ?>
 			<div id='product-nextsteps' class='third'>
 				<?php if ($_product->getHowItWorks()):?>
 			          <div class="tab-content">
 						<?php echo $_helper->productAttribute($_product, nl2br($_product->getHowItWorks()), 'how_it_works') ?>
-					</div> 
+					</div>
 				<?php else:?>
 					  <div class="tab-content">
 						<?php echo $_helper->productAttribute($_product, nl2br($MasterProduct->getHowItWorks()), 'how_it_works') ?>
@@ -258,13 +258,13 @@ echo $jsObjpre . $jsObj;
 			<div id='selection-status'></div>
 			 <?php echo $this->getChildHtml('addtocart') ?>
 		</div>
-		
-		
+
+
 
                 <?php // echo $this->getTierPriceHtml() ?>
                 <?php echo $this->getChildHtml('alert_urls') ?>
                 <?php echo $this->getChildHtml('extrahint') ?>
-                
+
                 <div class="add-to-box">
                     <?php echo $this->getChildHtml('addto') ?>
                     <?php if ($this->canEmailToFriend()): ?>
@@ -275,29 +275,29 @@ echo $jsObjpre . $jsObj;
                 <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-549fdf445bd3a1b9" async="async"></script>
                 <?php if (!$this->hasOptions()):?>
                     <div class="add-to-box-cart">
-                        
+
                         <?php if($_product->isSaleable()): ?>
                             <?php // echo $this->getChildHtml('addtocart') ?>
                         <?php endif; ?>
                         <?php //echo $this->getChildHtml('addto') ?>
                     </div>
-                    <?php echo $this->getChildHtml('extra_buttons') ?>     
+                    <?php echo $this->getChildHtml('extra_buttons') ?>
                 <?php elseif (!$_product->isSaleable()): ?>
-                
-                
+
+
                 <?php endif; ?>
-    
+
                 <?php echo $this->getChildHtml('other');?>
-    
+
                 <?php if ($_product->isSaleable() && $this->hasOptions()):?>
                     <?php echo $this->getChildChildHtml('container1', '', true, true) ?>
                 <?php endif;?>
-                
+
                 <?php if ($_product->isSaleable() && $this->hasOptions()):?>
-                    <?php // echo $this->getChildChildHtml('container2', '', true, true) ?>         
+                    <?php // echo $this->getChildChildHtml('container2', '', true, true) ?>
                 <?php endif;?>
-                
-                </div>   
+
+                </div>
             </div>
             <div class="col-sm-12 col-md-3 col-sms-12 col-smb-12">
                 <?php echo $this->getChildHtml('related_slider') ?>
@@ -360,10 +360,10 @@ echo $jsObjpre . $jsObj;
         }.bind(productAddToCartForm);
     //]]>
     </script>
-    
+
 
     </div>
-    
+
     <div class="product-collateral row-fluid">
         <?php echo $this->getChildHtml('info_tabs') ?>
         <?php echo $this->getChildHtml('upsell_products') ?>
