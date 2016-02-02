@@ -222,10 +222,6 @@ echo $jsObjpre . $jsObj;
 				 // 				 	echo $this->getChildHtml('alert_urls');
 				 // 			        echo $this->getChildHtml('product_type_data'); }
 			?>
-
-		      <?php if ($_product->isSaleable() && $this->hasOptions()):?>
-		            <?php  echo $this->getChildChildHtml('container2', '', true, true) ?>
-		      <?php endif;?>
 			</div>
 			</div>
 			<div id='product-specs'>
@@ -249,7 +245,7 @@ echo $jsObjpre . $jsObj;
 						<?php echo $_helper->productAttribute($_product, nl2br($_product->getHowItWorks()), 'how_it_works') ?>
 					</div>
 				<?php else:?>
-						<p class="tab-title">Next Steps</p>		
+						<p class="tab-title">Next Steps</p>
 					  <div class="tab-content">
 						<?php echo $_helper->productAttribute($_product, nl2br($MasterProduct->getHowItWorks()), 'how_it_works') ?>
 					  </div>
@@ -257,6 +253,11 @@ echo $jsObjpre . $jsObj;
 			</div>
 			<?php endif ?>
 		</div>
+
+		<?php if ($_product->isSaleable() && $this->hasOptions()):?>
+					<?php  echo $this->getChildChildHtml('container2', '', true, true) ?>
+		<?php endif;?>
+
 		<div id='add-to-holder'>
 			<!-- ADD SELECTION STATUS STUFF HERE-->
 			<div id='selection-status'></div>
