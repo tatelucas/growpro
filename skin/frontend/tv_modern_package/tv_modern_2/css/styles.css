@@ -3804,28 +3804,43 @@ padding:12px 25px; background:#000; border-radius:0; text-transform: uppercase;}
 .product-pricing tbody tr {/*height: auto;*/}
 .product-pricing tbody td {/*height: auto;*/}
 
-.price-table-outer 		{width: 98%; position: relative; padding-top: 36px; border: 1px solid #000; background: #000;}
-.price-table-inner 		{overflow: auto; width: 100%;  height: 150px; border-top: 1px solid #000; background: white;}
-.price-table			{width: 96%;}
+.product-specs { }
 
-.price-table tr td.quantity, .price-table tr th.quantity {width: 20% !important;}
+.price-table-outer 		{ /*width: 98%;*/ width: 100%; position: relative; /* padding-top: 36px; background: #000; */}
+.price-table-inner 		{overflow: auto; width: 100%;  height: 150px; border-top: 1px solid #000; background: white;}
+.price-table			{ /*width: 96%;*/ width: 100%; }
+
+.price-table tr td.quantity, .price-table tr th.quantity {
+  width: 20% !important;
+  text-align: left;
+  padding-left: 5%;
+}
+
+.price-table tr th.quantity {
+  border-bottom: 10px solid #fff;
+}
 .price-table tr td.w3, .price-table tr th.w3 {width: 23%;}
 .price-table tr td.w2, .price-table tr th.w2 {width: 33%;}
 .price-table tr td.w1, .price-table tr th.w1 {width: 75%;}
 
-.price-table tr.hover {background: #e7fee1;}
+.price-table tr.hover {background: #eee;}
 .price-table tr.selected {background: #F5ECD9; }
 .price-table tr td.selected {font-weight: bold;}
 .price-table tr.hover td.hover {background: background: #000;}
-.pricetable_row td {text-align: left; padding-left: 7.5%; text-decoration: underline; color:#1E7EC8; cursor: pointer;}
+.pricetable_row td {text-align: left; padding-left: 7.5%; text-decoration: underline; color:#000; cursor: pointer;}
 
 .pricetable_row td.quantity {text-align: left; padding-left: 5%; text-decoration: none; color:#222222;}
 
 .price-table thead		{ color: white; }
-.price-table thead tr 	{  position: absolute; top: 0; height: 30px; width: 96%; color: #fff; line-height: 1em; font-size: .9em;}
+.price-table thead tr 	{
+  background: #000;
+  /* position: absolute; top: 0; height: 30px; width: 96%; color: #fff; line-height: 1em; font-size: .9em; */
+}
 
-.price-table thead tr th { text-align: center; padding-top: 6px;}
-#product-ordering {padding: 0 8px 0 5px;}
+.ui-tabs .ui-tabs-panel .tab-title { background: #000; color: #fff; margin: 0; padding: 10px 5%;}
+
+.price-table thead tr th { text-align: left; padding: 10px 0 10px 7.5%; border-bottom: 10px solid #fff; }
+#product-ordering {padding: 0 0 0 1px;}
 .price-table tr {width: 100%;}
 
 .product-pricing {width:96%; margin: 0 0 0 0px; padding: 0; background-color:#f4f7f7; border:1px solid #dadddd; }

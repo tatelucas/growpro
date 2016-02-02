@@ -230,10 +230,12 @@ echo $jsObjpre . $jsObj;
 			</div>
 			<div id='product-specs'>
 				 <?php if ($_product->getDescription()):?>
-			          <div class="tab-content">
+					 <p class="tab-title">Product Description</p>
+						<div class="tab-content">
 						<?php echo $_helper->productAttribute($_product, nl2br($_product->getDescription()), 'description') ?>
 					</div>
 				<?php else:?>
+					 <p class="tab-title">Product Description</p>
 					  <div class="tab-content">
 						<?php echo $_helper->productAttribute($_product, nl2br($MasterProduct->getDescription()), 'description') ?>
 					  </div>
@@ -242,10 +244,12 @@ echo $jsObjpre . $jsObj;
 			<?php if ($_product->getHowItWorks() || $MasterProduct->getHowItWorks()): ?>
 			<div id='product-nextsteps' class='third'>
 				<?php if ($_product->getHowItWorks()):?>
+								<p class="tab-title">Next Steps</p>
 			          <div class="tab-content">
 						<?php echo $_helper->productAttribute($_product, nl2br($_product->getHowItWorks()), 'how_it_works') ?>
 					</div>
 				<?php else:?>
+						<p class="tab-title">Next Steps</p>		
 					  <div class="tab-content">
 						<?php echo $_helper->productAttribute($_product, nl2br($MasterProduct->getHowItWorks()), 'how_it_works') ?>
 					  </div>

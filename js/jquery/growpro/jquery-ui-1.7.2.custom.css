@@ -61,7 +61,7 @@
 .ui-state-default a, .ui-state-default a:link, .ui-state-default a:visited { color: #000; text-decoration: none; outline: none; }
 .ui-state-hover, .ui-widget-content .ui-state-hover, .ui-state-focus, .ui-widget-content .ui-state-focus { border: 0px solid #ffffff; background: #000 url(images/ui-bg_inset-hard_75_000_1x100.png) 50% 50% repeat-x; font-weight: bold; color: #fff; outline: none; }
 .ui-state-hover a, .ui-state-hover a:hover { color: #fff; text-decoration: none; outline: none; }
-.ui-state-active, .ui-widget-content .ui-state-active { border: 1px solid #fff; background: #000 url(images/ui-bg_highlight-soft_65_000_1x100.png) 50% 50% repeat-x; font-weight: bold; color: #ffffff; outline: none; }
+.ui-state-active, .ui-widget-content .ui-state-active { border: 1px solid #fff; background: #000; font-weight: bold; color: #ffffff; outline: none; }
 .ui-state-active a, .ui-state-active a:link, .ui-state-active a:visited { color: #ffffff; outline: none; text-decoration: none; }
 
 /* Interaction Cues
@@ -395,12 +395,15 @@
 .ui-slider-vertical .ui-slider-range-min { bottom: 0; }
 .ui-slider-vertical .ui-slider-range-max { top: 0; }/* Tabs
 ----------------------------------*/
-.ui-tabs { padding: .2em; zoom: 1; }
-.ui-tabs .ui-tabs-nav { list-style: none; position: relative; padding: .2em .2em 0; }
-.ui-tabs .ui-tabs-nav li { position: relative; float: left; border-bottom-width: 0 !important; margin: 0 .2em -1px 0; padding:  .3em 0; width: 32%;}
+.ui-tabs { padding: .2em 0; zoom: 1; }
+.ui-tabs .ui-tabs-nav { list-style: none; position: relative; padding: .2em 0 0; }
+.ui-tabs .ui-tabs-nav li { position: relative; float: left; border-bottom-width: 0 !important; margin: 0 .2em -1px 0; padding:  .3em 0; /* width: 32%; */ width: 30%; }
 .ui-tabs .ui-tabs-nav li a { float: left; text-decoration: none; padding: .5em 2%;  width: 95%; text-align: center; font-size: .8em;}
 .ui-tabs .ui-tabs-nav li.ui-tabs-selected { padding-bottom: 4px; border-bottom-width: 0; }
 .ui-tabs .ui-tabs-nav li.ui-tabs-selected a, .ui-tabs .ui-tabs-nav li.ui-state-disabled a, .ui-tabs .ui-tabs-nav li.ui-state-processing a { cursor: text; }
-.ui-tabs .ui-tabs-nav li a, .ui-tabs.ui-tabs-collapsible .ui-tabs-nav li.ui-tabs-selected a { cursor: pointer; } /* first selector in group seems obsolete, but required to overcome bug in Opera applying cursor: text overall if defined elsewhere... */
-.ui-tabs .ui-tabs-panel { padding: 1em 1.4em; display: block; border-width: 0; background: none; }
+.ui-tabs .ui-tabs-nav li a, .ui-tabs.ui-tabs-collapsible .ui-tabs-nav li.ui-tabs-selected a { cursor: pointer; white-space: nowrap; overflow: hidden; } /* first selector in group seems obsolete, but required to overcome bug in Opera applying cursor: text overall if defined elsewhere... */
+.ui-tabs .ui-tabs-panel { /* border: 1px solid #000 !important; */ margin: 0 0 0 1px; /* padding: 1em 1.4em; */ display: block; border-width: 0; background: none; }
 .ui-tabs .ui-tabs-hide { display: none !important; }
+.ui-tabs .ui-tabs-panel #tab-content,
+.ui-tabs .ui-tabs-panel .tab-content { border: 1px solid #000; padding: 0 5%; }
+#product-ordering #tab-content { padding: 0; border: 1px solid #000; }
