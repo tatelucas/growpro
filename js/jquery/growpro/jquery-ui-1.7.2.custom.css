@@ -59,6 +59,7 @@
 ----------------------------------*/
 .ui-state-default, .ui-widget-content .ui-state-default { border: 1px solid #; background: #e1e1e1; font-weight: bold; color: #000; outline: none; }
 .ui-state-default a, .ui-state-default a:link, .ui-state-default a:visited { color: #000; text-decoration: none; outline: none; }
+.ui-state-hover a, .ui-state-hover a:link, .ui-state-hover a:visited { color: #fff; }
 .ui-state-hover, .ui-widget-content .ui-state-hover, .ui-state-focus, .ui-widget-content .ui-state-focus { border: 0px solid #ffffff; background: #000 url(images/ui-bg_inset-hard_75_000_1x100.png) 50% 50% repeat-x; font-weight: bold; color: #fff; outline: none; }
 .ui-state-hover a, .ui-state-hover a:hover { color: #fff; text-decoration: none; outline: none; }
 .ui-state-active, .ui-widget-content .ui-state-active { border: 1px solid #fff; background: #000; font-weight: bold; color: #ffffff; outline: none; }

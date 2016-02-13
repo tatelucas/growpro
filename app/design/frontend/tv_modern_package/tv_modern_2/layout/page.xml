@@ -64,6 +64,8 @@ Default layout, loads most of the pages
                 <action method="addJs"><script>themevast/bootstrap/bootstrap.js</script></action>
                 <action method="addJs"><script>themevast/bootstrap/bootstrap-tooltip.js</script></action>
 
+                <action method="addJs"><script>themevast/growpro.js</script></action>
+
                 <action method="addItem"><type>js</type><name>themevast/themevast.js</name></action>
 
                 <action method="addCss"><stylesheet>themevast/plugin/css/jquery.fancybox.css</stylesheet></action>
