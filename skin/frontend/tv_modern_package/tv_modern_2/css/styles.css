@@ -1414,7 +1414,7 @@ font-family:Karla; font-weight:600;}
 /* View Type: List */
 .products-list li.item { margin-bottom: 30px; position: relative; padding: 0; background: #fff; overflow: hidden;  padding: 10px; border: 1px solid #e0e0e0;}
 .products-list li.item .product-images {  overflow: hidden;  }
-.products-list li.item .box-images { overflow: visible;  margin: 0;}
+.products-list li.item .box-images { overflow: visible;  margin: 0; max-width: 100%; }
 .products-list .desc { padding-bottom: 0px;  border-bottom: none; font-family:Open Sans; font-weight:400; font-size:13px; color:#444444;}
 .products-list li.item .ratings { margin: 10px 0 0;}
 .products-list li.item .rating-links a { color: #333;  line-height: 15px; }
