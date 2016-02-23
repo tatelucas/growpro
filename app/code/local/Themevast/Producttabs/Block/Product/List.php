@@ -125,7 +125,7 @@ class Themevast_Producttabs_Block_Product_List extends Mage_Catalog_Block_Produc
         Mage::getSingleton('catalog/product_visibility')->addVisibleInSearchFilterToCollection($collection);
 
         $collection->setPageSize($this->getNumProduct());
-		
+		/*
         if($this->useFlatCatalogProduct())
         {
             foreach ($collection as $product) 
@@ -137,7 +137,7 @@ class Themevast_Producttabs_Block_Product_List extends Mage_Catalog_Block_Produc
                 $product->_data['small_image'] = $_product->getSmallImage();
             }            
         }		
-		
+		*/
         return $collection; 		
     }	
 	

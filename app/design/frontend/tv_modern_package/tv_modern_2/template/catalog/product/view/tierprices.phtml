@@ -237,6 +237,7 @@ if (Mage::helper('weee')->typeOfDisplay($_product, array(1,2,4))) {
 
 <?php
 		$_product = $this->getProduct();
+		$mainProductName = $_product['name'];
 		$_pricecat = $_product->getCategoryTierPrice();
 		
 		if (is_numeric($_pricecat) & $_pricecat != 0 ) { //if there is a master price table
@@ -249,6 +250,7 @@ if (Mage::helper('weee')->typeOfDisplay($_product, array(1,2,4))) {
 			->addAttributetoSelect('tier_price')
 			->addAttributeToSelect('category_tier_price_sku')
 			->addAttributeToSelect('category_pricing')
+			->addAttributeToSelect('name')
 			->load();
 			
 			//Test for the price case
@@ -270,11 +272,11 @@ if (Mage::helper('weee')->typeOfDisplay($_product, array(1,2,4))) {
 					break;		
 			
 					case (count($masterProductList) > 1): //Multiple Masters, assume imprint options
-				
 						foreach($masterProductList as $masterProduct) {	
+						//var_dump ($masterProduct);
 								$countperpack =	 $masterProduct['count_per_pack']; 
 								if ($masterProduct['category_tier_price_sku'] == 'N'){$nonImprint_prices = load_prices($masterProduct);}	
-		 				};
+		 				
 							if ($masterProduct['category_tier_price_sku'] == 'B') {
 								$blkImprint_prices = load_prices($masterProduct);
 								$clrImprint_prices = $blkImprint_prices;
@@ -283,12 +285,35 @@ if (Mage::helper('weee')->typeOfDisplay($_product, array(1,2,4))) {
 									   	$clrImprint_prices[$qty]['website_price'] = ($blkImprint_prices[$qty]['website_price'] + (40 / $qty));
 									}
 							};
+						};
+						
 								$product_prices = array(
 									"No Imprint"=>$nonImprint_prices,
 									"Black Imprint" => $blkImprint_prices,
 									"Single Color Imprint" => $clrImprint_prices
 								);
-										output_table($product_prices, $countperpack, 'category');
+						
+							$customImprint_prices = array();
+						foreach($masterProductList as $masterProduct) {	
+							if ($masterProduct['category_tier_price_sku'] != 'B' && $masterProduct['category_tier_price_sku'] != 'N') {
+								$name = $masterProduct['name'];
+								$name = str_ireplace("master","",$name);
+								$name = str_ireplace($mainProductName,"",$name);
+								if ($name == "" || $name == " ") {
+									$name = "Standard";
+								}
+								$customImprint_prices = load_prices($masterProduct);
+								
+								$product_price_array[$name] = $customImprint_prices;
+							}
+						};	
+						
+						if ($product_price_array) {
+							output_table($product_price_array, $countperpack, 'category');
+						} else {
+							output_table($product_prices, $countperpack, 'category');
+						}
+						
 					break;}
 			} else{ //there is not a master price table
 				if ($_product->getTierPrice()){
