@@ -16,14 +16,15 @@
         </reference>
 
         <!-- Tate 1/13/16 - removed blog from sidebar -->
-        <!--<reference name="left">
+        <!-- Tate 3/8/16 - Added it back -->
+        <reference name="left">
             <block type="blog/menu_sidebar" name="left.blog.menu"  before="-">
                 <action method="setTemplate" ifconfig="blog/menu/left">
                     <template>themevast/blog/menu.phtml</template>
                 </action>
                 <block type="blog/tags" name="blog_tags" />
             </block>
-        </reference>-->
+        </reference>
 
         <reference name="top.links">
             <block type="blog/blog" name="add.blog.link">

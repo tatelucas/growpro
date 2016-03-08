@@ -77,7 +77,7 @@
 * { margin:0; padding:0; }
 body          {  font:13px/1.55 Karla; color:#333; text-align: left; background: #fff;   font-stretch: condensed;}
 img           { border:0; vertical-align:top; max-width: 100%; height: auto;}
-a             { color:#555; text-decoration: none; }
+a             { /* color:#555; */ color: #781B23; text-decoration: none; }
 a:hover       { text-decoration: none; color:#f33636; }
 
 span.color { color: #444;}
@@ -453,7 +453,7 @@ p.required { font-size:11px; text-align:right; color:#EB340A; }
 .sorter {  }
 .sorter .view-mode { float:left; margin:8px 0 0; }
 .sorter .view-mode a { text-decoration: none; }
-.sorter .sort-by { float: left; margin-left: 130px;  }
+.sorter .sort-by { float: left; /* margin-left: 130px; */  }
 .sorter .sort-by label { vertical-align:middle; margin: 4px 0 0;}
 .sorter .sort-by select { margin:0 0 0 10px; vertical-align:middle; font-size: 13px; display: inline-block; padding: 6px 10px; border: 1px solid #e0e0e0; background: #F5F5F5;  font-size: 13px;font-family: Open Sans;font-weight: 400; }
 .sorter .sort-by a{ display: none;}

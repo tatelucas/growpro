@@ -171,7 +171,7 @@ abstract class Themevast_Blog_Block_Abstract extends Mage_Core_Block_Template
 
     protected function _getReadMoreLink($item)
     {
-        return '<a class="aw-blog-read-more" href="' . $item->getAddress() . '">' . $this->__('Readmore') . '</a>';
+        return '<a class="aw-blog-read-more" href="' . $item->getAddress() . '">' . $this->__('Read More') . '</a>';
     }
 
     public function getPreparedCollection()
