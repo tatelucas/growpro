@@ -221,6 +221,20 @@ border-bottom: 1px solid #7f7f7f; color: #555555;  padding:0;  border-radius: 0;
 .buttons-set .back-link { float:left; margin:0; }
 .buttons-set button.button { float:right; margin-left:5px; }
 
+.btn-primary {
+  background: #781B23;
+  border-radius: 0px;
+  border-color: #60161C;
+  white-space: inherit;
+}
+
+.btn-primary:hover,
+.btn-primary:active,
+.btn-primary:focus {
+  border-color: #60161C;
+  background: #60161C;
+}
+
 /* Global Styles ========================================================================= */
 /* Form Elements */
 input,select,textarea,button { vertical-align:middle; color:#2f2f2f; outline: 0;}
@@ -1734,7 +1748,7 @@ font-family:Karla; font-weight:600;}
 .product-options ul.options-list label { font-weight:normal; margin: 2px 0; }
 .product-options ul.validation-failed { padding:0 7px; }
 .product-options p.note { margin:0; font-size:11px; }
-.product-options p.required { position:absolute; right:20px; top:20px; }
+.product-options p.required { position:absolute; right:20px; top: -5px; }
 
 .product-options-bottom { background:none;   border-top:0; }
 .product-options-bottom .product-pricing,
@@ -3697,13 +3711,25 @@ ul.cattabs {
 .info-content em:before { font-size: 14px; }
 .info-content em.fa-envelope:before { font-size: 12px;}
 
-.info-content h2 { font-size: 14px; text-transform: uppercase; font-weight: normal;font-family:Karla;  }
+.info-content h2 { font-size: 14px; font-weight: 700; font-family:Karla; margin-bottom: 0;  }
 .info-content .des-info { font-family:Open Sans; font-size:12px; font-weight:normal;}
 .info-content a { color: #666;}
 .info-content a:hover { text-decoration: underline;}
 .info-content a .des-info { color: #fff;}
 
 .bx-wrapper .products-grid .item { float: left;}
+
+.grey-block {
+    background: #e1e1e1;
+    padding: 10px;
+    margin-bottom: 20px;
+}
+
+.grey-block-inner {
+  border: 1px solid white;
+  background: #e1e1e1;
+  padding: 10px;
+}
 
 /*-----------------------------------------------------------------------*/
 
