@@ -646,7 +646,7 @@ tr.summary-details-excluded { font-style:italic; }
 #header-special-offer .promotion p span { color: #fff; }
 #header-special-offer .promotion .btn-promotion { position: absolute; top: 50%; right: 38px; margin-top: -19px;   padding: 8px 20px; color: #fff; background: #f33636;   font-size: 14px;   letter-spacing: 1px; }
 #header-special-offer .promotion .btn-promotion:hover {background: #666;}
-#search_mini_form {  position: absolute;  top: 2px;  /* right:7%;*/ right: 25px; z-index: 9;}
+#search_mini_form {  position: absolute;  top: 2px;  /* right:7%;*/ right: 35px; z-index: 9;}
 #mini_cart_block   { position:absolute; top:2px; /* right:1%;*/ right: 5px; z-index:9;}
  .header-quick-access { height:40px;}
 .quick-access {  margin-top: 0px; position: relative; z-index: 999;   display: inline-block;  width: 100%;  height: 40px;  border-bottom: 1px solid #ddd;}
@@ -3909,3 +3909,8 @@ dl.item-options dd { padding-left:10px; }
 
 
 #add-to-holder { position: relative; width: 98%; padding: 10px; background: #eee; float: left; min-height: 40px; padding-right: 25%; margin: 0 0 20px;}
+
+.top-cart-content {
+	/*this hides the cart price preview on hoving on the cart icon - the system wasn't calculating prices correctly*/
+	display: none !important;
+}
