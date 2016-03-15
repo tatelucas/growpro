@@ -88,14 +88,17 @@ a:focus,
 
 
 /* Headings */
-h1,h2,h3,
-h4,h5,h6      { margin:0 0 5px; line-height:1.35; }
-h1            { font-size:20px; font-weight:normal; }
-h2            { font-size:18px; font-weight:normal; }
-h3            { font-size:16px; font-weight:bold; }
-h4            { font-size:14px; font-weight:bold; }
-h5            { font-size:12px; font-weight:bold; }
-h6            { font-size:11px; font-weight:bold; }
+h1,h2,h3,h4,h5,h6,
+.h1,.h2,.h3,.h4,.h5,.h6 {
+  margin:0 0 5px; line-height:1.35; 
+}
+    
+h1, .h1            { font-size:20px; font-weight:normal; }
+h2, .h2            { font-size:18px; font-weight:normal; }
+h3, .h3            { font-size:16px; font-weight:bold; }
+h4, .h4            { font-size:14px; font-weight:bold; }
+h5, .h5            { font-size:12px; font-weight:bold; }
+h6, .h6            { font-size:11px; font-weight:bold; }
 
 /* Forms */
 form          { display:inline; }
@@ -425,6 +428,7 @@ p.required { font-size:11px; text-align:right; color:#EB340A; }
     border-bottom: 1px solid #eee;
     margin-bottom: 10px;
     }
+
 .page-title .separator { margin:0 3px; }
 .page-title .link-rss { float:right; margin:7px 0 0; }
 .title-buttons { text-align:right; }
@@ -434,6 +438,17 @@ p.required { font-size:11px; text-align:right; color:#EB340A; }
 .title-buttons h4,
 .title-buttons h5,
 .title-buttons h6 { float:left; }
+
+.block-title {
+  background: #BCBBB5;
+  padding: 15px 0;
+  width: 100%;
+  text-transform: uppercase;
+  color: #70151B;
+  text-align: center;
+  font-weight: 700;
+  margin-bottom: 30px;
+}
 
 .subtitle,
 .sub-title { clear:both; padding:15px 0 0; font-size:15px; font-weight:bold; margin:0 0 6px; color:#e25203; }
@@ -3913,4 +3928,187 @@ dl.item-options dd { padding-left:10px; }
 .top-cart-content {
 	/*this hides the cart price preview on hoving on the cart icon - the system wasn't calculating prices correctly*/
 	display: none !important;
+}
+
+/** Add/remove margins **/
+
+.push {
+    margin: 22px;
+}
+
+.push-top {
+    margin-top: 22px;
+}
+
+.push-right {
+    margin-right: 22px;
+}
+
+.push-bottom {
+    margin-bottom: 22px;
+}
+
+.push-left {
+    margin-left: 22px;
+}
+
+.push-ends {
+    margin-top: 22px;
+    margin-bottom: 22px;
+}
+
+.push-sides {
+    margin-right: 22px;
+    margin-left: 22px;
+}
+
+.push-half {
+    margin: 11px;
+}
+
+.push-half-top {
+    margin-top: 11px;
+}
+
+.push-half-right {
+    margin-right: 11px;
+}
+
+.push-half-bottom {
+    margin-bottom: 11px;
+}
+
+.push-half-left {
+    margin-left: 11px;
+}
+
+.push-half-ends {
+    margin-top: 11px;
+    margin-bottom: 11px;
+}
+
+.push-half-sides {
+    margin-right: 11px;
+    margin-left: 11px;
+}
+
+.flush {
+    margin: 0;
+}
+
+.flush-top {
+    margin-top: 0;
+}
+
+.flush-right {
+    margin-right: 0;
+}
+
+.flush-bottom {
+    margin-bottom: 0;
+}
+
+.flush-left {
+    margin-left: 0;
+}
+
+.flush-ends {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.flush-sides {
+    margin-right: 0;
+    margin-left: 0;
+}
+/** Add/remove paddings **/
+
+.soft {
+    padding: 22px;
+}
+
+.soft-top {
+    padding-top: 22px;
+}
+
+.soft-right {
+    padding-right: 22px;
+}
+
+.soft-bottom {
+    padding-bottom: 22px;
+}
+
+.soft-left {
+    padding-left: 22px;
+}
+
+.soft-ends {
+    padding-top: 22px;
+    padding-bottom: 22px;
+}
+
+.soft-sides {
+    padding-right: 22px;
+    padding-left: 22px;
+}
+
+.soft-half {
+    padding: 11px;
+}
+
+.soft-half-top {
+    padding-top: 11px;
+}
+
+.soft-half-right {
+    padding-right: 11px;
+}
+
+.soft-half-bottom {
+    padding-bottom: 11px;
+}
+
+.soft-half-left {
+    padding-left: 11px;
+}
+
+.soft-half-ends {
+    padding-top: 11px;
+    padding-bottom: 11px;
+}
+
+.soft-half-sides {
+    padding-right: 11px;
+    padding-left: 11px;
+}
+
+.hard {
+    padding: 0;
+}
+
+.hard-top {
+    padding-top: 0;
+}
+
+.hard-right {
+    padding-right: 0;
+}
+
+.hard-bottom {
+    padding-bottom: 0;
+}
+
+.hard-left {
+    padding-left: 0;
+}
+
+.hard-ends {
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+.hard-sides {
+    padding-right: 0;
+    padding-left: 0;
 }
