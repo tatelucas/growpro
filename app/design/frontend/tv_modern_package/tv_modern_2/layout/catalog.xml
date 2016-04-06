@@ -71,7 +71,12 @@ Category default layout
         </reference>
         <reference name="left">
             <block type="catalog/navigation" name="catalog.leftnav" before="-" template="catalog/navigation/left.phtml"/>
-            <block type="catalog/product_compare_sidebar" after="catalog.leftnav" name="catalog.compare.sidebar" template="catalog/product/compare/sidebar.phtml"/>
+            <!--<block type="catalog/product_compare_sidebar" after="catalog.leftnav" name="catalog.compare.sidebar" template="catalog/product/compare/sidebar.phtml"/>-->
+
+            <block type="cms/block" name="block-name">
+              <action method="setBlockId"><block_id>default-sidebar</block_id></action>
+            </block>
+            
             <!--<block type="page/html" name="banner.left" after="catalog.compare.sidebar" template="themevast/banner_left.phtml"/>-->
         </reference>
         <reference name="content">
