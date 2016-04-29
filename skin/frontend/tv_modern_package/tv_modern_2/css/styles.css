@@ -1158,6 +1158,29 @@ font-family: Karla !important;
   bottom: 0;
   left: 0;
 }
+/* Block:Newsletter */
+.block-newsletter {
+  border: 1px solid #ccc;
+  padding: 10px;
+}
+
+.block-newsletter input {
+  width: 100%;
+}
+
+.block-newsletter label {
+  margin-bottom: 0px;
+}
+
+.block-newsletter .btn {
+  border-radius: 0px;
+}
+
+.block-newsletter .btn:hover {
+  background: #781B23;
+  color: #fff;
+}
+
 
 /* Block: Related */
 .block-related .block-title strong {   }
