@@ -87,14 +87,26 @@ function pageSelection (cartItems, priceChart, packCount) {
 									CunitPrice = priceChart[CselectOpt][CtotalQty];
 									} else {
 										CnextQty = CtotalQty - 1;
-									 	while (priceChart[CselectOpt][CnextQty] == NaN) {
+									 	while (priceChart[CselectOpt][CnextQty] == NaN || jQuery.type(priceChart[CselectOpt][CnextQty]) === "undefined") {
 											CnextQty = CnextQty - 1;
 										}
 										CunitPrice = priceChart[CselectOpt][CnextQty];
 									}
 				
-			CtotalPrice		= CunitPrice * CtotalQty;         
-			CcartPrice 		= CcartQty * priceChart[CselectOpt][CcartQty];
+			CtotalPrice		= CunitPrice * CtotalQty;  	
+
+				// protect against absolutely huge orders in the cart not being able to see correct pricing
+				if (priceChart[CselectOpt][CcartQty] !== undefined){	
+									CcartPrice 		= CcartQty * priceChart[CselectOpt][CcartQty];
+									} else {
+										CcartnextQty = CcartQty - 1;
+									 	while (priceChart[CselectOpt][CcartnextQty] == NaN || jQuery.type(priceChart[CselectOpt][CcartnextQty]) === "undefined") {
+											CcartnextQty = CcartnextQty - 1;
+										}
+										CcartPrice = CcartQty * priceChart[CselectOpt][CcartnextQty];
+									}
+	
+			//CcartPrice 		= CcartQty * priceChart[CselectOpt][CcartQty];		
 			CdisplayPrice 	= (CtotalPrice - CcartPrice).toFixed(2);
 			return {
 					DisplayQty: 	CdisplayQty, 
