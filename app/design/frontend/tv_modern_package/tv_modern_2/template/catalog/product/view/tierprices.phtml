@@ -404,10 +404,8 @@ function output_table($arrayPricing,  $countperpack, $discounttype) {
 						<th class='quantity <?php echo($colClass)?>'>Quantity</th>
 								
 								 <?php foreach ($arrayPricing as $column_name=>$price_column): ?>
-									<th class='<?php echo($colClass)?>'><?php echo($column_name)?></th>
+									<th class='<?php echo($colClass)?>'><?php echo($column_name); if ($column_name == 'Price') { echo " (Click to add to cart)"; } ?></th>
 								<?php endforeach ?>
-
-
 					</tr>
 				</thead>
 				<tbody><?php
@@ -427,7 +425,7 @@ function output_table($arrayPricing,  $countperpack, $discounttype) {
 										echo('$' . number_format($row_content[$row_quantity]['website_price'] *  $row_quantity, 2)) ?>
 									</td>
 								<?php endforeach ?>
-
+                <td></td>
 
 						</tr>
 						<?php endforeach ?>
