@@ -188,7 +188,7 @@ Product view
             <action method="setTemplate"><template>page/1column.phtml</template></action>
         </reference>
         <reference name="right">
-            <block type="page/html" name="banner.left" after="-" template="themevast/banner_left.phtml"/>
+            <!--<block type="page/html" name="banner.left" after="-" template="themevast/banner_left.phtml"/>-->
         </reference>
         <remove name="catalog.compare.sidebar" />
         <reference name="head">

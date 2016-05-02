@@ -4160,7 +4160,17 @@ ol.numbered li {
   list-style: decimal;
 }
 
+ul.circled {
+  list-style: initial;
+  padding-left: 10px;
+  margin-left: 10px;
+}
 
+ul.circled li {
+  list-style: disc;
+}
+
+.display-block,
 .block {
   display: block;
 }
@@ -4174,3 +4184,19 @@ ol.numbered li {
 .add-to-cart .input-content {
   display: none;
 }
+
+.article-list li {
+  list-style: disc !important;
+  margin-left: 20px !important;
+}
+
+@media (min-width: 992px) {
+  .main-container.col2-right-layout .col-sm-12.col-md-5.col-sms-6.col-smb-12 {
+    width: 66.66666666666666%;
+  }
+}
+
+.btn a {
+  color: white;
+}
+
