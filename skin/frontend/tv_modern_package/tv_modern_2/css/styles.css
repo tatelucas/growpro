@@ -4200,3 +4200,10 @@ ul.circled li {
   color: white;
 }
 
+.category-product-thumb {
+  max-height: 150px;
+}
+
+.next-prev-page {
+ display: none; 
+}
