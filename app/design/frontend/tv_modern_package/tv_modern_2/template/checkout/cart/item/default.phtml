@@ -206,7 +206,17 @@ $canApplyMsrp = Mage::helper('catalog')->canApplyMsrp($_item->getProduct(), Mage
     <?php endif; ?>
     <td class="product-cart-actions" data-rwd-label="<?php echo $this->__('Qty'); ?>">
         <input type="text" pattern="\d*" name="cart[<?php echo $_item->getId() ?>][qty]" value="<?php echo $this->getQty() ?>" size="4" title="<?php echo $this->__('Qty') ?>" class="input-text qty" maxlength="12" />
-
+		<?php // echo $this->getQty() ?>
+		<?php echo '<br>'; ?>
+<?php $_item = $this->getItem()?>
+<?php $_product= Mage::getSingleton('catalog/product')->load($_item->getProductId()) ?>
+<?php
+	$count_per_pack = $_product->getResource()->getAttribute('count_per_pack')->getFrontend()->getValue($_product);
+	if (isset($count_per_pack) && $count_per_pack > 0) {
+		echo "Packs of " . $count_per_pack . "<br/>";
+		echo "Total: " . $this->getQty()*$count_per_pack;
+	}
+?>
         <button type="submit" name="update_cart_action" value="update_qty" title="<?php echo $this->__('Update'); ?>" class="button btn-update"><span><span><?php echo $this->__('Update'); ?></span></span>
         </button>
 
