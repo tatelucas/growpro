@@ -61,6 +61,8 @@ function pageSelection (cartItems, priceChart, packCount) {
 	var domPriceTable 		= jQuery("table.price-table");	//the tiered pricing table
 	if ( jQuery( "dd#type" ).length ) { //added the option to select by dynamic type -dwl - 3-7-2016
 		var domOptInput   		= jQuery("dd#type select");		//the dropdown for type selection
+	} else if ( jQuery( "dd#size" ).length ) {  //added the option to select by dynamic type with a name of size also -dwl - 7-30-2016
+		var domOptInput   		= jQuery("dd#size select");		//the dropdown for type selection
 	} else {
 		var domOptInput   		= jQuery("dd#imprint select");		//the dropdown for imprint selection
 	}
