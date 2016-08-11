@@ -6,7 +6,34 @@
                 <div class="cart-mini-title">
                     <a class="shopping-cart" href="<?php echo Mage::helper('checkout/cart')->getCartUrl(); ?>">
             
-                    <span class="cart-count"><?php if($_cartQty<1) { echo $this->__('0'); } else { echo $_cartQty; } ?><?php echo $this->__(' '); ?><?php if($_cartQty>1) { echo $this->__(''); } else { echo $this->__(''); } ?>
+                    <span class="cart-count">
+<?php 
+//override all cart-count with custom count that is items X qty X count_per_pack
+$items = Mage::getSingleton('checkout/session')->getQuote()->getAllItems();
+
+$fullqty = 0;
+foreach($items as $item) {
+	$count_per_pack = $item->getProduct()->getData('count_per_pack');
+	if ($count_per_pack && $count_per_pack != 0) {
+		$fullqty += ($count_per_pack * $item->getQty()) ;
+	} else {
+		$fullqty += $item->getQty();
+	}
+}
+	//rebuild fullqty number to reduce the display size
+	if (substr($fullqty, -3) === "000") {
+		$fullqty = substr_replace($fullqty, 'K', -3);
+	} else if (strlen($fullqty) === 4 && substr($fullqty, -2) === "00") {
+		$rebuild = substr($fullqty, 0, 1) . "." . substr($fullqty, 1, 1) . "K";
+		$fullqty = $rebuild;
+	} else if (strlen($fullqty) == 5 && substr($fullqty, -2) === "00") {
+		$rebuild = substr($fullqty, 0, 2) . "." . substr($fullqty, 2, 1) . "K";
+		$fullqty = $rebuild;
+	}
+
+echo $fullqty;
+ ?>									
+					<?php /* echo "hi"; ?><?php if($_cartQty<1) { echo $this->__('0'); } else { echo $_cartQty; } ?><?php echo $this->__(' '); ?><?php if($_cartQty>1) { echo $this->__(''); } else { echo $this->__(''); }  */?>
                    
                    <span class="arrows"></span>
                     </a>
